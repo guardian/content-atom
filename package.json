@@ -3,9 +3,13 @@
   "version": "1.0.0",
   "description": "Tool for building Guardian quiz JSON",
   "repository": "https://github.com/guardian/ten-four",
-  "main": "thrift/gen-nodejs/events_types.js",
+  "main": "js/main.js",
   "dependencies": {
     "thrift": "^0.9.2"
   },
-  "license": "Apache-2.0"
+  "license": "Apache-2.0",
+  "files": [
+    "js/main.js",
+    "thrift/gen-nodejs"
+  ]
 }
