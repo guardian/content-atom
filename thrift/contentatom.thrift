@@ -4,11 +4,13 @@ namespace * contentatom
  * folder in atoms/ */
 
 include "atoms/quiz.thrift"
-
+include "atoms/note.thrift"
+ 
 typedef string ContentAtomID
 
 union AtomData {
   1: quiz.QuizType quiz
+  2: note.NoteType note
 }
 
 enum EventType { PUBLISH, UPDATE, TAKEDOWN }
