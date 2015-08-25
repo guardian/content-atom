@@ -2,8 +2,17 @@
 
 LANGUAGES=("js:node" "java")
 
-# if this is empty then thrift won't run in verbose mode
-: ${THRIFT_VERBOSE:="-v"}
+THRIFT_VERBOSE="-v"
+
+while getopts "q" OPT
+do
+  case $OPT in
+    "q") THRIFT_VERBOSE=""
+      ;;
+    "v") THRIFT_VERBOSE="-v"
+      ;;
+  esac
+done
 
 THRIFT_DIR="thrift"
 : ${THRIFT_CMD:=$(which thrift)}
