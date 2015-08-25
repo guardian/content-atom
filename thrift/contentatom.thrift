@@ -1,4 +1,15 @@
+namespace * contentatom
+
+/* each type of content-atom will have its definitions in a different
+ * folder in atoms/ */
+
+include "atoms/quiz.thrift"
+
 typedef string ContentAtomID
+
+union AtomData {
+  1: quiz.QuizType quiz
+}
 
 enum EventType { PUBLISH, UPDATE, TAKEDOWN }
 
@@ -18,5 +29,5 @@ struct ContentAtomEvent {
 
    4: EventType eventType
    
-   5: string data // a string contain an opaque, JSON-encoded, data blob
+   5: AtomData data
  }

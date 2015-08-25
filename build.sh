@@ -3,13 +3,12 @@
 LANGUAGES=("js:node" "java")
 
 # if this is empty then thrift won't run in verbose mode
-VERBOSE="-v"
+: ${THRIFT_VERBOSE:="-v"}
 
 THRIFT_DIR="thrift"
 : ${THRIFT_CMD:=$(which thrift)}
 
-shopt -s globstar
-THRIFT_FILES=($THRIFT_DIR/**/*.thrift)
+THRIFT_FILE="$THRIFT_DIR/contentatom.thrift"
 
 function fatal {
     echo >&2 $@
@@ -25,4 +24,4 @@ fi
 
 LANG_OPTS=${LANGUAGES[@]/#/--gen }
 
-$THRIFT_CMD $VERBOSE -o ${THRIFT_DIR} $LANG_OPTS ${THRIFT_FILES[@]}
+$THRIFT_CMD $THRIFT_VERBOSE --recurse -o ${THRIFT_DIR} $LANG_OPTS "$THRIFT_FILE"
