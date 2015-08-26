@@ -1,0 +1,9 @@
+# the files in this directory are auto generated, so although we do want to
+# know if they have changed, we don't want to actually see the changes in the
+# diff output, because we aren't going to fix individual lines, just regenerate
+# the whole thing.
+
+* -diff
+
+# except this file itself, which is an exception ...
+.gitattributes diff
