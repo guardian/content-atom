@@ -10,6 +10,6 @@
   "license": "Apache-2.0",
   "files": [
     "js/main.js",
-    "thrift/gen-nodejs"
+    "generated/gen-nodejs"
   ]
 }
