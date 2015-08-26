@@ -19,6 +19,23 @@ Begin by creating a new directory within
 using Thrift's [IDL](https://thrift.apache.org/docs/idl). Naturally
 you can use the other content atom types as a starting point here.
 
+If you want to use any of the types in `shared.thrift`, include the
+file and reference the types with the prefix `shared.`
+
+```
+include "../shared.thrift"
+...
+struct Example {
+   1: required shared.OpaqueJson data
+}
+```
+
+Add your type to the `union` `ContentAtom` in `contentatom.thrift` to
+make it usable as one of the types that can be placed into
+`ContentAtomEvent`s and similar.
+
+## Building and publishing your changes
+
 ## TODO
 
 * adding to the `build.sh` file to make sure that your library gets
