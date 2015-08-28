@@ -4,7 +4,7 @@ typedef string ContentAtomID
 
 enum EventType { PUBLISH, UPDATE, TAKEDOWN }
 
-enum AtomType { TENFOUR_QUIZ }
+enum AtomType { TENFOUR_QUIZ_BUILDER }
 
 struct ContentAtomEvent {
 

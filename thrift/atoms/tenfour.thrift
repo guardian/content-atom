@@ -5,7 +5,7 @@ include "../shared.thrift"
 /** date times are reprsented as i64 - epoch millis */
 typedef i64 DateTime
 
-struct Content {
+struct TenfourQuizBuilderAtom {
   // do we need to store the ID, seeing as it is replicated(?) in the
   // content-atom wrapping?
   1  : required string id
