@@ -12,13 +12,9 @@ struct ContentAtomEvent {
 
    1: required ContentAtomID id
 
-   // this is a canonical place from which the current version of the
-   //content atom's data can be downloaded.
-   2: required string url
+   2: required string atomType
 
-   3: required string atomType
-
-   4: required EventType eventType
+   3: required EventType eventType
    
-   5: required contentatom.ContentAtom data
+   4: required contentatom.ContentAtom data
  }
