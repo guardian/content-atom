@@ -1,6 +1,6 @@
 #!/bin/bash
 
-LANGUAGES=("js:node" "java")
+LANGUAGES=("js:node")
 
 THRIFT_VERBOSE="-v"
 
