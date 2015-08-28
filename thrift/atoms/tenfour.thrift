@@ -15,8 +15,8 @@ struct Content {
   5  : required DateTime createdAt
   6  : required string createdBy
   7  : required bool published
-  8  : required string type
-  9  : required i16 defaultColumns
+  8  : required string quizType
+  9  : optional i16 defaultColumns
   10 : required ItemContent content
 }
 

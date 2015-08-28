@@ -1,3 +1,5 @@
+include "contentatom.thrift"
+
 typedef string ContentAtomID
 
 enum EventType { PUBLISH, UPDATE, TAKEDOWN }
@@ -8,15 +10,15 @@ struct ContentAtomEvent {
    * across all content-atoms of any type (an alternative model might
    * be to have the `type+id` be unique) */
 
-   1: ContentAtomID id
+   1: required ContentAtomID id
 
    // this is a canonical place from which the current version of the
    //content atom's data can be downloaded.
-   2: string url
+   2: required string url
 
-   3: string atomType
+   3: required string atomType
 
-   4: EventType eventType
+   4: required EventType eventType
    
-   5: string data // a string contain an opaque, JSON-encoded, data blob
+   5: required contentatom.ContentAtom data
  }
