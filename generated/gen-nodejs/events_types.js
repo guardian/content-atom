@@ -7,6 +7,8 @@ var thrift = require('thrift');
 var Thrift = thrift.Thrift;
 var Q = thrift.Q;
 
+var contentatom_ttypes = require('./contentatom_types')
+
 
 var ttypes = module.exports = {};
 ttypes.EventType = {
@@ -23,18 +25,28 @@ ContentAtomEvent = module.exports.ContentAtomEvent = function(args) {
   if (args) {
     if (args.id !== undefined) {
       this.id = args.id;
+    } else {
+      throw new Thrift.TProtocolException(Thrift.TProtocolExceptionType.UNKNOWN, 'Required field id is unset!');
     }
     if (args.url !== undefined) {
       this.url = args.url;
+    } else {
+      throw new Thrift.TProtocolException(Thrift.TProtocolExceptionType.UNKNOWN, 'Required field url is unset!');
     }
     if (args.atomType !== undefined) {
       this.atomType = args.atomType;
+    } else {
+      throw new Thrift.TProtocolException(Thrift.TProtocolExceptionType.UNKNOWN, 'Required field atomType is unset!');
     }
     if (args.eventType !== undefined) {
       this.eventType = args.eventType;
+    } else {
+      throw new Thrift.TProtocolException(Thrift.TProtocolExceptionType.UNKNOWN, 'Required field eventType is unset!');
     }
     if (args.data !== undefined) {
       this.data = args.data;
+    } else {
+      throw new Thrift.TProtocolException(Thrift.TProtocolExceptionType.UNKNOWN, 'Required field data is unset!');
     }
   }
 };
@@ -81,8 +93,9 @@ ContentAtomEvent.prototype.read = function(input) {
       }
       break;
       case 5:
-      if (ftype == Thrift.Type.STRING) {
-        this.data = input.readString();
+      if (ftype == Thrift.Type.STRUCT) {
+        this.data = new contentatom_ttypes.ContentAtom();
+        this.data.read(input);
       } else {
         input.skip(ftype);
       }
@@ -119,8 +132,8 @@ ContentAtomEvent.prototype.write = function(output) {
     output.writeFieldEnd();
   }
   if (this.data !== null && this.data !== undefined) {
-    output.writeFieldBegin('data', Thrift.Type.STRING, 5);
-    output.writeString(this.data);
+    output.writeFieldBegin('data', Thrift.Type.STRUCT, 5);
+    this.data.write(output);
     output.writeFieldEnd();
   }
   output.writeFieldStop();

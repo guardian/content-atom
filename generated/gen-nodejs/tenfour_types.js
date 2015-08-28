@@ -22,7 +22,7 @@ tenfour.Content = module.exports.Content = function(args) {
   this.createdAt = null;
   this.createdBy = null;
   this.published = null;
-  this.type = null;
+  this.quizType = null;
   this.defaultColumns = null;
   this.content = null;
   if (args) {
@@ -61,15 +61,13 @@ tenfour.Content = module.exports.Content = function(args) {
     } else {
       throw new Thrift.TProtocolException(Thrift.TProtocolExceptionType.UNKNOWN, 'Required field published is unset!');
     }
-    if (args.type !== undefined) {
-      this.type = args.type;
+    if (args.quizType !== undefined) {
+      this.quizType = args.quizType;
     } else {
-      throw new Thrift.TProtocolException(Thrift.TProtocolExceptionType.UNKNOWN, 'Required field type is unset!');
+      throw new Thrift.TProtocolException(Thrift.TProtocolExceptionType.UNKNOWN, 'Required field quizType is unset!');
     }
     if (args.defaultColumns !== undefined) {
       this.defaultColumns = args.defaultColumns;
-    } else {
-      throw new Thrift.TProtocolException(Thrift.TProtocolExceptionType.UNKNOWN, 'Required field defaultColumns is unset!');
     }
     if (args.content !== undefined) {
       this.content = args.content;
@@ -143,7 +141,7 @@ tenfour.Content.prototype.read = function(input) {
       break;
       case 8:
       if (ftype == Thrift.Type.STRING) {
-        this.type = input.readString();
+        this.quizType = input.readString();
       } else {
         input.skip(ftype);
       }
@@ -209,9 +207,9 @@ tenfour.Content.prototype.write = function(output) {
     output.writeBool(this.published);
     output.writeFieldEnd();
   }
-  if (this.type !== null && this.type !== undefined) {
-    output.writeFieldBegin('type', Thrift.Type.STRING, 8);
-    output.writeString(this.type);
+  if (this.quizType !== null && this.quizType !== undefined) {
+    output.writeFieldBegin('quizType', Thrift.Type.STRING, 8);
+    output.writeString(this.quizType);
     output.writeFieldEnd();
   }
   if (this.defaultColumns !== null && this.defaultColumns !== undefined) {
