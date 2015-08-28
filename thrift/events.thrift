@@ -4,6 +4,8 @@ typedef string ContentAtomID
 
 enum EventType { PUBLISH, UPDATE, TAKEDOWN }
 
+enum AtomType { TENFOUR_QUIZ }
+
 struct ContentAtomEvent {
 
   /* this opaque identifier should uniquely identify this content atom
@@ -12,7 +14,7 @@ struct ContentAtomEvent {
 
    1: required ContentAtomID id
 
-   2: required string atomType
+   2: required AtomType atomType
 
    3: required EventType eventType
    

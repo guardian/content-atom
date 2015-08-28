@@ -16,9 +16,11 @@ ttypes.EventType = {
   'UPDATE' : 1,
   'TAKEDOWN' : 2
 };
+ttypes.AtomType = {
+  'TENFOUR_QUIZ' : 0
+};
 ContentAtomEvent = module.exports.ContentAtomEvent = function(args) {
   this.id = null;
-  this.url = null;
   this.atomType = null;
   this.eventType = null;
   this.data = null;
@@ -27,11 +29,6 @@ ContentAtomEvent = module.exports.ContentAtomEvent = function(args) {
       this.id = args.id;
     } else {
       throw new Thrift.TProtocolException(Thrift.TProtocolExceptionType.UNKNOWN, 'Required field id is unset!');
-    }
-    if (args.url !== undefined) {
-      this.url = args.url;
-    } else {
-      throw new Thrift.TProtocolException(Thrift.TProtocolExceptionType.UNKNOWN, 'Required field url is unset!');
     }
     if (args.atomType !== undefined) {
       this.atomType = args.atomType;
@@ -72,27 +69,20 @@ ContentAtomEvent.prototype.read = function(input) {
       }
       break;
       case 2:
-      if (ftype == Thrift.Type.STRING) {
-        this.url = input.readString();
+      if (ftype == Thrift.Type.I32) {
+        this.atomType = input.readI32();
       } else {
         input.skip(ftype);
       }
       break;
       case 3:
-      if (ftype == Thrift.Type.STRING) {
-        this.atomType = input.readString();
-      } else {
-        input.skip(ftype);
-      }
-      break;
-      case 4:
       if (ftype == Thrift.Type.I32) {
         this.eventType = input.readI32();
       } else {
         input.skip(ftype);
       }
       break;
-      case 5:
+      case 4:
       if (ftype == Thrift.Type.STRUCT) {
         this.data = new contentatom_ttypes.ContentAtom();
         this.data.read(input);
@@ -116,23 +106,18 @@ ContentAtomEvent.prototype.write = function(output) {
     output.writeString(this.id);
     output.writeFieldEnd();
   }
-  if (this.url !== null && this.url !== undefined) {
-    output.writeFieldBegin('url', Thrift.Type.STRING, 2);
-    output.writeString(this.url);
-    output.writeFieldEnd();
-  }
   if (this.atomType !== null && this.atomType !== undefined) {
-    output.writeFieldBegin('atomType', Thrift.Type.STRING, 3);
-    output.writeString(this.atomType);
+    output.writeFieldBegin('atomType', Thrift.Type.I32, 2);
+    output.writeI32(this.atomType);
     output.writeFieldEnd();
   }
   if (this.eventType !== null && this.eventType !== undefined) {
-    output.writeFieldBegin('eventType', Thrift.Type.I32, 4);
+    output.writeFieldBegin('eventType', Thrift.Type.I32, 3);
     output.writeI32(this.eventType);
     output.writeFieldEnd();
   }
   if (this.data !== null && this.data !== undefined) {
-    output.writeFieldBegin('data', Thrift.Type.STRUCT, 5);
+    output.writeFieldBegin('data', Thrift.Type.STRUCT, 4);
     this.data.write(output);
     output.writeFieldEnd();
   }
