@@ -1,6 +1,6 @@
 #!/bin/bash
 
-LANGUAGES=("js:node" "java")
+LANGUAGES=("js:node")
 
 THRIFT_VERBOSE="-v"
 
@@ -53,7 +53,7 @@ function thrift {
 
     LANG_OPTS=${LANGUAGES[@]/#/--gen }
 
-    for file in $THRIFT_FILES
+    for file in "${THRIFT_FILES[@]}"
     do
         $THRIFT_CMD $THRIFT_VERBOSE --recurse -o ${OUT_DIR} $LANG_OPTS "$file"
     done

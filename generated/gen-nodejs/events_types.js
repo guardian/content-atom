@@ -7,6 +7,8 @@ var thrift = require('thrift');
 var Thrift = thrift.Thrift;
 var Q = thrift.Q;
 
+var contentatom_ttypes = require('./contentatom_types')
+
 
 var ttypes = module.exports = {};
 ttypes.EventType = {
@@ -14,27 +16,34 @@ ttypes.EventType = {
   'UPDATE' : 1,
   'TAKEDOWN' : 2
 };
+ttypes.AtomType = {
+  'TENFOUR_QUIZ' : 0
+};
 ContentAtomEvent = module.exports.ContentAtomEvent = function(args) {
   this.id = null;
-  this.url = null;
   this.atomType = null;
   this.eventType = null;
   this.data = null;
   if (args) {
     if (args.id !== undefined) {
       this.id = args.id;
-    }
-    if (args.url !== undefined) {
-      this.url = args.url;
+    } else {
+      throw new Thrift.TProtocolException(Thrift.TProtocolExceptionType.UNKNOWN, 'Required field id is unset!');
     }
     if (args.atomType !== undefined) {
       this.atomType = args.atomType;
+    } else {
+      throw new Thrift.TProtocolException(Thrift.TProtocolExceptionType.UNKNOWN, 'Required field atomType is unset!');
     }
     if (args.eventType !== undefined) {
       this.eventType = args.eventType;
+    } else {
+      throw new Thrift.TProtocolException(Thrift.TProtocolExceptionType.UNKNOWN, 'Required field eventType is unset!');
     }
     if (args.data !== undefined) {
       this.data = args.data;
+    } else {
+      throw new Thrift.TProtocolException(Thrift.TProtocolExceptionType.UNKNOWN, 'Required field data is unset!');
     }
   }
 };
@@ -60,29 +69,23 @@ ContentAtomEvent.prototype.read = function(input) {
       }
       break;
       case 2:
-      if (ftype == Thrift.Type.STRING) {
-        this.url = input.readString();
+      if (ftype == Thrift.Type.I32) {
+        this.atomType = input.readI32();
       } else {
         input.skip(ftype);
       }
       break;
       case 3:
-      if (ftype == Thrift.Type.STRING) {
-        this.atomType = input.readString();
-      } else {
-        input.skip(ftype);
-      }
-      break;
-      case 4:
       if (ftype == Thrift.Type.I32) {
         this.eventType = input.readI32();
       } else {
         input.skip(ftype);
       }
       break;
-      case 5:
-      if (ftype == Thrift.Type.STRING) {
-        this.data = input.readString();
+      case 4:
+      if (ftype == Thrift.Type.STRUCT) {
+        this.data = new contentatom_ttypes.ContentAtom();
+        this.data.read(input);
       } else {
         input.skip(ftype);
       }
@@ -103,24 +106,19 @@ ContentAtomEvent.prototype.write = function(output) {
     output.writeString(this.id);
     output.writeFieldEnd();
   }
-  if (this.url !== null && this.url !== undefined) {
-    output.writeFieldBegin('url', Thrift.Type.STRING, 2);
-    output.writeString(this.url);
-    output.writeFieldEnd();
-  }
   if (this.atomType !== null && this.atomType !== undefined) {
-    output.writeFieldBegin('atomType', Thrift.Type.STRING, 3);
-    output.writeString(this.atomType);
+    output.writeFieldBegin('atomType', Thrift.Type.I32, 2);
+    output.writeI32(this.atomType);
     output.writeFieldEnd();
   }
   if (this.eventType !== null && this.eventType !== undefined) {
-    output.writeFieldBegin('eventType', Thrift.Type.I32, 4);
+    output.writeFieldBegin('eventType', Thrift.Type.I32, 3);
     output.writeI32(this.eventType);
     output.writeFieldEnd();
   }
   if (this.data !== null && this.data !== undefined) {
-    output.writeFieldBegin('data', Thrift.Type.STRING, 5);
-    output.writeString(this.data);
+    output.writeFieldBegin('data', Thrift.Type.STRUCT, 4);
+    this.data.write(output);
     output.writeFieldEnd();
   }
   output.writeFieldStop();
