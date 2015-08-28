@@ -1,1 +1,1 @@
-exports.events = require('../thrift/gen-nodejs/events_types');
+exports.events = require('../generated/gen-nodejs/events_types');
