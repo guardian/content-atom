@@ -696,7 +696,7 @@ contentatom.quiz.Question.prototype.write = function(output) {
 contentatom.quiz.Answer = module.exports.Answer = function(args) {
   this.answerText = null;
   this.assets = null;
-  this.correct = null;
+  this.weight = null;
   this.revealText = null;
   if (args) {
     if (args.answerText !== undefined) {
@@ -709,10 +709,10 @@ contentatom.quiz.Answer = module.exports.Answer = function(args) {
     } else {
       throw new Thrift.TProtocolException(Thrift.TProtocolExceptionType.UNKNOWN, 'Required field assets is unset!');
     }
-    if (args.correct !== undefined) {
-      this.correct = args.correct;
+    if (args.weight !== undefined) {
+      this.weight = args.weight;
     } else {
-      throw new Thrift.TProtocolException(Thrift.TProtocolExceptionType.UNKNOWN, 'Required field correct is unset!');
+      throw new Thrift.TProtocolException(Thrift.TProtocolExceptionType.UNKNOWN, 'Required field weight is unset!');
     }
     if (args.revealText !== undefined) {
       this.revealText = args.revealText;
@@ -762,8 +762,8 @@ contentatom.quiz.Answer.prototype.read = function(input) {
       }
       break;
       case 3:
-      if (ftype == Thrift.Type.BOOL) {
-        this.correct = input.readBool();
+      if (ftype == Thrift.Type.I16) {
+        this.weight = input.readI16();
       } else {
         input.skip(ftype);
       }
@@ -805,9 +805,9 @@ contentatom.quiz.Answer.prototype.write = function(output) {
     output.writeListEnd();
     output.writeFieldEnd();
   }
-  if (this.correct !== null && this.correct !== undefined) {
-    output.writeFieldBegin('correct', Thrift.Type.BOOL, 3);
-    output.writeBool(this.correct);
+  if (this.weight !== null && this.weight !== undefined) {
+    output.writeFieldBegin('weight', Thrift.Type.I16, 3);
+    output.writeI16(this.weight);
     output.writeFieldEnd();
   }
   if (this.revealText !== null && this.revealText !== undefined) {

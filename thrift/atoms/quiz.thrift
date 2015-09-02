@@ -47,7 +47,7 @@ struct Question {
 struct Answer {
   1: required string answerText
   2: required list<Asset> assets
-  3: required bool correct
+  3: required i16 weight
   4: optional string revealText
 }
 
