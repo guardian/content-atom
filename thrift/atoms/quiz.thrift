@@ -1,18 +1,15 @@
-namespace * tenfour
+namespace * contentatom.quiz
 
 include "../shared.thrift"
 
-/** date times are reprsented as i64 - epoch millis */
-typedef i64 DateTime
-
-struct TenfourQuizBuilderAtom {
+struct QuizAtom {
   // do we need to store the ID, seeing as it is replicated(?) in the
   // content-atom wrapping?
   1  : required string id
   2  : required string title
   3  : required string updatedBy
-  4  : required DateTime updatedAt
-  5  : required DateTime createdAt
+  4  : required shared.DateTime updatedAt
+  5  : required shared.DateTime createdAt
   6  : required string createdBy
   7  : required bool published
   8  : required string quizType

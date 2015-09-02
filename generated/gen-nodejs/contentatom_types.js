@@ -7,20 +7,176 @@ var thrift = require('thrift');
 var Thrift = thrift.Thrift;
 var Q = thrift.Q;
 
-var tenfour_ttypes = require('./tenfour_types')
+var quiz_ttypes = require('./quiz_types')
+var shared_ttypes = require('./shared_types')
 
 
 var ttypes = module.exports = {};
-ContentAtom = module.exports.ContentAtom = function(args) {
-  this.tenfour = null;
+ttypes.AtomType = {
+  'QUIZ' : 0
+};
+ttypes.EventType = {
+  'PUBLISH' : 0,
+  'UPDATE' : 1,
+  'TAKEDOWN' : 2
+};
+Atom = module.exports.Atom = function(args) {
+  this.id = null;
+  this.atomType = null;
+  this.labels = null;
+  this.defaultBody = null;
+  this.data = null;
   if (args) {
-    if (args.tenfour !== undefined) {
-      this.tenfour = args.tenfour;
+    if (args.id !== undefined) {
+      this.id = args.id;
+    } else {
+      throw new Thrift.TProtocolException(Thrift.TProtocolExceptionType.UNKNOWN, 'Required field id is unset!');
+    }
+    if (args.atomType !== undefined) {
+      this.atomType = args.atomType;
+    } else {
+      throw new Thrift.TProtocolException(Thrift.TProtocolExceptionType.UNKNOWN, 'Required field atomType is unset!');
+    }
+    if (args.labels !== undefined) {
+      this.labels = args.labels;
+    } else {
+      throw new Thrift.TProtocolException(Thrift.TProtocolExceptionType.UNKNOWN, 'Required field labels is unset!');
+    }
+    if (args.defaultBody !== undefined) {
+      this.defaultBody = args.defaultBody;
+    } else {
+      throw new Thrift.TProtocolException(Thrift.TProtocolExceptionType.UNKNOWN, 'Required field defaultBody is unset!');
+    }
+    if (args.data !== undefined) {
+      this.data = args.data;
+    } else {
+      throw new Thrift.TProtocolException(Thrift.TProtocolExceptionType.UNKNOWN, 'Required field data is unset!');
     }
   }
 };
-ContentAtom.prototype = {};
-ContentAtom.prototype.read = function(input) {
+Atom.prototype = {};
+Atom.prototype.read = function(input) {
+  input.readStructBegin();
+  while (true)
+  {
+    var ret = input.readFieldBegin();
+    var fname = ret.fname;
+    var ftype = ret.ftype;
+    var fid = ret.fid;
+    if (ftype == Thrift.Type.STOP) {
+      break;
+    }
+    switch (fid)
+    {
+      case 1:
+      if (ftype == Thrift.Type.STRING) {
+        this.id = input.readString();
+      } else {
+        input.skip(ftype);
+      }
+      break;
+      case 2:
+      if (ftype == Thrift.Type.I32) {
+        this.atomType = input.readI32();
+      } else {
+        input.skip(ftype);
+      }
+      break;
+      case 3:
+      if (ftype == Thrift.Type.LIST) {
+        var _size0 = 0;
+        var _rtmp34;
+        this.labels = [];
+        var _etype3 = 0;
+        _rtmp34 = input.readListBegin();
+        _etype3 = _rtmp34.etype;
+        _size0 = _rtmp34.size;
+        for (var _i5 = 0; _i5 < _size0; ++_i5)
+        {
+          var elem6 = null;
+          elem6 = input.readString();
+          this.labels.push(elem6);
+        }
+        input.readListEnd();
+      } else {
+        input.skip(ftype);
+      }
+      break;
+      case 4:
+      if (ftype == Thrift.Type.STRING) {
+        this.defaultBody = input.readString();
+      } else {
+        input.skip(ftype);
+      }
+      break;
+      case 5:
+      if (ftype == Thrift.Type.STRUCT) {
+        this.data = new ttypes.AtomData();
+        this.data.read(input);
+      } else {
+        input.skip(ftype);
+      }
+      break;
+      default:
+        input.skip(ftype);
+    }
+    input.readFieldEnd();
+  }
+  input.readStructEnd();
+  return;
+};
+
+Atom.prototype.write = function(output) {
+  output.writeStructBegin('Atom');
+  if (this.id !== null && this.id !== undefined) {
+    output.writeFieldBegin('id', Thrift.Type.STRING, 1);
+    output.writeString(this.id);
+    output.writeFieldEnd();
+  }
+  if (this.atomType !== null && this.atomType !== undefined) {
+    output.writeFieldBegin('atomType', Thrift.Type.I32, 2);
+    output.writeI32(this.atomType);
+    output.writeFieldEnd();
+  }
+  if (this.labels !== null && this.labels !== undefined) {
+    output.writeFieldBegin('labels', Thrift.Type.LIST, 3);
+    output.writeListBegin(Thrift.Type.STRING, this.labels.length);
+    for (var iter7 in this.labels)
+    {
+      if (this.labels.hasOwnProperty(iter7))
+      {
+        iter7 = this.labels[iter7];
+        output.writeString(iter7);
+      }
+    }
+    output.writeListEnd();
+    output.writeFieldEnd();
+  }
+  if (this.defaultBody !== null && this.defaultBody !== undefined) {
+    output.writeFieldBegin('defaultBody', Thrift.Type.STRING, 4);
+    output.writeString(this.defaultBody);
+    output.writeFieldEnd();
+  }
+  if (this.data !== null && this.data !== undefined) {
+    output.writeFieldBegin('data', Thrift.Type.STRUCT, 5);
+    this.data.write(output);
+    output.writeFieldEnd();
+  }
+  output.writeFieldStop();
+  output.writeStructEnd();
+  return;
+};
+
+AtomData = module.exports.AtomData = function(args) {
+  this.quiz = null;
+  if (args) {
+    if (args.quiz !== undefined) {
+      this.quiz = args.quiz;
+    }
+  }
+};
+AtomData.prototype = {};
+AtomData.prototype.read = function(input) {
   input.readStructBegin();
   while (true)
   {
@@ -35,8 +191,8 @@ ContentAtom.prototype.read = function(input) {
     {
       case 1:
       if (ftype == Thrift.Type.STRUCT) {
-        this.tenfour = new tenfour_ttypes.TenfourQuizBuilderAtom();
-        this.tenfour.read(input);
+        this.quiz = new quiz_ttypes.QuizAtom();
+        this.quiz.read(input);
       } else {
         input.skip(ftype);
       }
@@ -53,11 +209,100 @@ ContentAtom.prototype.read = function(input) {
   return;
 };
 
-ContentAtom.prototype.write = function(output) {
-  output.writeStructBegin('ContentAtom');
-  if (this.tenfour !== null && this.tenfour !== undefined) {
-    output.writeFieldBegin('tenfour', Thrift.Type.STRUCT, 1);
-    this.tenfour.write(output);
+AtomData.prototype.write = function(output) {
+  output.writeStructBegin('AtomData');
+  if (this.quiz !== null && this.quiz !== undefined) {
+    output.writeFieldBegin('quiz', Thrift.Type.STRUCT, 1);
+    this.quiz.write(output);
+    output.writeFieldEnd();
+  }
+  output.writeFieldStop();
+  output.writeStructEnd();
+  return;
+};
+
+ContentAtomEvent = module.exports.ContentAtomEvent = function(args) {
+  this.atom = null;
+  this.eventType = null;
+  this.eventCreationTime = null;
+  if (args) {
+    if (args.atom !== undefined) {
+      this.atom = args.atom;
+    } else {
+      throw new Thrift.TProtocolException(Thrift.TProtocolExceptionType.UNKNOWN, 'Required field atom is unset!');
+    }
+    if (args.eventType !== undefined) {
+      this.eventType = args.eventType;
+    } else {
+      throw new Thrift.TProtocolException(Thrift.TProtocolExceptionType.UNKNOWN, 'Required field eventType is unset!');
+    }
+    if (args.eventCreationTime !== undefined) {
+      this.eventCreationTime = args.eventCreationTime;
+    } else {
+      throw new Thrift.TProtocolException(Thrift.TProtocolExceptionType.UNKNOWN, 'Required field eventCreationTime is unset!');
+    }
+  }
+};
+ContentAtomEvent.prototype = {};
+ContentAtomEvent.prototype.read = function(input) {
+  input.readStructBegin();
+  while (true)
+  {
+    var ret = input.readFieldBegin();
+    var fname = ret.fname;
+    var ftype = ret.ftype;
+    var fid = ret.fid;
+    if (ftype == Thrift.Type.STOP) {
+      break;
+    }
+    switch (fid)
+    {
+      case 1:
+      if (ftype == Thrift.Type.STRUCT) {
+        this.atom = new ttypes.Atom();
+        this.atom.read(input);
+      } else {
+        input.skip(ftype);
+      }
+      break;
+      case 2:
+      if (ftype == Thrift.Type.I32) {
+        this.eventType = input.readI32();
+      } else {
+        input.skip(ftype);
+      }
+      break;
+      case 3:
+      if (ftype == Thrift.Type.I64) {
+        this.eventCreationTime = input.readI64();
+      } else {
+        input.skip(ftype);
+      }
+      break;
+      default:
+        input.skip(ftype);
+    }
+    input.readFieldEnd();
+  }
+  input.readStructEnd();
+  return;
+};
+
+ContentAtomEvent.prototype.write = function(output) {
+  output.writeStructBegin('ContentAtomEvent');
+  if (this.atom !== null && this.atom !== undefined) {
+    output.writeFieldBegin('atom', Thrift.Type.STRUCT, 1);
+    this.atom.write(output);
+    output.writeFieldEnd();
+  }
+  if (this.eventType !== null && this.eventType !== undefined) {
+    output.writeFieldBegin('eventType', Thrift.Type.I32, 2);
+    output.writeI32(this.eventType);
+    output.writeFieldEnd();
+  }
+  if (this.eventCreationTime !== null && this.eventCreationTime !== undefined) {
+    output.writeFieldBegin('eventCreationTime', Thrift.Type.I64, 3);
+    output.writeI64(this.eventCreationTime);
     output.writeFieldEnd();
   }
   output.writeFieldStop();
