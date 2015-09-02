@@ -1,5 +1,5 @@
 include "atoms/tenfour.thrift"
 
 union ContentAtom {
-  1: tenfour.Content tenfour
+  1: tenfour.TenfourQuizBuilderAtom tenfour
 }

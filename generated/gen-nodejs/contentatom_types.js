@@ -35,7 +35,7 @@ ContentAtom.prototype.read = function(input) {
     {
       case 1:
       if (ftype == Thrift.Type.STRUCT) {
-        this.tenfour = new tenfour_ttypes.Content();
+        this.tenfour = new tenfour_ttypes.TenfourQuizBuilderAtom();
         this.tenfour.read(input);
       } else {
         input.skip(ftype);

@@ -17,7 +17,7 @@ ttypes.EventType = {
   'TAKEDOWN' : 2
 };
 ttypes.AtomType = {
-  'TENFOUR_QUIZ' : 0
+  'TENFOUR_QUIZ_BUILDER' : 0
 };
 ContentAtomEvent = module.exports.ContentAtomEvent = function(args) {
   this.id = null;

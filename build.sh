@@ -2,7 +2,7 @@
 
 LANGUAGES=("js:node")
 
-THRIFT_VERBOSE="-v"
+THRIFT_VERBOSE=""
 
 while getopts "q" OPT
 do
@@ -55,6 +55,7 @@ function thrift {
 
     for file in "${THRIFT_FILES[@]}"
     do
+        echo "FILE: $file"
         $THRIFT_CMD $THRIFT_VERBOSE --recurse -o ${OUT_DIR} $LANG_OPTS "$file"
     done
 }

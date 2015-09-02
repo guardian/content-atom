@@ -1,6 +1,6 @@
 {
   "name": "content-atom-js",
-  "version": "1.0.0",
+  "version": "0.2.0",
   "description": "Tool for building Guardian quiz JSON",
   "repository": "https://github.com/guardian/ten-four",
   "main": "js/main.js",

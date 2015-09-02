@@ -14,7 +14,7 @@ var ttypes = module.exports = {};
 if (typeof tenfour === 'undefined') {
   tenfour = {};
 }
-tenfour.Content = module.exports.Content = function(args) {
+tenfour.TenfourQuizBuilderAtom = module.exports.TenfourQuizBuilderAtom = function(args) {
   this.id = null;
   this.title = null;
   this.updatedBy = null;
@@ -76,8 +76,8 @@ tenfour.Content = module.exports.Content = function(args) {
     }
   }
 };
-tenfour.Content.prototype = {};
-tenfour.Content.prototype.read = function(input) {
+tenfour.TenfourQuizBuilderAtom.prototype = {};
+tenfour.TenfourQuizBuilderAtom.prototype.read = function(input) {
   input.readStructBegin();
   while (true)
   {
@@ -170,8 +170,8 @@ tenfour.Content.prototype.read = function(input) {
   return;
 };
 
-tenfour.Content.prototype.write = function(output) {
-  output.writeStructBegin('Content');
+tenfour.TenfourQuizBuilderAtom.prototype.write = function(output) {
+  output.writeStructBegin('TenfourQuizBuilderAtom');
   if (this.id !== null && this.id !== undefined) {
     output.writeFieldBegin('id', Thrift.Type.STRING, 1);
     output.writeString(this.id);
