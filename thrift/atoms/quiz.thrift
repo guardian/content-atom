@@ -14,12 +14,7 @@ struct QuizAtom {
   7  : required bool published
   8  : required string quizType
   9  : optional i16 defaultColumns
-  10 : required ItemContent content
-}
-
-// will vary depending on item's type
-union ItemContent {
-  1: QuizContent quiz
+  10 : required QuizContent content
 }
 
 struct QuizContent {
