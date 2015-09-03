@@ -20,10 +20,6 @@ if (typeof contentatom.quiz === 'undefined') {
 contentatom.quiz.QuizAtom = module.exports.QuizAtom = function(args) {
   this.id = null;
   this.title = null;
-  this.updatedBy = null;
-  this.updatedAt = null;
-  this.createdAt = null;
-  this.createdBy = null;
   this.published = null;
   this.quizType = null;
   this.defaultColumns = null;
@@ -38,26 +34,6 @@ contentatom.quiz.QuizAtom = module.exports.QuizAtom = function(args) {
       this.title = args.title;
     } else {
       throw new Thrift.TProtocolException(Thrift.TProtocolExceptionType.UNKNOWN, 'Required field title is unset!');
-    }
-    if (args.updatedBy !== undefined) {
-      this.updatedBy = args.updatedBy;
-    } else {
-      throw new Thrift.TProtocolException(Thrift.TProtocolExceptionType.UNKNOWN, 'Required field updatedBy is unset!');
-    }
-    if (args.updatedAt !== undefined) {
-      this.updatedAt = args.updatedAt;
-    } else {
-      throw new Thrift.TProtocolException(Thrift.TProtocolExceptionType.UNKNOWN, 'Required field updatedAt is unset!');
-    }
-    if (args.createdAt !== undefined) {
-      this.createdAt = args.createdAt;
-    } else {
-      throw new Thrift.TProtocolException(Thrift.TProtocolExceptionType.UNKNOWN, 'Required field createdAt is unset!');
-    }
-    if (args.createdBy !== undefined) {
-      this.createdBy = args.createdBy;
-    } else {
-      throw new Thrift.TProtocolException(Thrift.TProtocolExceptionType.UNKNOWN, 'Required field createdBy is unset!');
     }
     if (args.published !== undefined) {
       this.published = args.published;
@@ -107,34 +83,6 @@ contentatom.quiz.QuizAtom.prototype.read = function(input) {
         input.skip(ftype);
       }
       break;
-      case 3:
-      if (ftype == Thrift.Type.STRING) {
-        this.updatedBy = input.readString();
-      } else {
-        input.skip(ftype);
-      }
-      break;
-      case 4:
-      if (ftype == Thrift.Type.I64) {
-        this.updatedAt = input.readI64();
-      } else {
-        input.skip(ftype);
-      }
-      break;
-      case 5:
-      if (ftype == Thrift.Type.I64) {
-        this.createdAt = input.readI64();
-      } else {
-        input.skip(ftype);
-      }
-      break;
-      case 6:
-      if (ftype == Thrift.Type.STRING) {
-        this.createdBy = input.readString();
-      } else {
-        input.skip(ftype);
-      }
-      break;
       case 7:
       if (ftype == Thrift.Type.BOOL) {
         this.published = input.readBool();
@@ -158,7 +106,7 @@ contentatom.quiz.QuizAtom.prototype.read = function(input) {
       break;
       case 10:
       if (ftype == Thrift.Type.STRUCT) {
-        this.content = new ttypes.ItemContent();
+        this.content = new ttypes.QuizContent();
         this.content.read(input);
       } else {
         input.skip(ftype);
@@ -185,26 +133,6 @@ contentatom.quiz.QuizAtom.prototype.write = function(output) {
     output.writeString(this.title);
     output.writeFieldEnd();
   }
-  if (this.updatedBy !== null && this.updatedBy !== undefined) {
-    output.writeFieldBegin('updatedBy', Thrift.Type.STRING, 3);
-    output.writeString(this.updatedBy);
-    output.writeFieldEnd();
-  }
-  if (this.updatedAt !== null && this.updatedAt !== undefined) {
-    output.writeFieldBegin('updatedAt', Thrift.Type.I64, 4);
-    output.writeI64(this.updatedAt);
-    output.writeFieldEnd();
-  }
-  if (this.createdAt !== null && this.createdAt !== undefined) {
-    output.writeFieldBegin('createdAt', Thrift.Type.I64, 5);
-    output.writeI64(this.createdAt);
-    output.writeFieldEnd();
-  }
-  if (this.createdBy !== null && this.createdBy !== undefined) {
-    output.writeFieldBegin('createdBy', Thrift.Type.STRING, 6);
-    output.writeString(this.createdBy);
-    output.writeFieldEnd();
-  }
   if (this.published !== null && this.published !== undefined) {
     output.writeFieldBegin('published', Thrift.Type.BOOL, 7);
     output.writeBool(this.published);
@@ -223,60 +151,6 @@ contentatom.quiz.QuizAtom.prototype.write = function(output) {
   if (this.content !== null && this.content !== undefined) {
     output.writeFieldBegin('content', Thrift.Type.STRUCT, 10);
     this.content.write(output);
-    output.writeFieldEnd();
-  }
-  output.writeFieldStop();
-  output.writeStructEnd();
-  return;
-};
-
-contentatom.quiz.ItemContent = module.exports.ItemContent = function(args) {
-  this.quiz = null;
-  if (args) {
-    if (args.quiz !== undefined) {
-      this.quiz = args.quiz;
-    }
-  }
-};
-contentatom.quiz.ItemContent.prototype = {};
-contentatom.quiz.ItemContent.prototype.read = function(input) {
-  input.readStructBegin();
-  while (true)
-  {
-    var ret = input.readFieldBegin();
-    var fname = ret.fname;
-    var ftype = ret.ftype;
-    var fid = ret.fid;
-    if (ftype == Thrift.Type.STOP) {
-      break;
-    }
-    switch (fid)
-    {
-      case 1:
-      if (ftype == Thrift.Type.STRUCT) {
-        this.quiz = new ttypes.QuizContent();
-        this.quiz.read(input);
-      } else {
-        input.skip(ftype);
-      }
-      break;
-      case 0:
-        input.skip(ftype);
-        break;
-      default:
-        input.skip(ftype);
-    }
-    input.readFieldEnd();
-  }
-  input.readStructEnd();
-  return;
-};
-
-contentatom.quiz.ItemContent.prototype.write = function(output) {
-  output.writeStructBegin('ItemContent');
-  if (this.quiz !== null && this.quiz !== undefined) {
-    output.writeFieldBegin('quiz', Thrift.Type.STRUCT, 1);
-    this.quiz.write(output);
     output.writeFieldEnd();
   }
   output.writeFieldStop();

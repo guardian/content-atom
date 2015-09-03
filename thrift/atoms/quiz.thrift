@@ -7,10 +7,6 @@ struct QuizAtom {
   // content-atom wrapping?
   1  : required string id
   2  : required string title
-  3  : required string updatedBy
-  4  : required shared.DateTime updatedAt
-  5  : required shared.DateTime createdAt
-  6  : required string createdBy
   7  : required bool published
   8  : required string quizType
   9  : optional i16 defaultColumns
