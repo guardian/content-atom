@@ -16,15 +16,14 @@ ttypes.AtomType = {
   'QUIZ' : 0
 };
 ttypes.EventType = {
-  'PUBLISH' : 0,
-  'UPDATE' : 1,
-  'TAKEDOWN' : 2
+  'UPDATE' : 0,
+  'TAKEDOWN' : 1
 };
 Atom = module.exports.Atom = function(args) {
   this.id = null;
   this.atomType = null;
   this.labels = null;
-  this.defaultBody = null;
+  this.defaultHtml = null;
   this.data = null;
   this.contentChangeDetails = null;
   if (args) {
@@ -43,10 +42,10 @@ Atom = module.exports.Atom = function(args) {
     } else {
       throw new Thrift.TProtocolException(Thrift.TProtocolExceptionType.UNKNOWN, 'Required field labels is unset!');
     }
-    if (args.defaultBody !== undefined) {
-      this.defaultBody = args.defaultBody;
+    if (args.defaultHtml !== undefined) {
+      this.defaultHtml = args.defaultHtml;
     } else {
-      throw new Thrift.TProtocolException(Thrift.TProtocolExceptionType.UNKNOWN, 'Required field defaultBody is unset!');
+      throw new Thrift.TProtocolException(Thrift.TProtocolExceptionType.UNKNOWN, 'Required field defaultHtml is unset!');
     }
     if (args.data !== undefined) {
       this.data = args.data;
@@ -110,7 +109,7 @@ Atom.prototype.read = function(input) {
       break;
       case 4:
       if (ftype == Thrift.Type.STRING) {
-        this.defaultBody = input.readString();
+        this.defaultHtml = input.readString();
       } else {
         input.skip(ftype);
       }
@@ -166,9 +165,9 @@ Atom.prototype.write = function(output) {
     output.writeListEnd();
     output.writeFieldEnd();
   }
-  if (this.defaultBody !== null && this.defaultBody !== undefined) {
-    output.writeFieldBegin('defaultBody', Thrift.Type.STRING, 4);
-    output.writeString(this.defaultBody);
+  if (this.defaultHtml !== null && this.defaultHtml !== undefined) {
+    output.writeFieldBegin('defaultHtml', Thrift.Type.STRING, 4);
+    output.writeString(this.defaultHtml);
     output.writeFieldEnd();
   }
   if (this.data !== null && this.data !== undefined) {
