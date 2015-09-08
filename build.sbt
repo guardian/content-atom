@@ -4,7 +4,7 @@ organization := "com.gu"
 
 name := "content-atom-model"
 
-version := "0.0.1-SNAPSHOT"
+version := "0.2.0-SNAPSHOT"
 
 // this is not a scala application: the JVM compiled version of the
 // library is built from auto-generated Java source, so there is no
