@@ -1,3 +1,5 @@
+namespace java com.gu.contentatom.thrift
+
 include "atoms/quiz.thrift"
 include "shared.thrift"
 

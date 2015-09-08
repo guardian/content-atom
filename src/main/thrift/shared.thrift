@@ -1,3 +1,5 @@
+namespace java com.gu.contentatom.thrift
+
 /** date times are reprsented as i64 - epoch millis */
 typedef i64 DateTime
 
