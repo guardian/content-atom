@@ -1,5 +1,7 @@
 namespace * contentatom.quiz
 
+namespace java com.gu.contentatom.thrift.atom.quiz
+
 include "../shared.thrift"
 
 struct QuizAtom {
