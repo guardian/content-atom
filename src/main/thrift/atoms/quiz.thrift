@@ -10,6 +10,7 @@ struct QuizAtom {
   1  : required string id
   2  : required string title
   7  : required bool published
+  6  : required bool revealAtEnd
   8  : required string quizType
   9  : optional i16 defaultColumns
   10 : required QuizContent content
