@@ -1,5 +1,11 @@
 import com.github.bigtoast.sbtthrift.ThriftPlugin._
 
+import sbtrelease._
+
+import ReleaseStateTransformations._
+
+Sonatype.sonatypeSettings
+
 organization := "com.gu"
 
 name := "content-atom-model"
@@ -28,3 +34,38 @@ thriftSettings ++ inConfig(Thrift) {
     thriftJsOutputDir <<= thriftOutputDir
   )
 }
+
+// Publish settings
+
+scmInfo := Some(ScmInfo(url("https://github.com/guardian/content-atom"),
+                        "scm:git:git@github.com:guardian/contant-atom.git"))
+
+description := "Java library built from Content-atom thrift definition"
+
+pomExtra := (
+<url>https://github.com/guardian/content-atom</url>
+<developers>
+  <developer>
+    <id>paulmr</id>
+    <name>Paul Roberts</name>
+    <url>https://github.com/paulmr</url>
+  </developer>
+</developers>
+)
+
+licenses := Seq("Apache V2" -> url("http://www.apache.org/licenses/LICENSE-2.0.html"))
+
+releaseProcess := Seq[ReleaseStep](
+  checkSnapshotDependencies,
+  inquireVersions,
+  runClean,
+  runTest,
+  setReleaseVersion,
+  commitReleaseVersion,
+  tagRelease,
+  releaseStepTask(PgpKeys.publishSigned),
+  setNextVersion,
+  commitNextVersion,
+  releaseStepCommand("sonatypeReleaseAll"),
+  pushChanges
+)
