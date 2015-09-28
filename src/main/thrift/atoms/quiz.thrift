@@ -23,7 +23,6 @@ struct QuizContent {
 
 struct ResultGroups {
   1: required list<ResultGroup> groups
-  2: required bool revealAtEnd
 }
 
 struct ResultGroup {
