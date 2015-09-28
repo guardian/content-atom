@@ -17,7 +17,8 @@ struct QuizAtom {
 
 struct QuizContent {
   1: required list<Question> questions
-  2: required ResultGroups resultGroups
+  2: optional ResultGroups resultGroups
+  3: optional ResultBuckets resultBuckets
 }
 
 struct ResultGroups {
@@ -48,4 +49,15 @@ struct Asset {
   1: required string type
   /* what type is this? currently assuming opaque json */
   2: required shared.OpaqueJson data
+}
+
+struct ResultBuckets {
+  1: required list<Bucket> buckets
+}
+
+struct ResultBucket {
+  1: optional list<Asset> assets
+  2: required string description
+  3: required string title
+  4: required string share
 }
