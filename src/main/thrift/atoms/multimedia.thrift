@@ -33,9 +33,10 @@ enum EncodingStatus {
 }
 
 enum PublicationStatus {
+    NO_CONTENT,     //No media essence has been attached to this yet
     DRAFT,          //This is still being edited
     UNPUBLISHED,    //It's ready to go but not been launched yet
-    PUBLISHED       //It's published in CAPI
+    PUBLISHED,       //It's published in CAPI
 }
 
 enum ChapterType {
@@ -47,6 +48,17 @@ enum ChapterType {
     POST_EVENT      //VOD or image encodings as a holding pattern between when a live event ends and the VOD highlights package is available
 }
 
+enum AnnotationType {
+    TEXT,
+    IMAGE,
+    LINK
+}
+
+struct Annotation {
+    1: required AnnotationType type
+    2: required string content
+}
+
 struct Legals {
     1: required LegalStatus status
     2: required User lawyer
@@ -55,7 +67,7 @@ struct Legals {
 struct FrameSize {
     1: required i16 width
     2: required i16 height
-    3: required double aspect
+    3: required double aspect   //will normally be 1.777777777, i.e. 16:9
     4: optional string nickName  //e.g., "small", "mobile", "HD", etc.
 }
 
@@ -89,6 +101,7 @@ struct MultimediaAtom {
   // should we store an embed count here or is this done higher up?
   1  : required string id
   2  : required string title
+  3  : required i16 contentVersion  //from __version field in Vidispine
   7  : required PublicationStatus publicationStatus
   8  : required MultimediaSubtype mediaType
   9  : required LegalStatus legalStatus
