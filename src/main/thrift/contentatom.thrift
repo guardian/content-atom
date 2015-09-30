@@ -5,7 +5,7 @@ include "shared.thrift"
 
 typedef string ContentAtomID
 
-enum AtomType { QUIZ }
+enum AtomType { QUIZ, MULTIMEDIA }
 
 struct Atom {
   1: required ContentAtomID id
@@ -18,6 +18,7 @@ struct Atom {
 
 union AtomData {
   1: quiz.QuizAtom quiz
+  2: multimedia.MultimediaAtom multimedia
 }
 
 enum EventType { UPDATE, TAKEDOWN }
