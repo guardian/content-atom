@@ -4,12 +4,12 @@ namespace java com.gu.contentatom.thrift.atom.multimedia
 
 include "../shared.thrift"
 
-struct User {
-    1: required string email;
-    2: optional string firstName;
-    3: optional string lastName;
-    4: optional i32 googleID
-}
+#struct shared.User {
+#    1: required string email;
+#    2: optional string firstName;
+#    3: optional string lastName;
+#    4: optional i32 googleID
+#}
 
 enum LegalStatus {
     NOT_REQUIRED,
@@ -44,7 +44,7 @@ enum ChapterType {
     PRE_EVENT,      //VOD or image encodings to play in a loop before a live event starts
     PRE_ROLL,       //VOD or image encodings to play every time someone lands on the player
     LIVE_EVENT,     //Live streaming endpoints to play a live event
-    POST_ROLL,      //VOD or image encodings to play (when the user stops the player?) or the live stream ends
+    POST_ROLL,      //VOD or image encodings to play (when the shared.User stops the player?) or the live stream ends
     POST_EVENT      //VOD or image encodings as a holding pattern between when a live event ends and the VOD highlights package is available
 }
 
@@ -61,7 +61,7 @@ struct Annotation {
 
 struct Legals {
     1: required LegalStatus status
-    2: required User lawyer
+    2: required shared.User lawyer
 }
 
 struct FrameSize {
@@ -106,7 +106,7 @@ struct MultimediaAtom {
   8  : required MultimediaSubtype mediaType
   9  : required LegalStatus legalStatus
   10 : required list<Chapter> chapters
-  11 : required User creator        //we might not be able to get these easily but it would be good to get them
-  12 : required User commissioner   //we might not be able to get these easily but it would be good to get them
+  11 : required shared.User creator        //we might not be able to get these easily but it would be good to get them
+  12 : required shared.User commissioner   //we might not be able to get these easily but it would be good to get them
   13 : required string mediaTag
 }
