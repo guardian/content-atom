@@ -108,4 +108,5 @@ struct MultimediaAtom {
   10 : required list<Chapter> chapters
   11 : required User creator        //we might not be able to get these easily but it would be good to get them
   12 : required User commissioner   //we might not be able to get these easily but it would be good to get them
+  13 : required string mediaTag
 }
