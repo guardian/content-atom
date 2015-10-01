@@ -100,13 +100,14 @@ struct MultimediaAtom {
   // content-atom wrapping?
   // should we store an embed count here or is this done higher up?
   1  : required string id
-  2  : required string title
+  //2  : required string title              //use the defaultHTML field (possibly)
   3  : required i16 contentVersion  //from __version field in Vidispine
+  //4  : required list<string> labels //labels are provided at the higher level
   7  : required PublicationStatus publicationStatus
   8  : required MultimediaSubtype mediaType
   9  : required LegalStatus legalStatus
   10 : required list<Chapter> chapters
-  11 : required shared.User creator        //we might not be able to get these easily but it would be good to get them
+  //11 : required shared.User creator        //we might not be able to get these easily but it would be good to get them. Optional at top level
   12 : required shared.User commissioner   //we might not be able to get these easily but it would be good to get them
   13 : required string mediaTag
 }
