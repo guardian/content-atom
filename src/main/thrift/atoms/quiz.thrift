@@ -52,7 +52,7 @@ struct Asset {
 }
 
 struct ResultBuckets {
-  1: required list<Bucket> buckets
+  1: required list<ResultBucket> buckets
 }
 
 struct ResultBucket {
