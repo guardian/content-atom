@@ -19,6 +19,163 @@ ttypes.EventType = {
   'UPDATE' : 0,
   'TAKEDOWN' : 1
 };
+AtomData = module.exports.AtomData = function(args) {
+  this.quiz = null;
+  if (args) {
+    if (args.quiz !== undefined && args.quiz !== null) {
+      this.quiz = new quiz_ttypes.QuizAtom(args.quiz);
+    }
+  }
+};
+AtomData.prototype = {};
+AtomData.prototype.read = function(input) {
+  input.readStructBegin();
+  while (true)
+  {
+    var ret = input.readFieldBegin();
+    var fname = ret.fname;
+    var ftype = ret.ftype;
+    var fid = ret.fid;
+    if (ftype == Thrift.Type.STOP) {
+      break;
+    }
+    switch (fid)
+    {
+      case 1:
+      if (ftype == Thrift.Type.STRUCT) {
+        this.quiz = new quiz_ttypes.QuizAtom();
+        this.quiz.read(input);
+      } else {
+        input.skip(ftype);
+      }
+      break;
+      case 0:
+        input.skip(ftype);
+        break;
+      default:
+        input.skip(ftype);
+    }
+    input.readFieldEnd();
+  }
+  input.readStructEnd();
+  return;
+};
+
+AtomData.prototype.write = function(output) {
+  output.writeStructBegin('AtomData');
+  if (this.quiz !== null && this.quiz !== undefined) {
+    output.writeFieldBegin('quiz', Thrift.Type.STRUCT, 1);
+    this.quiz.write(output);
+    output.writeFieldEnd();
+  }
+  output.writeFieldStop();
+  output.writeStructEnd();
+  return;
+};
+
+ContentChangeDetails = module.exports.ContentChangeDetails = function(args) {
+  this.lastModified = null;
+  this.created = null;
+  this.published = null;
+  this.revision = null;
+  if (args) {
+    if (args.lastModified !== undefined && args.lastModified !== null) {
+      this.lastModified = new shared_ttypes.ChangeRecord(args.lastModified);
+    }
+    if (args.created !== undefined && args.created !== null) {
+      this.created = new shared_ttypes.ChangeRecord(args.created);
+    }
+    if (args.published !== undefined && args.published !== null) {
+      this.published = new shared_ttypes.ChangeRecord(args.published);
+    }
+    if (args.revision !== undefined && args.revision !== null) {
+      this.revision = args.revision;
+    } else {
+      throw new Thrift.TProtocolException(Thrift.TProtocolExceptionType.UNKNOWN, 'Required field revision is unset!');
+    }
+  }
+};
+ContentChangeDetails.prototype = {};
+ContentChangeDetails.prototype.read = function(input) {
+  input.readStructBegin();
+  while (true)
+  {
+    var ret = input.readFieldBegin();
+    var fname = ret.fname;
+    var ftype = ret.ftype;
+    var fid = ret.fid;
+    if (ftype == Thrift.Type.STOP) {
+      break;
+    }
+    switch (fid)
+    {
+      case 1:
+      if (ftype == Thrift.Type.STRUCT) {
+        this.lastModified = new shared_ttypes.ChangeRecord();
+        this.lastModified.read(input);
+      } else {
+        input.skip(ftype);
+      }
+      break;
+      case 2:
+      if (ftype == Thrift.Type.STRUCT) {
+        this.created = new shared_ttypes.ChangeRecord();
+        this.created.read(input);
+      } else {
+        input.skip(ftype);
+      }
+      break;
+      case 3:
+      if (ftype == Thrift.Type.STRUCT) {
+        this.published = new shared_ttypes.ChangeRecord();
+        this.published.read(input);
+      } else {
+        input.skip(ftype);
+      }
+      break;
+      case 4:
+      if (ftype == Thrift.Type.I64) {
+        this.revision = input.readI64();
+      } else {
+        input.skip(ftype);
+      }
+      break;
+      default:
+        input.skip(ftype);
+    }
+    input.readFieldEnd();
+  }
+  input.readStructEnd();
+  return;
+};
+
+ContentChangeDetails.prototype.write = function(output) {
+  output.writeStructBegin('ContentChangeDetails');
+  if (this.lastModified !== null && this.lastModified !== undefined) {
+    output.writeFieldBegin('lastModified', Thrift.Type.STRUCT, 1);
+    this.lastModified.write(output);
+    output.writeFieldEnd();
+  }
+  if (this.created !== null && this.created !== undefined) {
+    output.writeFieldBegin('created', Thrift.Type.STRUCT, 2);
+    this.created.write(output);
+    output.writeFieldEnd();
+  }
+  if (this.published !== null && this.published !== undefined) {
+    output.writeFieldBegin('published', Thrift.Type.STRUCT, 3);
+    this.published.write(output);
+    output.writeFieldEnd();
+  }
+  if (this.revision !== null && this.revision !== undefined) {
+    output.writeFieldBegin('revision', Thrift.Type.I64, 4);
+    output.writeI64(this.revision);
+    output.writeFieldEnd();
+  }
+  output.writeFieldStop();
+  output.writeStructEnd();
+  return;
+};
+
 Atom = module.exports.Atom = function(args) {
   this.id = null;
   this.atomType = null;
@@ -185,60 +342,6 @@ Atom.prototype.write = function(output) {
   return;
 };
 
-AtomData = module.exports.AtomData = function(args) {
-  this.quiz = null;
-  if (args) {
-    if (args.quiz !== undefined && args.quiz !== null) {
-      this.quiz = new quiz_ttypes.QuizAtom(args.quiz);
-    }
-  }
-};
-AtomData.prototype = {};
-AtomData.prototype.read = function(input) {
-  input.readStructBegin();
-  while (true)
-  {
-    var ret = input.readFieldBegin();
-    var fname = ret.fname;
-    var ftype = ret.ftype;
-    var fid = ret.fid;
-    if (ftype == Thrift.Type.STOP) {
-      break;
-    }
-    switch (fid)
-    {
-      case 1:
-      if (ftype == Thrift.Type.STRUCT) {
-        this.quiz = new quiz_ttypes.QuizAtom();
-        this.quiz.read(input);
-      } else {
-        input.skip(ftype);
-      }
-      break;
-      case 0:
-        input.skip(ftype);
-        break;
-      default:
-        input.skip(ftype);
-    }
-    input.readFieldEnd();
-  }
-  input.readStructEnd();
-  return;
-};
-
-AtomData.prototype.write = function(output) {
-  output.writeStructBegin('AtomData');
-  if (this.quiz !== null && this.quiz !== undefined) {
-    output.writeFieldBegin('quiz', Thrift.Type.STRUCT, 1);
-    this.quiz.write(output);
-    output.writeFieldEnd();
-  }
-  output.writeFieldStop();
-  output.writeStructEnd();
-  return;
-};
-
 ContentAtomEvent = module.exports.ContentAtomEvent = function(args) {
   this.atom = null;
   this.eventType = null;
@@ -321,109 +424,6 @@ ContentAtomEvent.prototype.write = function(output) {
   if (this.eventCreationTime !== null && this.eventCreationTime !== undefined) {
     output.writeFieldBegin('eventCreationTime', Thrift.Type.I64, 3);
     output.writeI64(this.eventCreationTime);
-    output.writeFieldEnd();
-  }
-  output.writeFieldStop();
-  output.writeStructEnd();
-  return;
-};
-
-ContentChangeDetails = module.exports.ContentChangeDetails = function(args) {
-  this.lastModified = null;
-  this.created = null;
-  this.published = null;
-  this.revision = null;
-  if (args) {
-    if (args.lastModified !== undefined && args.lastModified !== null) {
-      this.lastModified = new shared_ttypes.ChangeRecord(args.lastModified);
-    }
-    if (args.created !== undefined && args.created !== null) {
-      this.created = new shared_ttypes.ChangeRecord(args.created);
-    }
-    if (args.published !== undefined && args.published !== null) {
-      this.published = new shared_ttypes.ChangeRecord(args.published);
-    }
-    if (args.revision !== undefined && args.revision !== null) {
-      this.revision = args.revision;
-    } else {
-      throw new Thrift.TProtocolException(Thrift.TProtocolExceptionType.UNKNOWN, 'Required field revision is unset!');
-    }
-  }
-};
-ContentChangeDetails.prototype = {};
-ContentChangeDetails.prototype.read = function(input) {
-  input.readStructBegin();
-  while (true)
-  {
-    var ret = input.readFieldBegin();
-    var fname = ret.fname;
-    var ftype = ret.ftype;
-    var fid = ret.fid;
-    if (ftype == Thrift.Type.STOP) {
-      break;
-    }
-    switch (fid)
-    {
-      case 1:
-      if (ftype == Thrift.Type.STRUCT) {
-        this.lastModified = new shared_ttypes.ChangeRecord();
-        this.lastModified.read(input);
-      } else {
-        input.skip(ftype);
-      }
-      break;
-      case 2:
-      if (ftype == Thrift.Type.STRUCT) {
-        this.created = new shared_ttypes.ChangeRecord();
-        this.created.read(input);
-      } else {
-        input.skip(ftype);
-      }
-      break;
-      case 3:
-      if (ftype == Thrift.Type.STRUCT) {
-        this.published = new shared_ttypes.ChangeRecord();
-        this.published.read(input);
-      } else {
-        input.skip(ftype);
-      }
-      break;
-      case 4:
-      if (ftype == Thrift.Type.I64) {
-        this.revision = input.readI64();
-      } else {
-        input.skip(ftype);
-      }
-      break;
-      default:
-        input.skip(ftype);
-    }
-    input.readFieldEnd();
-  }
-  input.readStructEnd();
-  return;
-};
-
-ContentChangeDetails.prototype.write = function(output) {
-  output.writeStructBegin('ContentChangeDetails');
-  if (this.lastModified !== null && this.lastModified !== undefined) {
-    output.writeFieldBegin('lastModified', Thrift.Type.STRUCT, 1);
-    this.lastModified.write(output);
-    output.writeFieldEnd();
-  }
-  if (this.created !== null && this.created !== undefined) {
-    output.writeFieldBegin('created', Thrift.Type.STRUCT, 2);
-    this.created.write(output);
-    output.writeFieldEnd();
-  }
-  if (this.published !== null && this.published !== undefined) {
-    output.writeFieldBegin('published', Thrift.Type.STRUCT, 3);
-    this.published.write(output);
-    output.writeFieldEnd();
-  }
-  if (this.revision !== null && this.revision !== undefined) {
-    output.writeFieldBegin('revision', Thrift.Type.I64, 4);
-    output.writeI64(this.revision);
     output.writeFieldEnd();
   }
   output.writeFieldStop();

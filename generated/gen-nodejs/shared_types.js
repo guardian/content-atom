@@ -9,75 +9,6 @@ var Q = thrift.Q;
 
 
 var ttypes = module.exports = {};
-ChangeRecord = module.exports.ChangeRecord = function(args) {
-  this.date = null;
-  this.user = null;
-  if (args) {
-    if (args.date !== undefined && args.date !== null) {
-      this.date = args.date;
-    } else {
-      throw new Thrift.TProtocolException(Thrift.TProtocolExceptionType.UNKNOWN, 'Required field date is unset!');
-    }
-    if (args.user !== undefined && args.user !== null) {
-      this.user = new ttypes.User(args.user);
-    }
-  }
-};
-ChangeRecord.prototype = {};
-ChangeRecord.prototype.read = function(input) {
-  input.readStructBegin();
-  while (true)
-  {
-    var ret = input.readFieldBegin();
-    var fname = ret.fname;
-    var ftype = ret.ftype;
-    var fid = ret.fid;
-    if (ftype == Thrift.Type.STOP) {
-      break;
-    }
-    switch (fid)
-    {
-      case 1:
-      if (ftype == Thrift.Type.I64) {
-        this.date = input.readI64();
-      } else {
-        input.skip(ftype);
-      }
-      break;
-      case 2:
-      if (ftype == Thrift.Type.STRUCT) {
-        this.user = new ttypes.User();
-        this.user.read(input);
-      } else {
-        input.skip(ftype);
-      }
-      break;
-      default:
-        input.skip(ftype);
-    }
-    input.readFieldEnd();
-  }
-  input.readStructEnd();
-  return;
-};
-
-ChangeRecord.prototype.write = function(output) {
-  output.writeStructBegin('ChangeRecord');
-  if (this.date !== null && this.date !== undefined) {
-    output.writeFieldBegin('date', Thrift.Type.I64, 1);
-    output.writeI64(this.date);
-    output.writeFieldEnd();
-  }
-  if (this.user !== null && this.user !== undefined) {
-    output.writeFieldBegin('user', Thrift.Type.STRUCT, 2);
-    this.user.write(output);
-    output.writeFieldEnd();
-  }
-  output.writeFieldStop();
-  output.writeStructEnd();
-  return;
-};
-
 User = module.exports.User = function(args) {
   this.email = null;
   this.firstName = null;
@@ -155,6 +86,75 @@ User.prototype.write = function(output) {
   if (this.lastName !== null && this.lastName !== undefined) {
     output.writeFieldBegin('lastName', Thrift.Type.STRING, 3);
     output.writeString(this.lastName);
+    output.writeFieldEnd();
+  }
+  output.writeFieldStop();
+  output.writeStructEnd();
+  return;
+};
+
+ChangeRecord = module.exports.ChangeRecord = function(args) {
+  this.date = null;
+  this.user = null;
+  if (args) {
+    if (args.date !== undefined && args.date !== null) {
+      this.date = args.date;
+    } else {
+      throw new Thrift.TProtocolException(Thrift.TProtocolExceptionType.UNKNOWN, 'Required field date is unset!');
+    }
+    if (args.user !== undefined && args.user !== null) {
+      this.user = new ttypes.User(args.user);
+    }
+  }
+};
+ChangeRecord.prototype = {};
+ChangeRecord.prototype.read = function(input) {
+  input.readStructBegin();
+  while (true)
+  {
+    var ret = input.readFieldBegin();
+    var fname = ret.fname;
+    var ftype = ret.ftype;
+    var fid = ret.fid;
+    if (ftype == Thrift.Type.STOP) {
+      break;
+    }
+    switch (fid)
+    {
+      case 1:
+      if (ftype == Thrift.Type.I64) {
+        this.date = input.readI64();
+      } else {
+        input.skip(ftype);
+      }
+      break;
+      case 2:
+      if (ftype == Thrift.Type.STRUCT) {
+        this.user = new ttypes.User();
+        this.user.read(input);
+      } else {
+        input.skip(ftype);
+      }
+      break;
+      default:
+        input.skip(ftype);
+    }
+    input.readFieldEnd();
+  }
+  input.readStructEnd();
+  return;
+};
+
+ChangeRecord.prototype.write = function(output) {
+  output.writeStructBegin('ChangeRecord');
+  if (this.date !== null && this.date !== undefined) {
+    output.writeFieldBegin('date', Thrift.Type.I64, 1);
+    output.writeI64(this.date);
+    output.writeFieldEnd();
+  }
+  if (this.user !== null && this.user !== undefined) {
+    output.writeFieldBegin('user', Thrift.Type.STRUCT, 2);
+    this.user.write(output);
     output.writeFieldEnd();
   }
   output.writeFieldStop();

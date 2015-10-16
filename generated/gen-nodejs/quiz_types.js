@@ -17,6 +17,817 @@ if (typeof contentatom === 'undefined') {
 if (typeof contentatom.quiz === 'undefined') {
   contentatom.quiz = {};
 }
+contentatom.quiz.ResultGroup = module.exports.ResultGroup = function(args) {
+  this.title = null;
+  this.share = null;
+  this.minScore = null;
+  if (args) {
+    if (args.title !== undefined && args.title !== null) {
+      this.title = args.title;
+    } else {
+      throw new Thrift.TProtocolException(Thrift.TProtocolExceptionType.UNKNOWN, 'Required field title is unset!');
+    }
+    if (args.share !== undefined && args.share !== null) {
+      this.share = args.share;
+    } else {
+      throw new Thrift.TProtocolException(Thrift.TProtocolExceptionType.UNKNOWN, 'Required field share is unset!');
+    }
+    if (args.minScore !== undefined && args.minScore !== null) {
+      this.minScore = args.minScore;
+    } else {
+      throw new Thrift.TProtocolException(Thrift.TProtocolExceptionType.UNKNOWN, 'Required field minScore is unset!');
+    }
+  }
+};
+contentatom.quiz.ResultGroup.prototype = {};
+contentatom.quiz.ResultGroup.prototype.read = function(input) {
+  input.readStructBegin();
+  while (true)
+  {
+    var ret = input.readFieldBegin();
+    var fname = ret.fname;
+    var ftype = ret.ftype;
+    var fid = ret.fid;
+    if (ftype == Thrift.Type.STOP) {
+      break;
+    }
+    switch (fid)
+    {
+      case 1:
+      if (ftype == Thrift.Type.STRING) {
+        this.title = input.readString();
+      } else {
+        input.skip(ftype);
+      }
+      break;
+      case 2:
+      if (ftype == Thrift.Type.STRING) {
+        this.share = input.readString();
+      } else {
+        input.skip(ftype);
+      }
+      break;
+      case 3:
+      if (ftype == Thrift.Type.I16) {
+        this.minScore = input.readI16();
+      } else {
+        input.skip(ftype);
+      }
+      break;
+      default:
+        input.skip(ftype);
+    }
+    input.readFieldEnd();
+  }
+  input.readStructEnd();
+  return;
+};
+
+contentatom.quiz.ResultGroup.prototype.write = function(output) {
+  output.writeStructBegin('ResultGroup');
+  if (this.title !== null && this.title !== undefined) {
+    output.writeFieldBegin('title', Thrift.Type.STRING, 1);
+    output.writeString(this.title);
+    output.writeFieldEnd();
+  }
+  if (this.share !== null && this.share !== undefined) {
+    output.writeFieldBegin('share', Thrift.Type.STRING, 2);
+    output.writeString(this.share);
+    output.writeFieldEnd();
+  }
+  if (this.minScore !== null && this.minScore !== undefined) {
+    output.writeFieldBegin('minScore', Thrift.Type.I16, 3);
+    output.writeI16(this.minScore);
+    output.writeFieldEnd();
+  }
+  output.writeFieldStop();
+  output.writeStructEnd();
+  return;
+};
+
+contentatom.quiz.Asset = module.exports.Asset = function(args) {
+  this.type = null;
+  this.data = null;
+  if (args) {
+    if (args.type !== undefined && args.type !== null) {
+      this.type = args.type;
+    } else {
+      throw new Thrift.TProtocolException(Thrift.TProtocolExceptionType.UNKNOWN, 'Required field type is unset!');
+    }
+    if (args.data !== undefined && args.data !== null) {
+      this.data = args.data;
+    } else {
+      throw new Thrift.TProtocolException(Thrift.TProtocolExceptionType.UNKNOWN, 'Required field data is unset!');
+    }
+  }
+};
+contentatom.quiz.Asset.prototype = {};
+contentatom.quiz.Asset.prototype.read = function(input) {
+  input.readStructBegin();
+  while (true)
+  {
+    var ret = input.readFieldBegin();
+    var fname = ret.fname;
+    var ftype = ret.ftype;
+    var fid = ret.fid;
+    if (ftype == Thrift.Type.STOP) {
+      break;
+    }
+    switch (fid)
+    {
+      case 1:
+      if (ftype == Thrift.Type.STRING) {
+        this.type = input.readString();
+      } else {
+        input.skip(ftype);
+      }
+      break;
+      case 2:
+      if (ftype == Thrift.Type.STRING) {
+        this.data = input.readString();
+      } else {
+        input.skip(ftype);
+      }
+      break;
+      default:
+        input.skip(ftype);
+    }
+    input.readFieldEnd();
+  }
+  input.readStructEnd();
+  return;
+};
+
+contentatom.quiz.Asset.prototype.write = function(output) {
+  output.writeStructBegin('Asset');
+  if (this.type !== null && this.type !== undefined) {
+    output.writeFieldBegin('type', Thrift.Type.STRING, 1);
+    output.writeString(this.type);
+    output.writeFieldEnd();
+  }
+  if (this.data !== null && this.data !== undefined) {
+    output.writeFieldBegin('data', Thrift.Type.STRING, 2);
+    output.writeString(this.data);
+    output.writeFieldEnd();
+  }
+  output.writeFieldStop();
+  output.writeStructEnd();
+  return;
+};
+
+contentatom.quiz.Answer = module.exports.Answer = function(args) {
+  this.answerText = null;
+  this.assets = null;
+  this.weight = null;
+  this.revealText = null;
+  if (args) {
+    if (args.answerText !== undefined && args.answerText !== null) {
+      this.answerText = args.answerText;
+    } else {
+      throw new Thrift.TProtocolException(Thrift.TProtocolExceptionType.UNKNOWN, 'Required field answerText is unset!');
+    }
+    if (args.assets !== undefined && args.assets !== null) {
+      this.assets = Thrift.copyList(args.assets, [ttypes.Asset]);
+    } else {
+      throw new Thrift.TProtocolException(Thrift.TProtocolExceptionType.UNKNOWN, 'Required field assets is unset!');
+    }
+    if (args.weight !== undefined && args.weight !== null) {
+      this.weight = args.weight;
+    } else {
+      throw new Thrift.TProtocolException(Thrift.TProtocolExceptionType.UNKNOWN, 'Required field weight is unset!');
+    }
+    if (args.revealText !== undefined && args.revealText !== null) {
+      this.revealText = args.revealText;
+    }
+  }
+};
+contentatom.quiz.Answer.prototype = {};
+contentatom.quiz.Answer.prototype.read = function(input) {
+  input.readStructBegin();
+  while (true)
+  {
+    var ret = input.readFieldBegin();
+    var fname = ret.fname;
+    var ftype = ret.ftype;
+    var fid = ret.fid;
+    if (ftype == Thrift.Type.STOP) {
+      break;
+    }
+    switch (fid)
+    {
+      case 1:
+      if (ftype == Thrift.Type.STRING) {
+        this.answerText = input.readString();
+      } else {
+        input.skip(ftype);
+      }
+      break;
+      case 2:
+      if (ftype == Thrift.Type.LIST) {
+        var _size0 = 0;
+        var _rtmp34;
+        this.assets = [];
+        var _etype3 = 0;
+        _rtmp34 = input.readListBegin();
+        _etype3 = _rtmp34.etype;
+        _size0 = _rtmp34.size;
+        for (var _i5 = 0; _i5 < _size0; ++_i5)
+        {
+          var elem6 = null;
+          elem6 = new ttypes.Asset();
+          elem6.read(input);
+          this.assets.push(elem6);
+        }
+        input.readListEnd();
+      } else {
+        input.skip(ftype);
+      }
+      break;
+      case 3:
+      if (ftype == Thrift.Type.I16) {
+        this.weight = input.readI16();
+      } else {
+        input.skip(ftype);
+      }
+      break;
+      case 4:
+      if (ftype == Thrift.Type.STRING) {
+        this.revealText = input.readString();
+      } else {
+        input.skip(ftype);
+      }
+      break;
+      default:
+        input.skip(ftype);
+    }
+    input.readFieldEnd();
+  }
+  input.readStructEnd();
+  return;
+};
+
+contentatom.quiz.Answer.prototype.write = function(output) {
+  output.writeStructBegin('Answer');
+  if (this.answerText !== null && this.answerText !== undefined) {
+    output.writeFieldBegin('answerText', Thrift.Type.STRING, 1);
+    output.writeString(this.answerText);
+    output.writeFieldEnd();
+  }
+  if (this.assets !== null && this.assets !== undefined) {
+    output.writeFieldBegin('assets', Thrift.Type.LIST, 2);
+    output.writeListBegin(Thrift.Type.STRUCT, this.assets.length);
+    for (var iter7 in this.assets)
+    {
+      if (this.assets.hasOwnProperty(iter7))
+      {
+        iter7 = this.assets[iter7];
+        iter7.write(output);
+      }
+    }
+    output.writeListEnd();
+    output.writeFieldEnd();
+  }
+  if (this.weight !== null && this.weight !== undefined) {
+    output.writeFieldBegin('weight', Thrift.Type.I16, 3);
+    output.writeI16(this.weight);
+    output.writeFieldEnd();
+  }
+  if (this.revealText !== null && this.revealText !== undefined) {
+    output.writeFieldBegin('revealText', Thrift.Type.STRING, 4);
+    output.writeString(this.revealText);
+    output.writeFieldEnd();
+  }
+  output.writeFieldStop();
+  output.writeStructEnd();
+  return;
+};
+
+contentatom.quiz.ResultBucket = module.exports.ResultBucket = function(args) {
+  this.assets = null;
+  this.description = null;
+  this.title = null;
+  this.share = null;
+  if (args) {
+    if (args.assets !== undefined && args.assets !== null) {
+      this.assets = Thrift.copyList(args.assets, [ttypes.Asset]);
+    }
+    if (args.description !== undefined && args.description !== null) {
+      this.description = args.description;
+    } else {
+      throw new Thrift.TProtocolException(Thrift.TProtocolExceptionType.UNKNOWN, 'Required field description is unset!');
+    }
+    if (args.title !== undefined && args.title !== null) {
+      this.title = args.title;
+    } else {
+      throw new Thrift.TProtocolException(Thrift.TProtocolExceptionType.UNKNOWN, 'Required field title is unset!');
+    }
+    if (args.share !== undefined && args.share !== null) {
+      this.share = args.share;
+    } else {
+      throw new Thrift.TProtocolException(Thrift.TProtocolExceptionType.UNKNOWN, 'Required field share is unset!');
+    }
+  }
+};
+contentatom.quiz.ResultBucket.prototype = {};
+contentatom.quiz.ResultBucket.prototype.read = function(input) {
+  input.readStructBegin();
+  while (true)
+  {
+    var ret = input.readFieldBegin();
+    var fname = ret.fname;
+    var ftype = ret.ftype;
+    var fid = ret.fid;
+    if (ftype == Thrift.Type.STOP) {
+      break;
+    }
+    switch (fid)
+    {
+      case 1:
+      if (ftype == Thrift.Type.LIST) {
+        var _size8 = 0;
+        var _rtmp312;
+        this.assets = [];
+        var _etype11 = 0;
+        _rtmp312 = input.readListBegin();
+        _etype11 = _rtmp312.etype;
+        _size8 = _rtmp312.size;
+        for (var _i13 = 0; _i13 < _size8; ++_i13)
+        {
+          var elem14 = null;
+          elem14 = new ttypes.Asset();
+          elem14.read(input);
+          this.assets.push(elem14);
+        }
+        input.readListEnd();
+      } else {
+        input.skip(ftype);
+      }
+      break;
+      case 2:
+      if (ftype == Thrift.Type.STRING) {
+        this.description = input.readString();
+      } else {
+        input.skip(ftype);
+      }
+      break;
+      case 3:
+      if (ftype == Thrift.Type.STRING) {
+        this.title = input.readString();
+      } else {
+        input.skip(ftype);
+      }
+      break;
+      case 4:
+      if (ftype == Thrift.Type.STRING) {
+        this.share = input.readString();
+      } else {
+        input.skip(ftype);
+      }
+      break;
+      default:
+        input.skip(ftype);
+    }
+    input.readFieldEnd();
+  }
+  input.readStructEnd();
+  return;
+};
+
+contentatom.quiz.ResultBucket.prototype.write = function(output) {
+  output.writeStructBegin('ResultBucket');
+  if (this.assets !== null && this.assets !== undefined) {
+    output.writeFieldBegin('assets', Thrift.Type.LIST, 1);
+    output.writeListBegin(Thrift.Type.STRUCT, this.assets.length);
+    for (var iter15 in this.assets)
+    {
+      if (this.assets.hasOwnProperty(iter15))
+      {
+        iter15 = this.assets[iter15];
+        iter15.write(output);
+      }
+    }
+    output.writeListEnd();
+    output.writeFieldEnd();
+  }
+  if (this.description !== null && this.description !== undefined) {
+    output.writeFieldBegin('description', Thrift.Type.STRING, 2);
+    output.writeString(this.description);
+    output.writeFieldEnd();
+  }
+  if (this.title !== null && this.title !== undefined) {
+    output.writeFieldBegin('title', Thrift.Type.STRING, 3);
+    output.writeString(this.title);
+    output.writeFieldEnd();
+  }
+  if (this.share !== null && this.share !== undefined) {
+    output.writeFieldBegin('share', Thrift.Type.STRING, 4);
+    output.writeString(this.share);
+    output.writeFieldEnd();
+  }
+  output.writeFieldStop();
+  output.writeStructEnd();
+  return;
+};
+
+contentatom.quiz.ResultBuckets = module.exports.ResultBuckets = function(args) {
+  this.buckets = null;
+  if (args) {
+    if (args.buckets !== undefined && args.buckets !== null) {
+      this.buckets = Thrift.copyList(args.buckets, [ttypes.ResultBucket]);
+    } else {
+      throw new Thrift.TProtocolException(Thrift.TProtocolExceptionType.UNKNOWN, 'Required field buckets is unset!');
+    }
+  }
+};
+contentatom.quiz.ResultBuckets.prototype = {};
+contentatom.quiz.ResultBuckets.prototype.read = function(input) {
+  input.readStructBegin();
+  while (true)
+  {
+    var ret = input.readFieldBegin();
+    var fname = ret.fname;
+    var ftype = ret.ftype;
+    var fid = ret.fid;
+    if (ftype == Thrift.Type.STOP) {
+      break;
+    }
+    switch (fid)
+    {
+      case 1:
+      if (ftype == Thrift.Type.LIST) {
+        var _size16 = 0;
+        var _rtmp320;
+        this.buckets = [];
+        var _etype19 = 0;
+        _rtmp320 = input.readListBegin();
+        _etype19 = _rtmp320.etype;
+        _size16 = _rtmp320.size;
+        for (var _i21 = 0; _i21 < _size16; ++_i21)
+        {
+          var elem22 = null;
+          elem22 = new ttypes.ResultBucket();
+          elem22.read(input);
+          this.buckets.push(elem22);
+        }
+        input.readListEnd();
+      } else {
+        input.skip(ftype);
+      }
+      break;
+      case 0:
+        input.skip(ftype);
+        break;
+      default:
+        input.skip(ftype);
+    }
+    input.readFieldEnd();
+  }
+  input.readStructEnd();
+  return;
+};
+
+contentatom.quiz.ResultBuckets.prototype.write = function(output) {
+  output.writeStructBegin('ResultBuckets');
+  if (this.buckets !== null && this.buckets !== undefined) {
+    output.writeFieldBegin('buckets', Thrift.Type.LIST, 1);
+    output.writeListBegin(Thrift.Type.STRUCT, this.buckets.length);
+    for (var iter23 in this.buckets)
+    {
+      if (this.buckets.hasOwnProperty(iter23))
+      {
+        iter23 = this.buckets[iter23];
+        iter23.write(output);
+      }
+    }
+    output.writeListEnd();
+    output.writeFieldEnd();
+  }
+  output.writeFieldStop();
+  output.writeStructEnd();
+  return;
+};
+
+contentatom.quiz.Question = module.exports.Question = function(args) {
+  this.questionText = null;
+  this.assets = null;
+  this.answers = null;
+  if (args) {
+    if (args.questionText !== undefined && args.questionText !== null) {
+      this.questionText = args.questionText;
+    } else {
+      throw new Thrift.TProtocolException(Thrift.TProtocolExceptionType.UNKNOWN, 'Required field questionText is unset!');
+    }
+    if (args.assets !== undefined && args.assets !== null) {
+      this.assets = Thrift.copyList(args.assets, [ttypes.Asset]);
+    } else {
+      throw new Thrift.TProtocolException(Thrift.TProtocolExceptionType.UNKNOWN, 'Required field assets is unset!');
+    }
+    if (args.answers !== undefined && args.answers !== null) {
+      this.answers = Thrift.copyList(args.answers, [ttypes.Answer]);
+    } else {
+      throw new Thrift.TProtocolException(Thrift.TProtocolExceptionType.UNKNOWN, 'Required field answers is unset!');
+    }
+  }
+};
+contentatom.quiz.Question.prototype = {};
+contentatom.quiz.Question.prototype.read = function(input) {
+  input.readStructBegin();
+  while (true)
+  {
+    var ret = input.readFieldBegin();
+    var fname = ret.fname;
+    var ftype = ret.ftype;
+    var fid = ret.fid;
+    if (ftype == Thrift.Type.STOP) {
+      break;
+    }
+    switch (fid)
+    {
+      case 1:
+      if (ftype == Thrift.Type.STRING) {
+        this.questionText = input.readString();
+      } else {
+        input.skip(ftype);
+      }
+      break;
+      case 2:
+      if (ftype == Thrift.Type.LIST) {
+        var _size24 = 0;
+        var _rtmp328;
+        this.assets = [];
+        var _etype27 = 0;
+        _rtmp328 = input.readListBegin();
+        _etype27 = _rtmp328.etype;
+        _size24 = _rtmp328.size;
+        for (var _i29 = 0; _i29 < _size24; ++_i29)
+        {
+          var elem30 = null;
+          elem30 = new ttypes.Asset();
+          elem30.read(input);
+          this.assets.push(elem30);
+        }
+        input.readListEnd();
+      } else {
+        input.skip(ftype);
+      }
+      break;
+      case 3:
+      if (ftype == Thrift.Type.LIST) {
+        var _size31 = 0;
+        var _rtmp335;
+        this.answers = [];
+        var _etype34 = 0;
+        _rtmp335 = input.readListBegin();
+        _etype34 = _rtmp335.etype;
+        _size31 = _rtmp335.size;
+        for (var _i36 = 0; _i36 < _size31; ++_i36)
+        {
+          var elem37 = null;
+          elem37 = new ttypes.Answer();
+          elem37.read(input);
+          this.answers.push(elem37);
+        }
+        input.readListEnd();
+      } else {
+        input.skip(ftype);
+      }
+      break;
+      default:
+        input.skip(ftype);
+    }
+    input.readFieldEnd();
+  }
+  input.readStructEnd();
+  return;
+};
+
+contentatom.quiz.Question.prototype.write = function(output) {
+  output.writeStructBegin('Question');
+  if (this.questionText !== null && this.questionText !== undefined) {
+    output.writeFieldBegin('questionText', Thrift.Type.STRING, 1);
+    output.writeString(this.questionText);
+    output.writeFieldEnd();
+  }
+  if (this.assets !== null && this.assets !== undefined) {
+    output.writeFieldBegin('assets', Thrift.Type.LIST, 2);
+    output.writeListBegin(Thrift.Type.STRUCT, this.assets.length);
+    for (var iter38 in this.assets)
+    {
+      if (this.assets.hasOwnProperty(iter38))
+      {
+        iter38 = this.assets[iter38];
+        iter38.write(output);
+      }
+    }
+    output.writeListEnd();
+    output.writeFieldEnd();
+  }
+  if (this.answers !== null && this.answers !== undefined) {
+    output.writeFieldBegin('answers', Thrift.Type.LIST, 3);
+    output.writeListBegin(Thrift.Type.STRUCT, this.answers.length);
+    for (var iter39 in this.answers)
+    {
+      if (this.answers.hasOwnProperty(iter39))
+      {
+        iter39 = this.answers[iter39];
+        iter39.write(output);
+      }
+    }
+    output.writeListEnd();
+    output.writeFieldEnd();
+  }
+  output.writeFieldStop();
+  output.writeStructEnd();
+  return;
+};
+
+contentatom.quiz.ResultGroups = module.exports.ResultGroups = function(args) {
+  this.groups = null;
+  if (args) {
+    if (args.groups !== undefined && args.groups !== null) {
+      this.groups = Thrift.copyList(args.groups, [ttypes.ResultGroup]);
+    } else {
+      throw new Thrift.TProtocolException(Thrift.TProtocolExceptionType.UNKNOWN, 'Required field groups is unset!');
+    }
+  }
+};
+contentatom.quiz.ResultGroups.prototype = {};
+contentatom.quiz.ResultGroups.prototype.read = function(input) {
+  input.readStructBegin();
+  while (true)
+  {
+    var ret = input.readFieldBegin();
+    var fname = ret.fname;
+    var ftype = ret.ftype;
+    var fid = ret.fid;
+    if (ftype == Thrift.Type.STOP) {
+      break;
+    }
+    switch (fid)
+    {
+      case 1:
+      if (ftype == Thrift.Type.LIST) {
+        var _size40 = 0;
+        var _rtmp344;
+        this.groups = [];
+        var _etype43 = 0;
+        _rtmp344 = input.readListBegin();
+        _etype43 = _rtmp344.etype;
+        _size40 = _rtmp344.size;
+        for (var _i45 = 0; _i45 < _size40; ++_i45)
+        {
+          var elem46 = null;
+          elem46 = new ttypes.ResultGroup();
+          elem46.read(input);
+          this.groups.push(elem46);
+        }
+        input.readListEnd();
+      } else {
+        input.skip(ftype);
+      }
+      break;
+      case 0:
+        input.skip(ftype);
+        break;
+      default:
+        input.skip(ftype);
+    }
+    input.readFieldEnd();
+  }
+  input.readStructEnd();
+  return;
+};
+
+contentatom.quiz.ResultGroups.prototype.write = function(output) {
+  output.writeStructBegin('ResultGroups');
+  if (this.groups !== null && this.groups !== undefined) {
+    output.writeFieldBegin('groups', Thrift.Type.LIST, 1);
+    output.writeListBegin(Thrift.Type.STRUCT, this.groups.length);
+    for (var iter47 in this.groups)
+    {
+      if (this.groups.hasOwnProperty(iter47))
+      {
+        iter47 = this.groups[iter47];
+        iter47.write(output);
+      }
+    }
+    output.writeListEnd();
+    output.writeFieldEnd();
+  }
+  output.writeFieldStop();
+  output.writeStructEnd();
+  return;
+};
+
+contentatom.quiz.QuizContent = module.exports.QuizContent = function(args) {
+  this.questions = null;
+  this.resultGroups = null;
+  this.resultBuckets = null;
+  if (args) {
+    if (args.questions !== undefined && args.questions !== null) {
+      this.questions = Thrift.copyList(args.questions, [ttypes.Question]);
+    } else {
+      throw new Thrift.TProtocolException(Thrift.TProtocolExceptionType.UNKNOWN, 'Required field questions is unset!');
+    }
+    if (args.resultGroups !== undefined && args.resultGroups !== null) {
+      this.resultGroups = new ttypes.ResultGroups(args.resultGroups);
+    }
+    if (args.resultBuckets !== undefined && args.resultBuckets !== null) {
+      this.resultBuckets = new ttypes.ResultBuckets(args.resultBuckets);
+    }
+  }
+};
+contentatom.quiz.QuizContent.prototype = {};
+contentatom.quiz.QuizContent.prototype.read = function(input) {
+  input.readStructBegin();
+  while (true)
+  {
+    var ret = input.readFieldBegin();
+    var fname = ret.fname;
+    var ftype = ret.ftype;
+    var fid = ret.fid;
+    if (ftype == Thrift.Type.STOP) {
+      break;
+    }
+    switch (fid)
+    {
+      case 1:
+      if (ftype == Thrift.Type.LIST) {
+        var _size48 = 0;
+        var _rtmp352;
+        this.questions = [];
+        var _etype51 = 0;
+        _rtmp352 = input.readListBegin();
+        _etype51 = _rtmp352.etype;
+        _size48 = _rtmp352.size;
+        for (var _i53 = 0; _i53 < _size48; ++_i53)
+        {
+          var elem54 = null;
+          elem54 = new ttypes.Question();
+          elem54.read(input);
+          this.questions.push(elem54);
+        }
+        input.readListEnd();
+      } else {
+        input.skip(ftype);
+      }
+      break;
+      case 2:
+      if (ftype == Thrift.Type.STRUCT) {
+        this.resultGroups = new ttypes.ResultGroups();
+        this.resultGroups.read(input);
+      } else {
+        input.skip(ftype);
+      }
+      break;
+      case 3:
+      if (ftype == Thrift.Type.STRUCT) {
+        this.resultBuckets = new ttypes.ResultBuckets();
+        this.resultBuckets.read(input);
+      } else {
+        input.skip(ftype);
+      }
+      break;
+      default:
+        input.skip(ftype);
+    }
+    input.readFieldEnd();
+  }
+  input.readStructEnd();
+  return;
+};
+
+contentatom.quiz.QuizContent.prototype.write = function(output) {
+  output.writeStructBegin('QuizContent');
+  if (this.questions !== null && this.questions !== undefined) {
+    output.writeFieldBegin('questions', Thrift.Type.LIST, 1);
+    output.writeListBegin(Thrift.Type.STRUCT, this.questions.length);
+    for (var iter55 in this.questions)
+    {
+      if (this.questions.hasOwnProperty(iter55))
+      {
+        iter55 = this.questions[iter55];
+        iter55.write(output);
+      }
+    }
+    output.writeListEnd();
+    output.writeFieldEnd();
+  }
+  if (this.resultGroups !== null && this.resultGroups !== undefined) {
+    output.writeFieldBegin('resultGroups', Thrift.Type.STRUCT, 2);
+    this.resultGroups.write(output);
+    output.writeFieldEnd();
+  }
+  if (this.resultBuckets !== null && this.resultBuckets !== undefined) {
+    output.writeFieldBegin('resultBuckets', Thrift.Type.STRUCT, 3);
+    this.resultBuckets.write(output);
+    output.writeFieldEnd();
+  }
+  output.writeFieldStop();
+  output.writeStructEnd();
+  return;
+};
+
 contentatom.quiz.QuizAtom = module.exports.QuizAtom = function(args) {
   this.id = null;
   this.title = null;
@@ -169,817 +980,6 @@ contentatom.quiz.QuizAtom.prototype.write = function(output) {
   if (this.content !== null && this.content !== undefined) {
     output.writeFieldBegin('content', Thrift.Type.STRUCT, 10);
     this.content.write(output);
-    output.writeFieldEnd();
-  }
-  output.writeFieldStop();
-  output.writeStructEnd();
-  return;
-};
-
-contentatom.quiz.QuizContent = module.exports.QuizContent = function(args) {
-  this.questions = null;
-  this.resultGroups = null;
-  this.resultBuckets = null;
-  if (args) {
-    if (args.questions !== undefined && args.questions !== null) {
-      this.questions = Thrift.copyList(args.questions, [null]);
-    } else {
-      throw new Thrift.TProtocolException(Thrift.TProtocolExceptionType.UNKNOWN, 'Required field questions is unset!');
-    }
-    if (args.resultGroups !== undefined && args.resultGroups !== null) {
-      this.resultGroups = new ttypes.ResultGroups(args.resultGroups);
-    }
-    if (args.resultBuckets !== undefined && args.resultBuckets !== null) {
-      this.resultBuckets = new ttypes.ResultBuckets(args.resultBuckets);
-    }
-  }
-};
-contentatom.quiz.QuizContent.prototype = {};
-contentatom.quiz.QuizContent.prototype.read = function(input) {
-  input.readStructBegin();
-  while (true)
-  {
-    var ret = input.readFieldBegin();
-    var fname = ret.fname;
-    var ftype = ret.ftype;
-    var fid = ret.fid;
-    if (ftype == Thrift.Type.STOP) {
-      break;
-    }
-    switch (fid)
-    {
-      case 1:
-      if (ftype == Thrift.Type.LIST) {
-        var _size0 = 0;
-        var _rtmp34;
-        this.questions = [];
-        var _etype3 = 0;
-        _rtmp34 = input.readListBegin();
-        _etype3 = _rtmp34.etype;
-        _size0 = _rtmp34.size;
-        for (var _i5 = 0; _i5 < _size0; ++_i5)
-        {
-          var elem6 = null;
-          elem6 = new ttypes.Question();
-          elem6.read(input);
-          this.questions.push(elem6);
-        }
-        input.readListEnd();
-      } else {
-        input.skip(ftype);
-      }
-      break;
-      case 2:
-      if (ftype == Thrift.Type.STRUCT) {
-        this.resultGroups = new ttypes.ResultGroups();
-        this.resultGroups.read(input);
-      } else {
-        input.skip(ftype);
-      }
-      break;
-      case 3:
-      if (ftype == Thrift.Type.STRUCT) {
-        this.resultBuckets = new ttypes.ResultBuckets();
-        this.resultBuckets.read(input);
-      } else {
-        input.skip(ftype);
-      }
-      break;
-      default:
-        input.skip(ftype);
-    }
-    input.readFieldEnd();
-  }
-  input.readStructEnd();
-  return;
-};
-
-contentatom.quiz.QuizContent.prototype.write = function(output) {
-  output.writeStructBegin('QuizContent');
-  if (this.questions !== null && this.questions !== undefined) {
-    output.writeFieldBegin('questions', Thrift.Type.LIST, 1);
-    output.writeListBegin(Thrift.Type.STRUCT, this.questions.length);
-    for (var iter7 in this.questions)
-    {
-      if (this.questions.hasOwnProperty(iter7))
-      {
-        iter7 = this.questions[iter7];
-        iter7.write(output);
-      }
-    }
-    output.writeListEnd();
-    output.writeFieldEnd();
-  }
-  if (this.resultGroups !== null && this.resultGroups !== undefined) {
-    output.writeFieldBegin('resultGroups', Thrift.Type.STRUCT, 2);
-    this.resultGroups.write(output);
-    output.writeFieldEnd();
-  }
-  if (this.resultBuckets !== null && this.resultBuckets !== undefined) {
-    output.writeFieldBegin('resultBuckets', Thrift.Type.STRUCT, 3);
-    this.resultBuckets.write(output);
-    output.writeFieldEnd();
-  }
-  output.writeFieldStop();
-  output.writeStructEnd();
-  return;
-};
-
-contentatom.quiz.ResultGroups = module.exports.ResultGroups = function(args) {
-  this.groups = null;
-  if (args) {
-    if (args.groups !== undefined && args.groups !== null) {
-      this.groups = Thrift.copyList(args.groups, [null]);
-    } else {
-      throw new Thrift.TProtocolException(Thrift.TProtocolExceptionType.UNKNOWN, 'Required field groups is unset!');
-    }
-  }
-};
-contentatom.quiz.ResultGroups.prototype = {};
-contentatom.quiz.ResultGroups.prototype.read = function(input) {
-  input.readStructBegin();
-  while (true)
-  {
-    var ret = input.readFieldBegin();
-    var fname = ret.fname;
-    var ftype = ret.ftype;
-    var fid = ret.fid;
-    if (ftype == Thrift.Type.STOP) {
-      break;
-    }
-    switch (fid)
-    {
-      case 1:
-      if (ftype == Thrift.Type.LIST) {
-        var _size8 = 0;
-        var _rtmp312;
-        this.groups = [];
-        var _etype11 = 0;
-        _rtmp312 = input.readListBegin();
-        _etype11 = _rtmp312.etype;
-        _size8 = _rtmp312.size;
-        for (var _i13 = 0; _i13 < _size8; ++_i13)
-        {
-          var elem14 = null;
-          elem14 = new ttypes.ResultGroup();
-          elem14.read(input);
-          this.groups.push(elem14);
-        }
-        input.readListEnd();
-      } else {
-        input.skip(ftype);
-      }
-      break;
-      case 0:
-        input.skip(ftype);
-        break;
-      default:
-        input.skip(ftype);
-    }
-    input.readFieldEnd();
-  }
-  input.readStructEnd();
-  return;
-};
-
-contentatom.quiz.ResultGroups.prototype.write = function(output) {
-  output.writeStructBegin('ResultGroups');
-  if (this.groups !== null && this.groups !== undefined) {
-    output.writeFieldBegin('groups', Thrift.Type.LIST, 1);
-    output.writeListBegin(Thrift.Type.STRUCT, this.groups.length);
-    for (var iter15 in this.groups)
-    {
-      if (this.groups.hasOwnProperty(iter15))
-      {
-        iter15 = this.groups[iter15];
-        iter15.write(output);
-      }
-    }
-    output.writeListEnd();
-    output.writeFieldEnd();
-  }
-  output.writeFieldStop();
-  output.writeStructEnd();
-  return;
-};
-
-contentatom.quiz.ResultGroup = module.exports.ResultGroup = function(args) {
-  this.title = null;
-  this.share = null;
-  this.minScore = null;
-  if (args) {
-    if (args.title !== undefined && args.title !== null) {
-      this.title = args.title;
-    } else {
-      throw new Thrift.TProtocolException(Thrift.TProtocolExceptionType.UNKNOWN, 'Required field title is unset!');
-    }
-    if (args.share !== undefined && args.share !== null) {
-      this.share = args.share;
-    } else {
-      throw new Thrift.TProtocolException(Thrift.TProtocolExceptionType.UNKNOWN, 'Required field share is unset!');
-    }
-    if (args.minScore !== undefined && args.minScore !== null) {
-      this.minScore = args.minScore;
-    } else {
-      throw new Thrift.TProtocolException(Thrift.TProtocolExceptionType.UNKNOWN, 'Required field minScore is unset!');
-    }
-  }
-};
-contentatom.quiz.ResultGroup.prototype = {};
-contentatom.quiz.ResultGroup.prototype.read = function(input) {
-  input.readStructBegin();
-  while (true)
-  {
-    var ret = input.readFieldBegin();
-    var fname = ret.fname;
-    var ftype = ret.ftype;
-    var fid = ret.fid;
-    if (ftype == Thrift.Type.STOP) {
-      break;
-    }
-    switch (fid)
-    {
-      case 1:
-      if (ftype == Thrift.Type.STRING) {
-        this.title = input.readString();
-      } else {
-        input.skip(ftype);
-      }
-      break;
-      case 2:
-      if (ftype == Thrift.Type.STRING) {
-        this.share = input.readString();
-      } else {
-        input.skip(ftype);
-      }
-      break;
-      case 3:
-      if (ftype == Thrift.Type.I16) {
-        this.minScore = input.readI16();
-      } else {
-        input.skip(ftype);
-      }
-      break;
-      default:
-        input.skip(ftype);
-    }
-    input.readFieldEnd();
-  }
-  input.readStructEnd();
-  return;
-};
-
-contentatom.quiz.ResultGroup.prototype.write = function(output) {
-  output.writeStructBegin('ResultGroup');
-  if (this.title !== null && this.title !== undefined) {
-    output.writeFieldBegin('title', Thrift.Type.STRING, 1);
-    output.writeString(this.title);
-    output.writeFieldEnd();
-  }
-  if (this.share !== null && this.share !== undefined) {
-    output.writeFieldBegin('share', Thrift.Type.STRING, 2);
-    output.writeString(this.share);
-    output.writeFieldEnd();
-  }
-  if (this.minScore !== null && this.minScore !== undefined) {
-    output.writeFieldBegin('minScore', Thrift.Type.I16, 3);
-    output.writeI16(this.minScore);
-    output.writeFieldEnd();
-  }
-  output.writeFieldStop();
-  output.writeStructEnd();
-  return;
-};
-
-contentatom.quiz.Question = module.exports.Question = function(args) {
-  this.questionText = null;
-  this.assets = null;
-  this.answers = null;
-  if (args) {
-    if (args.questionText !== undefined && args.questionText !== null) {
-      this.questionText = args.questionText;
-    } else {
-      throw new Thrift.TProtocolException(Thrift.TProtocolExceptionType.UNKNOWN, 'Required field questionText is unset!');
-    }
-    if (args.assets !== undefined && args.assets !== null) {
-      this.assets = Thrift.copyList(args.assets, [null]);
-    } else {
-      throw new Thrift.TProtocolException(Thrift.TProtocolExceptionType.UNKNOWN, 'Required field assets is unset!');
-    }
-    if (args.answers !== undefined && args.answers !== null) {
-      this.answers = Thrift.copyList(args.answers, [null]);
-    } else {
-      throw new Thrift.TProtocolException(Thrift.TProtocolExceptionType.UNKNOWN, 'Required field answers is unset!');
-    }
-  }
-};
-contentatom.quiz.Question.prototype = {};
-contentatom.quiz.Question.prototype.read = function(input) {
-  input.readStructBegin();
-  while (true)
-  {
-    var ret = input.readFieldBegin();
-    var fname = ret.fname;
-    var ftype = ret.ftype;
-    var fid = ret.fid;
-    if (ftype == Thrift.Type.STOP) {
-      break;
-    }
-    switch (fid)
-    {
-      case 1:
-      if (ftype == Thrift.Type.STRING) {
-        this.questionText = input.readString();
-      } else {
-        input.skip(ftype);
-      }
-      break;
-      case 2:
-      if (ftype == Thrift.Type.LIST) {
-        var _size16 = 0;
-        var _rtmp320;
-        this.assets = [];
-        var _etype19 = 0;
-        _rtmp320 = input.readListBegin();
-        _etype19 = _rtmp320.etype;
-        _size16 = _rtmp320.size;
-        for (var _i21 = 0; _i21 < _size16; ++_i21)
-        {
-          var elem22 = null;
-          elem22 = new ttypes.Asset();
-          elem22.read(input);
-          this.assets.push(elem22);
-        }
-        input.readListEnd();
-      } else {
-        input.skip(ftype);
-      }
-      break;
-      case 3:
-      if (ftype == Thrift.Type.LIST) {
-        var _size23 = 0;
-        var _rtmp327;
-        this.answers = [];
-        var _etype26 = 0;
-        _rtmp327 = input.readListBegin();
-        _etype26 = _rtmp327.etype;
-        _size23 = _rtmp327.size;
-        for (var _i28 = 0; _i28 < _size23; ++_i28)
-        {
-          var elem29 = null;
-          elem29 = new ttypes.Answer();
-          elem29.read(input);
-          this.answers.push(elem29);
-        }
-        input.readListEnd();
-      } else {
-        input.skip(ftype);
-      }
-      break;
-      default:
-        input.skip(ftype);
-    }
-    input.readFieldEnd();
-  }
-  input.readStructEnd();
-  return;
-};
-
-contentatom.quiz.Question.prototype.write = function(output) {
-  output.writeStructBegin('Question');
-  if (this.questionText !== null && this.questionText !== undefined) {
-    output.writeFieldBegin('questionText', Thrift.Type.STRING, 1);
-    output.writeString(this.questionText);
-    output.writeFieldEnd();
-  }
-  if (this.assets !== null && this.assets !== undefined) {
-    output.writeFieldBegin('assets', Thrift.Type.LIST, 2);
-    output.writeListBegin(Thrift.Type.STRUCT, this.assets.length);
-    for (var iter30 in this.assets)
-    {
-      if (this.assets.hasOwnProperty(iter30))
-      {
-        iter30 = this.assets[iter30];
-        iter30.write(output);
-      }
-    }
-    output.writeListEnd();
-    output.writeFieldEnd();
-  }
-  if (this.answers !== null && this.answers !== undefined) {
-    output.writeFieldBegin('answers', Thrift.Type.LIST, 3);
-    output.writeListBegin(Thrift.Type.STRUCT, this.answers.length);
-    for (var iter31 in this.answers)
-    {
-      if (this.answers.hasOwnProperty(iter31))
-      {
-        iter31 = this.answers[iter31];
-        iter31.write(output);
-      }
-    }
-    output.writeListEnd();
-    output.writeFieldEnd();
-  }
-  output.writeFieldStop();
-  output.writeStructEnd();
-  return;
-};
-
-contentatom.quiz.Answer = module.exports.Answer = function(args) {
-  this.answerText = null;
-  this.assets = null;
-  this.weight = null;
-  this.revealText = null;
-  if (args) {
-    if (args.answerText !== undefined && args.answerText !== null) {
-      this.answerText = args.answerText;
-    } else {
-      throw new Thrift.TProtocolException(Thrift.TProtocolExceptionType.UNKNOWN, 'Required field answerText is unset!');
-    }
-    if (args.assets !== undefined && args.assets !== null) {
-      this.assets = Thrift.copyList(args.assets, [null]);
-    } else {
-      throw new Thrift.TProtocolException(Thrift.TProtocolExceptionType.UNKNOWN, 'Required field assets is unset!');
-    }
-    if (args.weight !== undefined && args.weight !== null) {
-      this.weight = args.weight;
-    } else {
-      throw new Thrift.TProtocolException(Thrift.TProtocolExceptionType.UNKNOWN, 'Required field weight is unset!');
-    }
-    if (args.revealText !== undefined && args.revealText !== null) {
-      this.revealText = args.revealText;
-    }
-  }
-};
-contentatom.quiz.Answer.prototype = {};
-contentatom.quiz.Answer.prototype.read = function(input) {
-  input.readStructBegin();
-  while (true)
-  {
-    var ret = input.readFieldBegin();
-    var fname = ret.fname;
-    var ftype = ret.ftype;
-    var fid = ret.fid;
-    if (ftype == Thrift.Type.STOP) {
-      break;
-    }
-    switch (fid)
-    {
-      case 1:
-      if (ftype == Thrift.Type.STRING) {
-        this.answerText = input.readString();
-      } else {
-        input.skip(ftype);
-      }
-      break;
-      case 2:
-      if (ftype == Thrift.Type.LIST) {
-        var _size32 = 0;
-        var _rtmp336;
-        this.assets = [];
-        var _etype35 = 0;
-        _rtmp336 = input.readListBegin();
-        _etype35 = _rtmp336.etype;
-        _size32 = _rtmp336.size;
-        for (var _i37 = 0; _i37 < _size32; ++_i37)
-        {
-          var elem38 = null;
-          elem38 = new ttypes.Asset();
-          elem38.read(input);
-          this.assets.push(elem38);
-        }
-        input.readListEnd();
-      } else {
-        input.skip(ftype);
-      }
-      break;
-      case 3:
-      if (ftype == Thrift.Type.I16) {
-        this.weight = input.readI16();
-      } else {
-        input.skip(ftype);
-      }
-      break;
-      case 4:
-      if (ftype == Thrift.Type.STRING) {
-        this.revealText = input.readString();
-      } else {
-        input.skip(ftype);
-      }
-      break;
-      default:
-        input.skip(ftype);
-    }
-    input.readFieldEnd();
-  }
-  input.readStructEnd();
-  return;
-};
-
-contentatom.quiz.Answer.prototype.write = function(output) {
-  output.writeStructBegin('Answer');
-  if (this.answerText !== null && this.answerText !== undefined) {
-    output.writeFieldBegin('answerText', Thrift.Type.STRING, 1);
-    output.writeString(this.answerText);
-    output.writeFieldEnd();
-  }
-  if (this.assets !== null && this.assets !== undefined) {
-    output.writeFieldBegin('assets', Thrift.Type.LIST, 2);
-    output.writeListBegin(Thrift.Type.STRUCT, this.assets.length);
-    for (var iter39 in this.assets)
-    {
-      if (this.assets.hasOwnProperty(iter39))
-      {
-        iter39 = this.assets[iter39];
-        iter39.write(output);
-      }
-    }
-    output.writeListEnd();
-    output.writeFieldEnd();
-  }
-  if (this.weight !== null && this.weight !== undefined) {
-    output.writeFieldBegin('weight', Thrift.Type.I16, 3);
-    output.writeI16(this.weight);
-    output.writeFieldEnd();
-  }
-  if (this.revealText !== null && this.revealText !== undefined) {
-    output.writeFieldBegin('revealText', Thrift.Type.STRING, 4);
-    output.writeString(this.revealText);
-    output.writeFieldEnd();
-  }
-  output.writeFieldStop();
-  output.writeStructEnd();
-  return;
-};
-
-contentatom.quiz.Asset = module.exports.Asset = function(args) {
-  this.type = null;
-  this.data = null;
-  if (args) {
-    if (args.type !== undefined && args.type !== null) {
-      this.type = args.type;
-    } else {
-      throw new Thrift.TProtocolException(Thrift.TProtocolExceptionType.UNKNOWN, 'Required field type is unset!');
-    }
-    if (args.data !== undefined && args.data !== null) {
-      this.data = args.data;
-    } else {
-      throw new Thrift.TProtocolException(Thrift.TProtocolExceptionType.UNKNOWN, 'Required field data is unset!');
-    }
-  }
-};
-contentatom.quiz.Asset.prototype = {};
-contentatom.quiz.Asset.prototype.read = function(input) {
-  input.readStructBegin();
-  while (true)
-  {
-    var ret = input.readFieldBegin();
-    var fname = ret.fname;
-    var ftype = ret.ftype;
-    var fid = ret.fid;
-    if (ftype == Thrift.Type.STOP) {
-      break;
-    }
-    switch (fid)
-    {
-      case 1:
-      if (ftype == Thrift.Type.STRING) {
-        this.type = input.readString();
-      } else {
-        input.skip(ftype);
-      }
-      break;
-      case 2:
-      if (ftype == Thrift.Type.STRING) {
-        this.data = input.readString();
-      } else {
-        input.skip(ftype);
-      }
-      break;
-      default:
-        input.skip(ftype);
-    }
-    input.readFieldEnd();
-  }
-  input.readStructEnd();
-  return;
-};
-
-contentatom.quiz.Asset.prototype.write = function(output) {
-  output.writeStructBegin('Asset');
-  if (this.type !== null && this.type !== undefined) {
-    output.writeFieldBegin('type', Thrift.Type.STRING, 1);
-    output.writeString(this.type);
-    output.writeFieldEnd();
-  }
-  if (this.data !== null && this.data !== undefined) {
-    output.writeFieldBegin('data', Thrift.Type.STRING, 2);
-    output.writeString(this.data);
-    output.writeFieldEnd();
-  }
-  output.writeFieldStop();
-  output.writeStructEnd();
-  return;
-};
-
-contentatom.quiz.ResultBuckets = module.exports.ResultBuckets = function(args) {
-  this.buckets = null;
-  if (args) {
-    if (args.buckets !== undefined && args.buckets !== null) {
-      this.buckets = Thrift.copyList(args.buckets, [null]);
-    } else {
-      throw new Thrift.TProtocolException(Thrift.TProtocolExceptionType.UNKNOWN, 'Required field buckets is unset!');
-    }
-  }
-};
-contentatom.quiz.ResultBuckets.prototype = {};
-contentatom.quiz.ResultBuckets.prototype.read = function(input) {
-  input.readStructBegin();
-  while (true)
-  {
-    var ret = input.readFieldBegin();
-    var fname = ret.fname;
-    var ftype = ret.ftype;
-    var fid = ret.fid;
-    if (ftype == Thrift.Type.STOP) {
-      break;
-    }
-    switch (fid)
-    {
-      case 1:
-      if (ftype == Thrift.Type.LIST) {
-        var _size40 = 0;
-        var _rtmp344;
-        this.buckets = [];
-        var _etype43 = 0;
-        _rtmp344 = input.readListBegin();
-        _etype43 = _rtmp344.etype;
-        _size40 = _rtmp344.size;
-        for (var _i45 = 0; _i45 < _size40; ++_i45)
-        {
-          var elem46 = null;
-          elem46 = new ttypes.ResultBucket();
-          elem46.read(input);
-          this.buckets.push(elem46);
-        }
-        input.readListEnd();
-      } else {
-        input.skip(ftype);
-      }
-      break;
-      case 0:
-        input.skip(ftype);
-        break;
-      default:
-        input.skip(ftype);
-    }
-    input.readFieldEnd();
-  }
-  input.readStructEnd();
-  return;
-};
-
-contentatom.quiz.ResultBuckets.prototype.write = function(output) {
-  output.writeStructBegin('ResultBuckets');
-  if (this.buckets !== null && this.buckets !== undefined) {
-    output.writeFieldBegin('buckets', Thrift.Type.LIST, 1);
-    output.writeListBegin(Thrift.Type.STRUCT, this.buckets.length);
-    for (var iter47 in this.buckets)
-    {
-      if (this.buckets.hasOwnProperty(iter47))
-      {
-        iter47 = this.buckets[iter47];
-        iter47.write(output);
-      }
-    }
-    output.writeListEnd();
-    output.writeFieldEnd();
-  }
-  output.writeFieldStop();
-  output.writeStructEnd();
-  return;
-};
-
-contentatom.quiz.ResultBucket = module.exports.ResultBucket = function(args) {
-  this.assets = null;
-  this.description = null;
-  this.title = null;
-  this.share = null;
-  if (args) {
-    if (args.assets !== undefined && args.assets !== null) {
-      this.assets = Thrift.copyList(args.assets, [ttypes.Asset]);
-    }
-    if (args.description !== undefined && args.description !== null) {
-      this.description = args.description;
-    } else {
-      throw new Thrift.TProtocolException(Thrift.TProtocolExceptionType.UNKNOWN, 'Required field description is unset!');
-    }
-    if (args.title !== undefined && args.title !== null) {
-      this.title = args.title;
-    } else {
-      throw new Thrift.TProtocolException(Thrift.TProtocolExceptionType.UNKNOWN, 'Required field title is unset!');
-    }
-    if (args.share !== undefined && args.share !== null) {
-      this.share = args.share;
-    } else {
-      throw new Thrift.TProtocolException(Thrift.TProtocolExceptionType.UNKNOWN, 'Required field share is unset!');
-    }
-  }
-};
-contentatom.quiz.ResultBucket.prototype = {};
-contentatom.quiz.ResultBucket.prototype.read = function(input) {
-  input.readStructBegin();
-  while (true)
-  {
-    var ret = input.readFieldBegin();
-    var fname = ret.fname;
-    var ftype = ret.ftype;
-    var fid = ret.fid;
-    if (ftype == Thrift.Type.STOP) {
-      break;
-    }
-    switch (fid)
-    {
-      case 1:
-      if (ftype == Thrift.Type.LIST) {
-        var _size48 = 0;
-        var _rtmp352;
-        this.assets = [];
-        var _etype51 = 0;
-        _rtmp352 = input.readListBegin();
-        _etype51 = _rtmp352.etype;
-        _size48 = _rtmp352.size;
-        for (var _i53 = 0; _i53 < _size48; ++_i53)
-        {
-          var elem54 = null;
-          elem54 = new ttypes.Asset();
-          elem54.read(input);
-          this.assets.push(elem54);
-        }
-        input.readListEnd();
-      } else {
-        input.skip(ftype);
-      }
-      break;
-      case 2:
-      if (ftype == Thrift.Type.STRING) {
-        this.description = input.readString();
-      } else {
-        input.skip(ftype);
-      }
-      break;
-      case 3:
-      if (ftype == Thrift.Type.STRING) {
-        this.title = input.readString();
-      } else {
-        input.skip(ftype);
-      }
-      break;
-      case 4:
-      if (ftype == Thrift.Type.STRING) {
-        this.share = input.readString();
-      } else {
-        input.skip(ftype);
-      }
-      break;
-      default:
-        input.skip(ftype);
-    }
-    input.readFieldEnd();
-  }
-  input.readStructEnd();
-  return;
-};
-
-contentatom.quiz.ResultBucket.prototype.write = function(output) {
-  output.writeStructBegin('ResultBucket');
-  if (this.assets !== null && this.assets !== undefined) {
-    output.writeFieldBegin('assets', Thrift.Type.LIST, 1);
-    output.writeListBegin(Thrift.Type.STRUCT, this.assets.length);
-    for (var iter55 in this.assets)
-    {
-      if (this.assets.hasOwnProperty(iter55))
-      {
-        iter55 = this.assets[iter55];
-        iter55.write(output);
-      }
-    }
-    output.writeListEnd();
-    output.writeFieldEnd();
-  }
-  if (this.description !== null && this.description !== undefined) {
-    output.writeFieldBegin('description', Thrift.Type.STRING, 2);
-    output.writeString(this.description);
-    output.writeFieldEnd();
-  }
-  if (this.title !== null && this.title !== undefined) {
-    output.writeFieldBegin('title', Thrift.Type.STRING, 3);
-    output.writeString(this.title);
-    output.writeFieldEnd();
-  }
-  if (this.share !== null && this.share !== undefined) {
-    output.writeFieldBegin('share', Thrift.Type.STRING, 4);
-    output.writeString(this.share);
     output.writeFieldEnd();
   }
   output.writeFieldStop();
