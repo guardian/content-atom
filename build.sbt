@@ -22,7 +22,8 @@ lazy val scala = (project in file("./scala")).settings(
   libraryDependencies ++= Seq(
     "org.apache.thrift" % "libthrift" % "0.9.2",
     "com.twitter" %% "scrooge-core" % "3.17.0"
-  )
+  ),
+  crossScalaVersions := Seq("2.10.4", "2.11.7")
 )
 
 // this is not a scala application: the JVM compiled version of the
