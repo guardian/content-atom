@@ -6,11 +6,11 @@ import ReleaseStateTransformations._
 
 Sonatype.sonatypeSettings
 
-organization := "com.gu"
+organization in ThisBuild := "com.gu"
 
 name := "content-atom-model"
 
-version := "0.2.0-SNAPSHOT"
+lazy val scala = project in file("./scala")
 
 // this is not a scala application: the JVM compiled version of the
 // library is built from auto-generated Java source, so there is no
