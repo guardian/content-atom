@@ -16,8 +16,8 @@ lazy val root = project in file(".")
 lazy val scala = (project in file("./scala")).settings(
   ScroogeSBT.newSettings: _*
 ).settings(
-  ScroogeSBT.scroogeThriftSourceFolder in Compile <<=
-    (baseDirectory in root) { _ / "src/main/thrift" },
+  ScroogeSBT.scroogeThriftSourceFolder in Compile :=
+    (baseDirectory in root).value / "src/main/thrift",
   name := "content-atom-model-scala",
   libraryDependencies ++= Seq(
     "org.apache.thrift" % "libthrift" % "0.9.2",
