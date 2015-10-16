@@ -1,6 +1,6 @@
+namespace java  com.gu.contentatom.thrift.atom.quiz
+namespace scala com.gu.contentatom.thrift.atom.quiz
 namespace * contentatom.quiz
-
-namespace java com.gu.contentatom.thrift.atom.quiz
 
 include "../shared.thrift"
 

@@ -1,4 +1,5 @@
-namespace java com.gu.contentatom.thrift
+namespace java  com.gu.contentatom.thrift
+namespace scala com.gu.contentatom.thrift
 
 /** date times are reprsented as i64 - epoch millis */
 typedef i64 DateTime
