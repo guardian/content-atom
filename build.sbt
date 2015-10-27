@@ -1,4 +1,5 @@
 import com.github.bigtoast.sbtthrift.ThriftPlugin._
+import com.twitter.scrooge.ScroogeSBT
 
 import sbtrelease._
 
@@ -6,11 +7,24 @@ import ReleaseStateTransformations._
 
 Sonatype.sonatypeSettings
 
-organization := "com.gu"
+organization in ThisBuild := "com.gu"
 
 name := "content-atom-model"
 
-version := "0.2.0-SNAPSHOT"
+lazy val root = project in file(".")
+
+lazy val scala = (project in file("./scala")).settings(
+  ScroogeSBT.newSettings: _*
+).settings(
+  ScroogeSBT.scroogeThriftSourceFolder in Compile :=
+    (baseDirectory in root).value / "src/main/thrift",
+  name := "content-atom-model-scala",
+  libraryDependencies ++= Seq(
+    "org.apache.thrift" % "libthrift" % "0.9.2",
+    "com.twitter" %% "scrooge-core" % "3.17.0"
+  ),
+  crossScalaVersions := Seq("2.10.4", "2.11.7")
+)
 
 // this is not a scala application: the JVM compiled version of the
 // library is built from auto-generated Java source, so there is no
