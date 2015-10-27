@@ -1,6 +1,10 @@
-namespace java  com.gu.contentatom.thrift.atom.quiz
-namespace scala com.gu.contentatom.thrift.atom.quiz
 namespace * contentatom.quiz
+namespace java com.gu.contentatom.thrift.atom.quiz
+# for some reason scrooge (the version we're using at least) overrides 'java'
+# with '*', so we need to add the scala namespace. Apache Thrift will reject
+# this so they have allowed this special format which appears as a comment to
+# Thrift.
+#@namespace scala com.gu.contentatom.thrift.atom.quiz
 
 include "../shared.thrift"
 
