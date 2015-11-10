@@ -6,10 +6,11 @@ include "shared.thrift"
 
 typedef string ContentAtomID
 
-enum AtomType { QUIZ }
+enum AtomType { QUIZ, MULTIMEDIA }
 
 union AtomData {
   1: quiz.QuizAtom quiz
+  2: multimedia.MultimediaAtom multimedia
 }
 
 struct ContentChangeDetails {
