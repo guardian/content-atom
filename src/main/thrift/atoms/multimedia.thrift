@@ -110,4 +110,5 @@ struct MultimediaAtom {
   //11 : required shared.User creator        //we might not be able to get these easily but it would be good to get them. Optional at top level
   12 : required shared.User commissioner   //we might not be able to get these easily but it would be good to get them
   13 : required string mediaTag
+  //externally embeddable
 }
