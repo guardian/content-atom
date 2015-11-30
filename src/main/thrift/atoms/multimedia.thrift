@@ -56,17 +56,6 @@ enum AnnotationType {
 
 struct Annotation {
     1: required AnnotationType type
-    2: required string content
-}
-
-enum AnnotationType {
-    TEXT,
-    IMAGE,
-    LINK
-}
-
-struct Annotation {
-    1: required AnnotationType type
     2: required string content //if type==TEXT should be html. if type==IMAGE should be url to image. if type==LINK is URL link
 }
 

@@ -11,7 +11,7 @@ from thrift import Thrift
 from thrift.transport import TSocket
 from thrift.transport import TTransport
 from thrift.protocol import TBinaryProtocol, TCompactProtocol
-#send first byte as 0=> uncompressed 4=>gzip compressed
+#send first byte as hex 0x0=> uncompressed 0x4=>gzip compressed
 #from boto import kinesis
 
 # struct Rendition {
@@ -85,6 +85,7 @@ atom.legalStatus = mm.LegalStatus.NOT_REQUIRED
 atom.chapters = [chapter]
 atom.creator = shared.User(email='andy.gallagher@theguardian.com',firstName='Andy',lastName='Gallagher')
 atom.commissioner = shared.User(email='andy.gallagher@theguardian.com',firstName='Andy',lastName='Gallagher')
+atom.mediaTag = "embeddable"
 atom.validate()
 
 transport = TTransport.TMemoryBuffer()
