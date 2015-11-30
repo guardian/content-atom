@@ -5,6 +5,15 @@ typedef i64 DateTime
 
 typedef string OpaqueJson
 
+struct User {
+
+    1: required string email;
+
+    2: optional string firstName;
+
+    3: optional string lastName;
+}
+
 struct ChangeRecord {
 
     /** when the change occured */
@@ -14,11 +23,4 @@ struct ChangeRecord {
     2: optional User user;
 }
 
-struct User {
 
-    1: required string email;
-
-    2: optional string firstName;
-
-    3: optional string lastName;
-}
