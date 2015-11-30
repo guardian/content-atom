@@ -8,6 +8,11 @@ sys.path.append('')
 import contentatom.multimedia.ttypes as mm
 import shared.ttypes as shared
 from thrift import Thrift
+from thrift.transport import TSocket
+from thrift.transport import TTransport
+from thrift.protocol import TBinaryProtocol, TCompactProtocol
+#send first byte as 0=> uncompressed 4=>gzip compressed
+#from boto import kinesis
 
 # struct Rendition {
 #     1: required string containerType
@@ -81,3 +86,9 @@ atom.chapters = [chapter]
 atom.creator = shared.User(email='andy.gallagher@theguardian.com',firstName='Andy',lastName='Gallagher')
 atom.commissioner = shared.User(email='andy.gallagher@theguardian.com',firstName='Andy',lastName='Gallagher')
 atom.validate()
+
+transport = TTransport.TMemoryBuffer()
+out = TCompactProtocol.TCompactProtocol(transport)
+atom.write(out)
+
+print transport.getvalue()

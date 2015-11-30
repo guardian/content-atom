@@ -56,7 +56,7 @@ enum AnnotationType {
 
 struct Annotation {
     1: required AnnotationType type
-    2: required string content
+    2: required string content //if type==TEXT should be html. if type==IMAGE should be url to image. if type==LINK is URL link
 }
 
 struct Legals {
@@ -93,6 +93,7 @@ struct Chapter {
     3: required EncodingStatus encodingStatus
     4: required list<Rendition> renditions
     5: required LegalStatus legalStatus
+    6: optional list<Annotation> annotations
 }
 
 struct MultimediaAtom {
