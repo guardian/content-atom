@@ -28,7 +28,7 @@ from thrift import Thrift
 rendition = mm.Rendition()
 rendition.containerType = "mp4"
 rendition.mediaType = mm.MultimediaSubtype.VIDEO
-rendition.frameSize = mm.FrameSize(width=1920,height=1080,aspect=1.7777777777,nickName="HD 1080")
+rendition.frameSize = mm.FrameSize(width=1920, height=1080, aspect=1.7777777777, nickName="HD 1080")
 rendition.hasVideo = True
 rendition.hasAudio = True
 rendition.hasEmbeddedSubs = False
