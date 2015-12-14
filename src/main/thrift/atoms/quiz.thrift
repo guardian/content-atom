@@ -64,5 +64,4 @@ struct QuizAtom {
   8  : required string quizType
   9  : optional i16 defaultColumns
   10 : required QuizContent content
-  11  : optional shared.DateTime publishedAt
 }
