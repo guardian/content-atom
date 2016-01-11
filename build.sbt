@@ -11,6 +11,11 @@ organization in ThisBuild := "com.gu"
 
 name := "content-atom-model"
 
+lazy val thriftDeps = Seq(
+  "org.apache.thrift" % "libthrift" % "0.9.2",
+  "com.twitter" %% "scrooge-core" % "3.17.0"
+)
+
 lazy val root = project in file(".")
 
 lazy val scala = (project in file("./scala")).settings(
@@ -19,11 +24,19 @@ lazy val scala = (project in file("./scala")).settings(
   ScroogeSBT.scroogeThriftSourceFolder in Compile :=
     (baseDirectory in root).value / "src/main/thrift",
   name := "content-atom-model-scala",
-  libraryDependencies ++= Seq(
-    "org.apache.thrift" % "libthrift" % "0.9.2",
-    "com.twitter" %% "scrooge-core" % "3.17.0"
-  ),
+  libraryDependencies ++= thriftDeps,
   crossScalaVersions := Seq("2.10.4", "2.11.7")
+)
+
+lazy val util = (project in file("./util")).settings(
+  name := "content-atom-util",
+  crossScalaVersions := Seq("2.10.4", "2.11.7"),
+  libraryDependencies ++=
+    thriftDeps ++
+    Seq(
+      "com.fasterxml.jackson.core" % "jackson-databind" % "2.5.5",
+      "commons-io" % "commons-io" % "2.4"
+    )
 )
 
 // this is not a scala application: the JVM compiled version of the
