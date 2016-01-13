@@ -11,13 +11,13 @@ organization in ThisBuild := "com.gu"
 
 name := "content-atom-model"
 
-lazy val thrift = (project in file("./thrift")
+lazy val thrift = project in file("./thrift")
 
 lazy val scala = (project in file("./scala")).settings(
   ScroogeSBT.newSettings: _*
 ).settings(
   ScroogeSBT.scroogeThriftSourceFolder in Compile :=
-    (baseDirectory in root).value / "src/main/thrift",
+    (baseDirectory in thrift).value / "src/main/thrift",
   name := "content-atom-model-scala",
   libraryDependencies ++= Seq(
     "org.apache.thrift" % "libthrift" % "0.9.2",
@@ -26,9 +26,10 @@ lazy val scala = (project in file("./scala")).settings(
   crossScalaVersions := Seq("2.10.4", "2.11.7")
 )
 
-lazy val root = project in file(".")
-  .dependsOn(thrift)
-  .dependsOn(scala)
+
+
+lazy val root = (project in file("."))
+  .aggregate(thrift, scala)
 
 // this is not a scala application: the JVM compiled version of the
 // library is built from auto-generated Java source, so there is no
