@@ -11,7 +11,7 @@ organization in ThisBuild := "com.gu"
 
 name := "content-atom-model"
 
-lazy val root = project in file(".")
+lazy val thrift = (project in file("./thrift")
 
 lazy val scala = (project in file("./scala")).settings(
   ScroogeSBT.newSettings: _*
@@ -25,6 +25,10 @@ lazy val scala = (project in file("./scala")).settings(
   ),
   crossScalaVersions := Seq("2.10.4", "2.11.7")
 )
+
+lazy val root = project in file(".")
+  .dependsOn(thrift)
+  .dependsOn(scala)
 
 // this is not a scala application: the JVM compiled version of the
 // library is built from auto-generated Java source, so there is no
