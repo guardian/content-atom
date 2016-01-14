@@ -36,10 +36,45 @@ make it usable as one of the types that can be placed into
 
 ## Building and publishing your changes
 
-## TODO
+The `root` project aggregates all of the other projects, and we are
+using the [sbt-release](https://github.com/sbt/sbt-release) plugin so
+you should be able to publish everything in one go.
 
-* adding to the `build.sh` file to make sure that your library gets
-    built with the required languages.
+### Preliminary configuration
+
+The first step is to create an account on
+[SonaType](https://oss.sonatype.org) and then
+[log a ticket](https://issues.sonatype.org/) to get added to the
+Guardian profile.
+
+Once that is done, create a file `~/.sbt/<version>/sonatype.sbt` with
+your credentials in, like this:
+
+```
+credentials += Credentials("Sonatype Nexus Repository Manager",
+                           "oss.sonatype.org",
+                           "USERNAME",
+                           "PASSWORD")
+```
+
+You will also need to create a PGP key that you can sign the release
+with. Add the secret key to `~/.sbt/gpg/secring.asc` and upload the
+public key to a key-server. There's more details in the `sbt-pgp`
+plugin [documentation](http://www.scala-sbt.org/sbt-pgp/) and on
+SonaType's page about
+[using PGP signatures](http://central.sonatype.org/pages/working-with-pgp-signatures.html).
+
+### Performing the release
+
+After all that is in place, you should then be able to just type `sbt
+release` from the commmand line (or just `release` from sbt within the
+root project).
+
+This will prompt you to bump the version number and it will tag the
+repo etc. Checkout the `sbt-release` plugin docs linked above for more
+details.
+
+## TODO
 
 * packaging it up and testing it.
 
