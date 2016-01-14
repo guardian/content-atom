@@ -67,6 +67,10 @@ thriftSettings ++ inConfig(Thrift) {
   )
 }
 
+releaseCrossBuild := true
+
+releasePublishArtifactsAction := PgpKeys.publishSigned.value
+
 // Publish settings
 
 scmInfo := Some(ScmInfo(url("https://github.com/guardian/content-atom"),
@@ -95,7 +99,7 @@ releaseProcess := Seq[ReleaseStep](
   setReleaseVersion,
   commitReleaseVersion,
   tagRelease,
-  releaseStepTask(PgpKeys.publishSigned),
+  publishArtifacts,
   setNextVersion,
   commitNextVersion,
   releaseStepCommand("sonatypeReleaseAll"),
