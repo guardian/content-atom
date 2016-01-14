@@ -11,30 +11,33 @@ organization in ThisBuild := "com.gu"
 
 name := "content-atom-model"
 
-lazy val root = (project in file("."))
+lazy val root = (project in file(".")).aggregate(scala, thriftSrc)
+
+// relative to root
+lazy val thriftSourceDir = file("src/main/thrift")
 
 lazy val scala = project.settings(
   ScroogeSBT.newSettings: _*
 ).settings(
-  ScroogeSBT.scroogeThriftSourceFolder in Compile :=
-    (baseDirectory in root).value / "src/main/thrift",
+  ScroogeSBT.scroogeThriftSourceFolder in Compile := thriftSourceDir,
   name := "content-atom-model-scala",
   libraryDependencies ++= Seq(
     "org.apache.thrift" % "libthrift" % "0.9.2",
     "com.twitter" %% "scrooge-core" % "3.17.0"
-  ),
-  crossScalaVersions := Seq("2.10.4", "2.11.7")
+  )
 )
+
+crossScalaVersions in ThisBuild := Seq("2.10.4", "2.11.7")
 
 // include the thrift source in the jar file so that it can be used as a
 // dependency for applications that wish to use this model to generate thier
 // own thrift rather than directly via the compiled code.
 
-lazy val `thrift-src` = project
+lazy val thriftSrc = (project in file("thrift-src"))
   .settings(
     name := "content-atom-model-thrift-src",
     description := "includable thrift source for the atom model",
-    unmanagedResourceDirectories in Compile += (baseDirectory in root).value / "src/main/thrift",
+    unmanagedResourceDirectories in Compile += thriftSourceDir,
     includeFilter in unmanagedResources := "*.thrift",
     autoScalaLibrary := false,
     crossPaths := false
