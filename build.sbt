@@ -20,7 +20,8 @@ lazy val scala = project.settings(
   ScroogeSBT.newSettings: _*
 ).settings(
   ScroogeSBT.scroogeThriftSourceFolder in Compile := thriftSourceDir,
-  name := "content-atom-model-scala",
+  includeFilter in unmanagedResources := "*.thrift",
+  name := "content-atom-model",
   libraryDependencies ++= Seq(
     "org.apache.thrift" % "libthrift" % "0.9.2",
     "com.twitter" %% "scrooge-core" % "3.17.0"
