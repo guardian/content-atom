@@ -11,30 +11,26 @@ organization in ThisBuild := "com.gu"
 
 name := "content-atom-model"
 
+scalaVersion := "2.11.7"
+
 // relative to root
 lazy val thriftSourceDir = file("src/main/thrift")
 
-lazy val root = (project in file(".")).settings(
-  ScroogeSBT.newSettings: _*
-).settings(
-  ScroogeSBT.scroogeThriftSourceFolder in Compile := thriftSourceDir,
-  includeFilter in unmanagedResources := "*.thrift",
-  libraryDependencies ++= Seq(
-    "org.apache.thrift" % "libthrift" % "0.9.2",
-    "com.twitter" %% "scrooge-core" % "3.17.0"
-  )
+lazy val root = (project in file("."))
+  .settings(ScroogeSBT.newSettings: _*)
+  .settings(
+    ScroogeSBT.scroogeThriftSourceFolder in Compile := thriftSourceDir,
+    includeFilter in unmanagedResources := "*.thrift",
+    unmanagedResourceDirectories in Compile += thriftSourceDir,
+    libraryDependencies ++= Seq(
+      "org.apache.thrift" % "libthrift" % "0.9.2",
+      "com.twitter" %% "scrooge-core" % "3.17.0"
+    )
 )
 
 crossScalaVersions in ThisBuild := Seq("2.11.7")
 
-// this is not a scala application: the JVM compiled version of the
-// library is built from auto-generated Java source, so there is no
-// need to depend on Scala
-autoScalaLibrary := false
-
-crossPaths := false
-
-libraryDependencies += "org.apache.thrift" % "libthrift" % "0.9.2"
+releaseCrossBuild := true
 
 // settings for the thrift plugin, both default and custom
 thriftSettings ++ inConfig(Thrift) {
@@ -50,8 +46,6 @@ thriftSettings ++ inConfig(Thrift) {
     thriftJsOutputDir <<= thriftOutputDir
   )
 }
-
-releaseCrossBuild := true
 
 releasePublishArtifactsAction := PgpKeys.publishSigned.value
 
