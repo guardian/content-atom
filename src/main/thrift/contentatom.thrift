@@ -40,6 +40,8 @@ struct Atom {
   4: required string defaultHtml
   5: required AtomData data       // the atom payload
   6: required ContentChangeDetails contentChangeDetails
+  7: optional map<string, string> metadata
+  8: optional map<string, bool> flags
  }
 
 enum EventType { UPDATE, TAKEDOWN }
