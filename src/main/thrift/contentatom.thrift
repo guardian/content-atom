@@ -33,6 +33,10 @@ struct ContentChangeDetails {
     4: required i64 revision
 }
 
+struct Flags {
+  1: optional suppressFurniture Boolean
+}
+
 struct Atom {
   1: required ContentAtomID id
   2: required AtomType atomType
@@ -40,8 +44,7 @@ struct Atom {
   4: required string defaultHtml
   5: required AtomData data       // the atom payload
   6: required ContentChangeDetails contentChangeDetails
-  7: optional map<string, string> metadata
-  8: optional map<string, bool> flags
+  7: optional Flags flags
  }
 
 enum EventType { UPDATE, TAKEDOWN }
