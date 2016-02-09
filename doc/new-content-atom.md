@@ -5,7 +5,7 @@ type for your application, and making it available to other tools for
 embedding.
 
 The pre-requisite is that you must have decided (and probably
-implemented) the internal model your appliation's data type.
+implemented) the internal model your application's data type.
 
 You should then create a Thrift model which describes your project's
 commitment to an specific structure whenever its content is
@@ -35,6 +35,8 @@ make it usable as one of the types that can be placed into
 `ContentAtomEvent`s and similar.
 
 ## Building and publishing your changes
+
+You can generate Javascript code with the target `thrift:generate-js`.
 
 The `root` project aggregates all of the other projects, and we are
 using the [sbt-release](https://github.com/sbt/sbt-release) plugin so
