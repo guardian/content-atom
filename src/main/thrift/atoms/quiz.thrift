@@ -27,6 +27,7 @@ struct Answer {
   3: required i16 weight
   4: optional string revealText
   5: required string id
+  6: optional list<string> bucket # A list of bucket ids
 }
 
 struct ResultBucket {
