@@ -12,6 +12,7 @@ struct ResultGroup {
   1: required string title
   2: required string share
   3: required i16 minScore
+  4: required string id
 }
 
 struct Asset {
@@ -25,6 +26,7 @@ struct Answer {
   2: required list<Asset> assets
   3: required i16 weight
   4: optional string revealText
+  5: required string id
 }
 
 struct ResultBucket {
@@ -32,6 +34,7 @@ struct ResultBucket {
   2: required string description
   3: required string title
   4: required string share
+  5: required string id
 }
 
 struct ResultBuckets {
@@ -42,6 +45,7 @@ struct Question {
   1: required string questionText
   2: required list<Asset> assets
   3: required list<Answer> answers
+  4: required string id
 }
 
 struct ResultGroups {
