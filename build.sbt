@@ -7,30 +7,75 @@ import ReleaseStateTransformations._
 
 Sonatype.sonatypeSettings
 
-organization in ThisBuild := "com.gu"
+val commonSettings = Seq(
+  organization := "com.gu",
+  scalaVersion := "2.11.8",
+  scmInfo := Some(ScmInfo(url("https://github.com/guardian/content-atom"),
+                          "scm:git:git@github.com:guardian/contant-atom.git")),
 
-name := "content-atom-model"
+  pomExtra := (
+  <url>https://github.com/guardian/content-atom</url>
+  <developers>
+    <developer>
+      <id>paulmr</id>
+      <name>Paul Roberts</name>
+      <url>https://github.com/paulmr</url>
+    </developer>
+  </developers>
+  ),
+  licenses := Seq("Apache V2" -> url("http://www.apache.org/licenses/LICENSE-2.0.html")),
 
-scalaVersion := "2.11.7"
-
-// relative to root
-lazy val thriftSourceDir = file("src/main/thrift")
+  releasePublishArtifactsAction := PgpKeys.publishSigned.value,
+  releaseProcess := Seq[ReleaseStep](
+    checkSnapshotDependencies,
+    inquireVersions,
+    runClean,
+    runTest,
+    setReleaseVersion,
+    commitReleaseVersion,
+    tagRelease,
+    publishArtifacts,
+    setNextVersion,
+    commitNextVersion,
+    releaseStepCommand("sonatypeReleaseAll"),
+    pushChanges
+  )
+)
 
 lazy val root = (project in file("."))
-  .settings(ScroogeSBT.newSettings: _*)
+  .aggregate(thrift, scala)
+  .settings(commonSettings)
   .settings(
-    ScroogeSBT.scroogeThriftSourceFolder in Compile := thriftSourceDir,
+    publishArtifact := false
+  )
+
+lazy val scala = (project in file("scala"))
+  .settings(ScroogeSBT.newSettings: _*)
+  .settings(commonSettings)
+  .settings(
+    name := "content-atom-model",
+    description := "Scala library built from Content-atom thrift definition",
+
+    scroogeThriftSourceFolder in Compile := baseDirectory.value / "../thrift/src/main/thrift",
     includeFilter in unmanagedResources := "*.thrift",
-    unmanagedResourceDirectories in Compile += thriftSourceDir,
+    unmanagedResourceDirectories in Compile += baseDirectory.value / "../thrift/src/main/thrift",
+    managedSourceDirectories in Compile += (scroogeThriftOutputFolder in Compile).value,
     libraryDependencies ++= Seq(
       "org.apache.thrift" % "libthrift" % "0.9.2",
       "com.twitter" %% "scrooge-core" % "3.17.0"
     )
-)
+  )
 
-crossScalaVersions in ThisBuild := Seq("2.11.7")
-
-releaseCrossBuild := true
+lazy val thrift = (project in file("thrift"))
+  .settings(commonSettings)
+  .settings(
+    name := "content-atom-model-thrift",
+    description := "Content atom model Thrift files",
+    crossPaths := false,
+    publishArtifact in packageDoc := false,
+    publishArtifact in packageSrc := false,
+    unmanagedResourceDirectories in Compile += { baseDirectory.value / "src/main/thrift" }
+  )
 
 // settings for the thrift plugin, both default and custom
 thriftSettings ++ inConfig(Thrift) {
@@ -39,6 +84,7 @@ thriftSettings ++ inConfig(Thrift) {
   // code that we want to generate
 
   Seq(
+    thriftSourceDir := file("thrift/src/main/thrift"),
     thriftJsEnabled := true,
     thriftJavaEnabled := false,
     thriftJsOptions := Seq("node"),
@@ -47,39 +93,3 @@ thriftSettings ++ inConfig(Thrift) {
   )
 }
 
-releasePublishArtifactsAction := PgpKeys.publishSigned.value
-
-// Publish settings
-
-scmInfo := Some(ScmInfo(url("https://github.com/guardian/content-atom"),
-                        "scm:git:git@github.com:guardian/contant-atom.git"))
-
-description := "Java library built from Content-atom thrift definition"
-
-pomExtra := (
-<url>https://github.com/guardian/content-atom</url>
-<developers>
-  <developer>
-    <id>paulmr</id>
-    <name>Paul Roberts</name>
-    <url>https://github.com/paulmr</url>
-  </developer>
-</developers>
-)
-
-licenses := Seq("Apache V2" -> url("http://www.apache.org/licenses/LICENSE-2.0.html"))
-
-releaseProcess := Seq[ReleaseStep](
-  checkSnapshotDependencies,
-  inquireVersions,
-  runClean,
-  runTest,
-  setReleaseVersion,
-  commitReleaseVersion,
-  tagRelease,
-  publishArtifacts,
-  setNextVersion,
-  commitNextVersion,
-  releaseStepCommand("sonatypeReleaseAll"),
-  pushChanges
-)
