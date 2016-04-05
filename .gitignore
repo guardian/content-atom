@@ -1,3 +1,8 @@
 node_modules
 npm-debug.log
 generated/gen-java
+src/main/thrift/atoms/gen-py/__init__.py
+src/main/thrift/atoms/gen-py/contentatom/__init__.py
+src/main/thrift/atoms/gen-py/contentatom/multimedia/__init__.py
+src/main/thrift/atoms/gen-py/contentatom/multimedia/constants.py
+src/main/thrift/atoms/gen-py/contentatom/multimedia/ttypes.py

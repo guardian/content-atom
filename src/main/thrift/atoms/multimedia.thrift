@@ -4,12 +4,12 @@ namespace java com.gu.contentatom.thrift.atom.multimedia
 
 include "../shared.thrift"
 
-struct User {
-    1: required string email;
-    2: optional string firstName;
-    3: optional string lastName;
-    4: optional i32 googleID
-}
+#struct shared.User {
+#    1: required string email;
+#    2: optional string firstName;
+#    3: optional string lastName;
+#    4: optional i32 googleID
+#}
 
 enum LegalStatus {
     NOT_REQUIRED,
@@ -51,12 +51,15 @@ enum ChapterType {
 enum AnnotationType {
     TEXT,
     IMAGE,
-    LINK
+    LINK,
+    AD_POINT
 }
 
 struct Annotation {
     1: required AnnotationType type
     2: required string content //if type==TEXT should be html. if type==IMAGE should be url to image. if type==LINK is URL link
+    2: required string content
+    3: required i32 time //in seconds
 }
 
 struct Legals {
@@ -83,7 +86,7 @@ struct Rendition {
     9: optional double audioBitRate
     10: optional i16 audioChannels
     20: required string url
-    21: optional string subsUrl
+    21: optional string subsUrl //subobject with language attribute
     22: optional list<string> imageUrls
 }
 
@@ -93,7 +96,12 @@ struct Chapter {
     3: required EncodingStatus encodingStatus
     4: required list<Rendition> renditions
     5: required LegalStatus legalStatus
-    6: optional list<Annotation> annotations
+    6: required bool isInappropriateForAdverts
+    7: required bool enableTracking
+    8: optional list<Annotation> annotations
+    9: required string source
+    10: required i32 duration
+
 }
 
 struct MultimediaAtom {
@@ -101,8 +109,9 @@ struct MultimediaAtom {
   // content-atom wrapping?
   // should we store an embed count here or is this done higher up?
   1  : required string id
-  2  : required string title
+  //2  : required string title              //use the defaultHTML field (possibly)
   3  : required i16 contentVersion  //from __version field in Vidispine
+  //4  : required list<string> labels //labels are provided at the higher level
   7  : required PublicationStatus publicationStatus
   8  : required MultimediaSubtype mediaType
   9  : required LegalStatus legalStatus
@@ -110,5 +119,7 @@ struct MultimediaAtom {
   //11 : required shared.User creator        //we might not be able to get these easily but it would be good to get them. Optional at top level
   12 : required shared.User commissioner   //we might not be able to get these easily but it would be good to get them
   13 : required string mediaTag
-  //externally embeddable
+  14 : required boolean embeddable
 }
+
+//find audio page, try to make sane mapping from this data.
