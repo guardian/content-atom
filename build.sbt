@@ -87,9 +87,9 @@ thriftSettings ++ inConfig(Thrift) {
     thriftSourceDir := file("thrift/src/main/thrift"),
     thriftJsEnabled := true,
     thriftJavaEnabled := false,
+    thriftPythonEnabled := true,
     thriftJsOptions := Seq("node"),
     thriftOutputDir <<= baseDirectory / "generated",
     thriftJsOutputDir <<= thriftOutputDir
   )
 }
-
