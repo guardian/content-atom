@@ -3,6 +3,7 @@ namespace java com.gu.contentatom.thrift
 
 include "atoms/quiz.thrift"
 include "atoms/viewpoints.thrift"
+include "atoms/video.thrift"
 include "shared.thrift"
 
 typedef string ContentAtomID
@@ -12,6 +13,7 @@ enum AtomType { QUIZ, VIEWPOINTS }
 union AtomData {
   1: quiz.QuizAtom quiz
   2: viewpoints.ViewpointsAtom viewpoints
+  3: video.VideoAtom video
 }
 
 struct ContentChangeDetails {
