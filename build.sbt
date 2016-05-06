@@ -78,7 +78,7 @@ lazy val thrift = (project in file("thrift"))
   )
 
 // settings for the thrift plugin, both default and custom
-thriftSettings ++ inConfig(Thrift) {
+thriftSettings ++ PythonBuild.pythonSettings ++ inConfig(Thrift) {
 
   // add the node option to the js generator, as that is the style of
   // code that we want to generate

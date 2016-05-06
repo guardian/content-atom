@@ -14,9 +14,7 @@ enum AssetType {
 struct Asset {
   1: required AssetType assetType
   2: required Version version
-  /* are these both required? */
   3: required string id
-  4: required string url
 }
 
 struct VideoAtom {
