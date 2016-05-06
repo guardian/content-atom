@@ -84,12 +84,12 @@ thriftSettings ++ inConfig(Thrift) {
   // code that we want to generate
 
   Seq(
-    thriftSourceDir := file("thrift/src/main/thrift"),
-    thriftJsEnabled := true,
-    thriftJavaEnabled := false,
+    thriftSourceDir     := file("thrift/src/main/thrift"),
+    thriftJsEnabled     := true,
+    thriftJavaEnabled   := false,
     thriftPythonEnabled := true,
-    thriftJsOptions := Seq("node"),
-    thriftOutputDir <<= baseDirectory / "generated",
-    thriftJsOutputDir <<= thriftOutputDir
+    thriftJsOptions     := Seq("node"),
+    thriftOutputDir     <<= baseDirectory / "generated",
+    thriftJsOutputDir   <<= thriftOutputDir
   )
 }
