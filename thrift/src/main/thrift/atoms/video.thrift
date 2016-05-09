@@ -7,7 +7,9 @@ typedef i64 Version
 enum AssetType {
   YOUTUBE,
   FACEBOOK,
-  /* not sure about this one ... ? */
+  PODCAST,
+  DAILYMOTION,
+  MAINSTREAM,
   SUBTITLES
 }
 
@@ -20,5 +22,6 @@ struct Asset {
 struct VideoAtom {
   /* the unique ID will be stored in the `atom` data, and this should correspond to the pluto ID */
   2: required list<Asset> assets
-  3: required Version latestVersion
+  3: required Version activeVersion
+  4: required string pluto_project_id
 }
