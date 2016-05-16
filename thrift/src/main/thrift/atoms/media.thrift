@@ -1,6 +1,6 @@
-namespace * contentatom.video
-namespace java com.gu.contentatom.thrift.atom.video
-#@namespace scala com.gu.contentatom.thrift.atom.video
+namespace * contentatom.media
+namespace java com.gu.contentatom.thrift.atom.media
+#@namespace scala com.gu.contentatom.thrift.atom.media
 
 typedef i64 Version
 
