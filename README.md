@@ -29,6 +29,6 @@ But in summary:
 
 1. Bump the version number in `package.json`
 
-2. Make sure you have built the latest version of the JS library with `sbt compile'
+2. Make sure you have built the latest version of the JS library with `sbt compile`
 
 3. Then, `npm publish` in the same directory as `package.json`
