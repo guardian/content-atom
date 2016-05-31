@@ -19,8 +19,16 @@ You will need a PGP key and Sonatype credentials.
 
 ### JavaScript
 
-To release the JS models to npm:
+The JS library should be published to npmjs, see:
+
+https://www.npmjs.com/package/publish
+
+and `npm help publish`.
+
+But in summary:
 
 1. Bump the version number in `package.json`
 
-2. Um, not sure. Ask Rob Rees or someone who knows about JS.
+2. Make sure you have built the latest version of the JS library with `sbt compile'
+
+3. Then, `npm publish` in the same directory as `package.json`
