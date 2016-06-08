@@ -7,7 +7,11 @@ include "shared.thrift"
 
 typedef string ContentAtomID
 
-enum AtomType { QUIZ, MEDIA }
+enum AtomType { 
+  QUIZ = 0, 
+//VIEWPOINTS = 1, DEPRECATED 
+  MEDIA = 2
+}
 
 union AtomData {
   1: quiz.QuizAtom quiz
