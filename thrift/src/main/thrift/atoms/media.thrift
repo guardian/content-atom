@@ -18,8 +18,8 @@ enum AssetType {
 }
 
 enum Category {
-    EXPLAINER,
     NEWS,
+    EXPLAINER,
     FEATURE,
     DOCUMENTARY
 }
