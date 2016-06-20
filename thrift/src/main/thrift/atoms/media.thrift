@@ -17,6 +17,13 @@ enum AssetType {
   VIDEO
 }
 
+enum Category {
+    DOCUMENTARY,
+    EXPLAINER,
+    FEATURE,
+    NEWS
+}
+
 struct Asset {
   1: required AssetType assetType
   2: required Version version
@@ -28,5 +35,9 @@ struct MediaAtom {
   /* the unique ID will be stored in the `atom` data, and this should correspond to the pluto ID */
   2: required list<Asset> assets
   3: required Version activeVersion
-  4: optional string plutoProjectId
+  4: required string title
+  5: required Category category
+  6: optional string plutoProjectId
+  7: optional double duration // milliseconds
+  8: optional string source
 }
