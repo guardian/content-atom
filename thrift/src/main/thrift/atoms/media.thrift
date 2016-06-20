@@ -18,10 +18,10 @@ enum AssetType {
 }
 
 enum Category {
-    NEWS,
+    DOCUMENTARY,
     EXPLAINER,
     FEATURE,
-    DOCUMENTARY
+    NEWS
 }
 
 struct Asset {
