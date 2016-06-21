@@ -31,4 +31,6 @@ But in summary:
 
 2. Make sure you have built the latest version of the JS library with `sbt compile`
 
-3. Then, `npm publish` in the same directory as `package.json`
+3. If you've added another type, be sure to add it to `js/main.js`
+
+4. Then, `npm publish` in the same directory as `package.json`
