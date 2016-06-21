@@ -34,7 +34,7 @@ struct Asset {
 struct MediaAtom {
   /* the unique ID will be stored in the `atom` data, and this should correspond to the pluto ID */
   2: required list<Asset> assets
-  3: required Version activeVersion
+  3: optional Version activeVersion
   4: required string title
   5: required Category category
   6: optional string plutoProjectId
