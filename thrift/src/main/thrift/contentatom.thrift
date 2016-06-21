@@ -2,17 +2,20 @@ namespace java com.gu.contentatom.thrift
 #@namespace scala com.gu.contentatom.thrift
 
 include "atoms/quiz.thrift"
-include "atoms/viewpoints.thrift"
 include "atoms/media.thrift"
 include "shared.thrift"
 
 typedef string ContentAtomID
 
-enum AtomType { QUIZ, VIEWPOINTS, MEDIA }
+enum AtomType { 
+  QUIZ = 0, 
+//VIEWPOINTS = 1, DEPRECATED 
+  MEDIA = 2
+}
 
 union AtomData {
   1: quiz.QuizAtom quiz
-  2: viewpoints.ViewpointsAtom viewpoints
+//2: viewpoints.ViewpointsAtom viewpoints DEPRECATED
   3: media.MediaAtom media
 }
 
