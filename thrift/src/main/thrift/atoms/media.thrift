@@ -29,6 +29,7 @@ struct Asset {
   2: required Version version
   3: required string id
   4: required Platform platform
+  5: optional string mimeType
 }
 
 struct MediaAtom {
