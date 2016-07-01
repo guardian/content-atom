@@ -21,7 +21,8 @@ enum Category {
     DOCUMENTARY,
     EXPLAINER,
     FEATURE,
-    NEWS
+    NEWS,
+    HOSTED // commercial content supplied by advertiser
 }
 
 struct Asset {
