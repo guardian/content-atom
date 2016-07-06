@@ -15,7 +15,8 @@ This will release 2 artifacts to Maven Central:
 * `content-atom-model_2.11-$version.jar` contains the Thrift files and Scrooge-generated Scala 2.11 classes
 * `content-atom-model-thrift-$version.jar` contains only the Thrift files
 
-You will need a PGP key and Sonatype credentials.
+You will need a PGP key and Sonatype credentials.  
+You will also need to have Thrift installed locally: `brew install thrift`.
 
 ### JavaScript
 
