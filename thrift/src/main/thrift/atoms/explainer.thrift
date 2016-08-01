@@ -1,6 +1,8 @@
 namespace * contentatom.explainer
 namespace java com.gu.contentatom.thrift.atom.explainer
 
+include "../shared.thrift"
+
 enum DisplayType {
   FLAT,
   EXPANDABLE,
@@ -12,4 +14,5 @@ struct ExplainerAtom {
   2: required string title
   3: required string body
   4: required DisplayType displayType
+  5: optional shared.Taxonomy taxonomy
 }
