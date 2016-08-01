@@ -14,5 +14,5 @@ struct ExplainerAtom {
   2: required string title
   3: required string body
   4: required DisplayType displayType
-  5: optional shared.Taxonomy taxonomy
+  5: optional list<string> tags
 }
