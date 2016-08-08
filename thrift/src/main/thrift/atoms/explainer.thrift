@@ -1,5 +1,6 @@
 namespace * contentatom.explainer
 namespace java com.gu.contentatom.thrift.atom.explainer
+#@namespace scala com.gu.contentatom.thrift.atom.explainer
 
 include "../shared.thrift"
 
