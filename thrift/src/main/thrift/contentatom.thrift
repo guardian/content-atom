@@ -4,15 +4,17 @@ namespace java com.gu.contentatom.thrift
 include "atoms/quiz.thrift"
 include "atoms/media.thrift"
 include "atoms/explainer.thrift"
+include "atoms/cta.thrift"
 include "shared.thrift"
 
 typedef string ContentAtomID
 
-enum AtomType { 
+enum AtomType {
   QUIZ = 0,
-//VIEWPOINTS = 1, DEPRECATED 
+//VIEWPOINTS = 1, DEPRECATED
   MEDIA = 2,
-  EXPLAINER = 3
+  EXPLAINER = 3,
+  CTA = 4
 }
 
 union AtomData {
@@ -20,6 +22,7 @@ union AtomData {
 //2: viewpoints.ViewpointsAtom viewpoints DEPRECATED
   3: media.MediaAtom media
   4: explainer.ExplainerAtom explainer
+  5: cta.CTAAtom cta
 }
 
 struct ContentChangeDetails {
