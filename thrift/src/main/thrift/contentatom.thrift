@@ -22,7 +22,7 @@ union AtomData {
 //2: viewpoints.ViewpointsAtom viewpoints DEPRECATED
   3: media.MediaAtom media
   4: explainer.ExplainerAtom explainer
-  5: cta.CtaAtom cta
+  5: cta.CTAAtom cta
 }
 
 struct ContentChangeDetails {
@@ -62,18 +62,16 @@ struct Atom {
  * type */
 
 struct Atoms {
-    1: optional list<Atom> quizzes
+    1: optional list<contentatom.Atom> quizzes
 
     /**
     * Viewpoints are deprecated
     */
-    2: optional list<Atom> viewpoints
+    2: optional list<contentatom.Atom> viewpoints
 
-    3: optional list<Atom> media
+    3: optional list<contentatom.Atom> media
 
-    4: optional list<Atom> explainers
-
-    5: optional list<Atom> cta
+    4: optional list<contentatom.Atom> explainers
 }
 
 enum EventType { UPDATE, TAKEDOWN }

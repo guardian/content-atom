@@ -2,7 +2,7 @@ namespace * contentatom.cta
 namespace java com.gu.contentatom.thrift.atom.cta
 #@namespace scala com.gu.contentatom.thrift.atom.cta
 
-struct CtaAtom {
+struct CTAAtom {
     1: required string url
     2: optional string backgroundImage
     3: optional string btnText
