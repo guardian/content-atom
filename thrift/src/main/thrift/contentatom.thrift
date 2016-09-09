@@ -74,6 +74,14 @@ struct Atoms {
     4: optional list<contentatom.Atom> explainers
 }
 
+/* which field of the above contains which type? */
+const map<AtomType, string> ATOM_FIELDS = {
+  AtomType.QUIZ: "quizzes",
+  AtomType.MEDIA: "media",
+  AtomType.EXPLAINER: "explainers",
+  AtomType.CTA: "cta"
+}
+
 enum EventType { UPDATE, TAKEDOWN }
 
 struct ContentAtomEvent {
