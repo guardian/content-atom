@@ -58,6 +58,22 @@ struct Atom {
   7: optional Flags flags
  }
 
+/* a collection of atoms, separated out into separate fields for each
+ * type */
+
+struct Atoms {
+    1: optional list<contentatom.Atom> quizzes
+
+    /**
+    * Viewpoints are deprecated
+    */
+    2: optional list<contentatom.Atom> viewpoints
+
+    3: optional list<contentatom.Atom> media
+
+    4: optional list<contentatom.Atom> explainers
+}
+
 enum EventType { UPDATE, TAKEDOWN }
 
 struct ContentAtomEvent {
