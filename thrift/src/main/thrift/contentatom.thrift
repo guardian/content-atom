@@ -5,6 +5,7 @@ include "atoms/quiz.thrift"
 include "atoms/media.thrift"
 include "atoms/explainer.thrift"
 include "atoms/cta.thrift"
+include "atoms/interactive.thrift"
 include "shared.thrift"
 
 typedef string ContentAtomID
@@ -14,7 +15,8 @@ enum AtomType {
 //VIEWPOINTS = 1, DEPRECATED
   MEDIA = 2,
   EXPLAINER = 3,
-  CTA = 4
+  CTA = 4,
+  INTERACTIVE = 5
 }
 
 union AtomData {
@@ -23,6 +25,7 @@ union AtomData {
   3: media.MediaAtom media
   4: explainer.ExplainerAtom explainer
   5: cta.CTAAtom cta
+  6: interactive.InteractiveAtom interactive
 }
 
 struct ContentChangeDetails {
