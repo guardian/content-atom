@@ -8,7 +8,6 @@ struct InteractiveAtom {
   3: required string title,
   4: required string css
   5: required string html
-  6: optional string inlineJS
-  7: optional string mainJS
-  8: optional string docData
+  6: optional string mainJS
+  7: optional string docData
 }
