@@ -37,7 +37,7 @@ struct Metadata {
   1: optional list<string> tags
   2: optional string categoryId
   3: optional string license
-  4: optional bool comments
+  4: optional bool commentsEnabled
   5: optional string channelId
 }
 
