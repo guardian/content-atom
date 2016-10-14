@@ -33,6 +33,14 @@ struct Asset {
   5: optional string mimeType
 }
 
+struct Metadata {
+  1: optional list<string> tags
+  2: optional string categoryId
+  3: optional string license
+  4: optional bool commentsEnabled
+  5: optional string channelId
+}
+
 struct MediaAtom {
   /* the unique ID will be stored in the `atom` data, and this should correspond to the pluto ID */
   2: required list<Asset> assets
@@ -43,4 +51,6 @@ struct MediaAtom {
   7: optional i64 duration // milliseconds
   8: optional string source
   9: optional string posterUrl
+  10: optional string description
+  11: optional Metadata metadata
 }
