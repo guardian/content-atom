@@ -7,21 +7,19 @@ typedef i64 DateTime
 typedef string OpaqueJson
 
 struct User {
-
-    1: required string email;
-
-    2: optional string firstName;
-
-    3: optional string lastName;
+  1: required string email
+  2: optional string firstName
+  3: optional string lastName
 }
 
 struct ChangeRecord {
 
-    /** when the change occured */
-    1: required DateTime date;
+  /** when the change occured */
+  1: required DateTime date
 
-    /** the user that performed the change */
-    2: optional User user;
+  /** the user that performed the change */
+  2: optional User user
+
 }
 
 /**
@@ -32,21 +30,22 @@ struct ChangeRecord {
 */
 struct Section {
 
-    /** The id of the section. This is derived from the R2 section id */
-    1: required i64 id;
+  /** The id of the section. This is derived from the R2 section id */
+  1: required i64 id
 
-    /** The section's name */
-    2: optional string name;
+  /** The section's name */
+  2: optional string name
 
-    /**
-    * The path fragment implied by the section.
-    *
-    * content paths include {section.pathPrefix}/{tag.slug}/{date}/{content.slug}
-    */
-    3: optional string pathPrefix;
+  /**
+  * The path fragment implied by the section.
+  *
+  * content paths include {section.pathPrefix}/{tag.slug}/{date}/{content.slug}
+  */
+  3: optional string pathPrefix
 
-    /** The url slug used when refering to the section */
-    4: optional string slug;
+  /** The url slug used when refering to the section */
+  4: optional string slug
+
 }
 
 /**
@@ -56,26 +55,27 @@ struct Section {
 */
 struct Tag {
 
-    /** The id of the tag. This is the R2 id and can be used to look up the tag in the tagApi etc. */
-    1: required i64 id;
+  /** The id of the tag. This is the R2 id and can be used to look up the tag in the tagApi etc. */
+  1: required i64 id
 
-    /** The tag's type */
-    2: optional string type; // TODO make this a enum?
+  /** The tag's type */
+  2: optional string type
 
-    /** The internal name of the tag */
-    3: optional string internalName;
+  /** The internal name of the tag */
+  3: optional string internalName
 
-    /** The external name of the tag */
-    4: optional string externalName;
+  /** The external name of the tag */
+  4: optional string externalName
 
-    /** The path fragment associated with the tag */
-    5: optional string slug;
+  /** The path fragment associated with the tag */
+  5: optional string slug
 
-    /** The section the tag belongs to */
-    6: optional Section section;
+  /** The section the tag belongs to */
+  6: optional Section section
 
-    /** The full path of the tag */
-    7: optional string path;
+  /** The full path of the tag */
+  7: optional string path
+
 }
 
 /**
@@ -88,14 +88,15 @@ struct Tag {
 */
 struct Newspaper {
 
-    /** The book tag represents the physical printed thing (G1, G2 etc) the content appeared in */
-    1: required Tag book;
+  /** The book tag represents the physical printed thing (G1, G2 etc) the content appeared in */
+  1: required Tag book
 
-    /** bookSection represents the subsection of the book (news, business, obituries etc.) he content appeared in*/
-    2: required Tag bookSection;
+  /** bookSection represents the subsection of the book (news, business, obituries etc.) he content appeared in*/
+  2: required Tag bookSection
 
-    /** publication represents the physical publication the content has been printed in */
-    3: required Tag publication;
+  /** publication represents the physical publication the content has been printed in */
+  3: required Tag publication
+
 }
 
 /**
@@ -105,11 +106,12 @@ struct Newspaper {
 */
 struct TagUsage {
 
-    /** The tag applied to content */
-    1: required Tag tag;
+  /** The tag applied to content */
+  1: required Tag tag
 
-    /** true if the content is lead for this tag */
-    2: required bool isLead = false;
+  /** true if the content is lead for this tag */
+  2: required bool isLead = false
+
 }
 
 /**
@@ -120,11 +122,12 @@ struct TagUsage {
 */
 struct Reference {
 
-    /** The external id */
-    1: required string id;
+  /** The external id */
+  1: required string id
 
-    /** The type of reference */
-    2: required string type;
+  /** The type of reference */
+  2: required string type
+
 }
 
 /**
@@ -132,28 +135,28 @@ struct Reference {
 */
 struct Taxonomy {
 
-    /** The list of tags applied to the content.
-    *
-    * The tags in this list are all the non contributor, newspaper and publication tags. They
-    * are ordered by importance (most important first). Any tag in this list can be marked as 'lead'
-    * marking this content as the most important story for the tag at the time of publication.
-    */
-    1: optional list<TagUsage> tags;
+  /** The list of tags applied to the content.
+   *
+   * The tags in this list are all the non contributor, newspaper and publication tags. They
+   * are ordered by importance (most important first). Any tag in this list can be marked as 'lead'
+   * marking this content as the most important story for the tag at the time of publication.
+  */
+  1: optional list<TagUsage> tags
 
-    /** The list of contributor tags for this content.
-    *
-    * Contributors are managed via the content's byline and links to the contributor tag pages are
-    * included in the byline
-    */
-    2: optional list<Tag> contributors;
+  /** The list of contributor tags for this content.
+   *
+   * Contributors are managed via the content's byline and links to the contributor tag pages are
+   * included in the byline
+  */
+  2: optional list<Tag> contributors
 
-    /** The publication that commissioned this content*/
-    3: optional Tag publication;
+  /** The publication that commissioned this content*/
+  3: optional Tag publication
 
-    /** The newspaper book and book section that the content appeared in */
-    4: optional Newspaper newspaper;
+  /** The newspaper book and book section that the content appeared in */
+  4: optional Newspaper newspaper
 
-    /** The external references applied to this content */
-    5: optional list<Reference> references
+  /** The external references applied to this content */
+  5: optional list<Reference> references
 }
 

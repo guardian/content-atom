@@ -2,12 +2,10 @@ namespace * contentatom.explainer
 namespace java com.gu.contentatom.thrift.atom.explainer
 #@namespace scala com.gu.contentatom.thrift.atom.explainer
 
-include "../shared.thrift"
-
 enum DisplayType {
-  FLAT,
-  EXPANDABLE,
-  CAROUSEL
+  FLAT = 1,
+  EXPANDABLE = 2,
+  CAROUSEL = 3
 }
 
 struct ExplainerAtom {

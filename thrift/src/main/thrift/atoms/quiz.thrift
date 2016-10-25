@@ -17,7 +17,6 @@ struct ResultGroup {
 
 struct Asset {
   1: required string type
-  /* what type is this? currently assuming opaque json */
   2: required shared.OpaqueJson data
 }
 
@@ -62,11 +61,11 @@ struct QuizContent {
 struct QuizAtom {
   // do we need to store the ID, seeing as it is replicated(?) in the
   // content-atom wrapping?
-  1  : required string id
-  2  : required string title
-  7  : required bool published
-  6  : required bool revealAtEnd
-  8  : required string quizType
-  9  : optional i16 defaultColumns
-  10 : required QuizContent content
+  1: required string id
+  2: required string title
+  6: required bool revealAtEnd
+  7: required bool published
+  8: required string quizType
+  9: optional i16 defaultColumns
+  10: required QuizContent content
 }
