@@ -29,22 +29,21 @@ union AtomData {
 }
 
 struct ContentChangeDetails {
+  /** the latest change to the content atom */
+  1: optional shared.ChangeRecord lastModified
 
-    /** the latest change to the content atom */
-     1: optional shared.ChangeRecord lastModified
+  /** the atom creation event */
+  2: optional shared.ChangeRecord created
 
-    /** the atom creation event */
-    2: optional shared.ChangeRecord created
-
-    /** the atom publication event (if published) */
-    3: optional shared.ChangeRecord published
-    /**
-     * the revision number of the content.
-     *
-     * This value is incremented whenever content is written to the database and can be used to
-     * ensure message ordering.
-     */
-    4: required i64 revision
+  /** the atom publication event (if published) */
+  3: optional shared.ChangeRecord published
+  /**
+  * the revision number of the content.
+  *
+  * This value is incremented whenever content is written to the database and can be used to
+  * ensure message ordering.
+  */
+  4: required i64 revision
 }
 
 struct Flags {
@@ -61,7 +60,10 @@ struct Atom {
   7: optional Flags flags
  }
 
-enum EventType { UPDATE, TAKEDOWN }
+enum EventType {
+  UPDATE = 1,
+  TAKEDOWN = 2
+}
 
 struct ContentAtomEvent {
   1: required Atom atom

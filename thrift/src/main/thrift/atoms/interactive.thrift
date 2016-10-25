@@ -1,4 +1,4 @@
-namespace * contentatom.cta
+namespace * contentatom.interactive
 namespace java com.gu.contentatom.thrift.atom.interactive
 #@namespace scala com.gu.contentatom.thrift.atom.interactive
 

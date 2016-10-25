@@ -5,24 +5,24 @@ namespace java com.gu.contentatom.thrift.atom.media
 typedef i64 Version
 
 enum Platform {
-  YOUTUBE,
-  FACEBOOK,
-  DAILYMOTION,
-  MAINSTREAM,
-  URL
+  YOUTUBE = 1,
+  FACEBOOK = 2,
+  DAILYMOTION = 3,
+  MAINSTREAM = 4,
+  URL = 5
 }
 
 enum AssetType {
-  AUDIO,
-  VIDEO
+  AUDIO = 1,
+  VIDEO = 2
 }
 
 enum Category {
-    DOCUMENTARY,
-    EXPLAINER,
-    FEATURE,
-    NEWS,
-    HOSTED // commercial content supplied by advertiser
+  DOCUMENTARY = 1,
+  EXPLAINER = 2,
+  FEATURE = 3,
+  NEWS = 4,
+  HOSTED = 5// commercial content supplied by advertiser
 }
 
 struct Asset {
