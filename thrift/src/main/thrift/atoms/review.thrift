@@ -30,6 +30,10 @@ struct Address {
   10: optional string postCode
 }
 
+struct Person {
+  1: required string name
+}
+
 struct RestaurantReview {
   1: required string restaurantName
   2: optional string approximateLocation
@@ -40,7 +44,7 @@ struct RestaurantReview {
 
 struct ReviewAtom {
   1: required ReviewType reviewType
-  2: required string reviewer
+  2: required Person reviewer
   3: optional Rating rating
   4: optional string reviewSnippet
   5: optional RestaurantReview restaurantReview
