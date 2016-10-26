@@ -38,14 +38,10 @@ struct RestaurantReview {
   5: optional Location location
 }
 
-union ReviewItem {
-  1: RestaurantReview restaurantReview
-}
-
 struct ReviewAtom {
-  1: required ReviewItem reviewItem
-  2: required ReviewType reviewType
-  3: required string reviewer
-  4: optional Rating rating
-  5: optional string reviewSnippet
+  1: required ReviewType reviewType
+  2: required string reviewer
+  3: optional Rating rating
+  4: optional string reviewSnippet
+  5: optional RestaurantReview restaurantReview
 }
