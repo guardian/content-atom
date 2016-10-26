@@ -12,7 +12,7 @@ struct Rating {
   3: required i16 minRating
 }
 
-struct Location {
+struct Geolocation {
   1: required double lat
   2: required double lng
 }
@@ -35,7 +35,7 @@ struct RestaurantReview {
   2: optional string approximateLocation
   3: optional string webAddress
   4: optional Address address
-  5: optional Location location
+  5: optional Geolocation geolocation
 }
 
 struct ReviewAtom {
