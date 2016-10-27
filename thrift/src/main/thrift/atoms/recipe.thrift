@@ -10,7 +10,7 @@ struct RecipeAtom {
   4: optional Serves serves
   5: required list<IngredientsList> ingredientsLists
   6: required list<string> steps
-  7: required list<string> credits 
+  7: required list<string> credits
 }
 
 struct Tags {
@@ -21,14 +21,14 @@ struct Tags {
 }
 
 struct Time {
-  1: optional short preparation
-  2: optional short cooking
+  1: optional i16 preparation
+  2: optional i16 cooking
 }
 
 struct Serves {
   1: required string type
-  2: required short from 
-  3: required short to
+  2: required i16 from
+  3: required i16 to
 }
 
 struct IngredientsList {
@@ -39,6 +39,6 @@ struct IngredientsList {
 struct Ingredient {
     1: required string item
     2: optional string comment
-    3: required float quantity
+    3: required double quantity
     4: optional string unit
 }
