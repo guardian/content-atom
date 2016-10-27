@@ -11,7 +11,7 @@ val commonSettings = Seq(
   organization := "com.gu",
   scalaVersion := "2.11.8",
   scmInfo := Some(ScmInfo(url("https://github.com/guardian/content-atom"),
-                          "scm:git:git@github.com:guardian/contant-atom.git")),
+                          "scm:git:git@github.com:guardian/content-atom.git")),
 
   pomExtra := (
   <url>https://github.com/guardian/content-atom</url>
