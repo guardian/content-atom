@@ -9,15 +9,15 @@ struct RecipeAtom {
   3: required Time time
   4: optional Serves serves
   5: required list<IngredientsList> ingredientsLists
-  6: required list<String> steps
-  7: required list<String> credits 
+  6: required list<string> steps
+  7: required list<string> credits 
 }
 
 struct Tags {
- 1: required list<String> cuisine
- 2: required list<String> category
- 3: required list<String> celebration
- 4: required list<String> dietary
+ 1: required list<string> cuisine
+ 2: required list<string> category
+ 3: required list<string> celebration
+ 4: required list<string> dietary
 }
 
 struct Time {
