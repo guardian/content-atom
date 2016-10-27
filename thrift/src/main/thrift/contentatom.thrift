@@ -7,6 +7,7 @@ include "atoms/explainer.thrift"
 include "atoms/cta.thrift"
 include "atoms/interactive.thrift"
 include "atoms/review.thrift"
+include "atoms/recipe.thrift"
 include "shared.thrift"
 
 typedef string ContentAtomID
@@ -18,7 +19,8 @@ enum AtomType {
   EXPLAINER = 3,
   CTA = 4,
   INTERACTIVE = 5,
-  REVIEW = 6
+  REVIEW = 6,
+  RECIPE = 7
 }
 
 union AtomData {
@@ -29,6 +31,7 @@ union AtomData {
   5: cta.CTAAtom cta
   6: interactive.InteractiveAtom interactive
   7: review.ReviewAtom review
+  8: recipe.RecipeAtom recipe
 }
 
 struct ContentChangeDetails {
