@@ -14,7 +14,7 @@ struct Rating {
 
 struct Geolocation {
   1: required double lat
-  2: required double lng
+  2: required double lon
 }
 
 struct Address {
