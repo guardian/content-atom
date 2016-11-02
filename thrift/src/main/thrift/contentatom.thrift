@@ -67,8 +67,8 @@ struct Atom {
  }
 
 enum EventType {
-  UPDATE = 1,
-  TAKEDOWN = 2
+  UPDATE = 0,
+  TAKEDOWN = 1
 }
 
 struct ContentAtomEvent {
