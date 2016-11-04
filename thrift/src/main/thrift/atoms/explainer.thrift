@@ -3,9 +3,9 @@ namespace java com.gu.contentatom.thrift.atom.explainer
 #@namespace scala com.gu.contentatom.thrift.atom.explainer
 
 enum DisplayType {
-  FLAT = 1,
-  EXPANDABLE = 2,
-  CAROUSEL = 3
+  FLAT = 0,
+  EXPANDABLE = 1,
+  CAROUSEL = 2
 }
 
 struct ExplainerAtom {
