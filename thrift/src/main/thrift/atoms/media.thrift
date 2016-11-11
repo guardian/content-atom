@@ -2,6 +2,8 @@ namespace * contentatom.media
 namespace java com.gu.contentatom.thrift.atom.media
 #@namespace scala com.gu.contentatom.thrift.atom.media
 
+include "../shared.thrift"
+
 typedef i64 Version
 
 enum Platform {
@@ -53,4 +55,5 @@ struct MediaAtom {
   9: optional string posterUrl
   10: optional string description
   11: optional Metadata metadata
+  12: optional shared.GridImage posterImage
 }

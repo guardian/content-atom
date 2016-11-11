@@ -160,3 +160,26 @@ struct Taxonomy {
   5: optional list<Reference> references
 }
 
+struct GridImageAssetDimensions {
+  1: required i32 height
+
+  2: required i32 width
+}
+
+struct GridImageAsset {
+  1: optional string mimeType
+
+  2: required string file
+
+  3: optional GridImageAssetDimensions dimensions
+
+  4: optional i64 size
+}
+
+struct GridImage {
+  1: required list<GridImageAsset> assets
+
+  2: optional GridImageAsset master
+
+  3: required string mediaId
+}
