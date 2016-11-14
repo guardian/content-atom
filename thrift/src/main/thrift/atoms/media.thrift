@@ -41,6 +41,13 @@ struct Metadata {
   5: optional string channelId
 }
 
+struct Settings {
+  1: optional bool sensitive
+  2: optional bool legallySensitive
+  3: optional bool surpressRelatedContent
+  4: optional bool blockAds
+}
+
 struct MediaAtom {
   /* the unique ID will be stored in the `atom` data, and this should correspond to the pluto ID */
   2: required list<Asset> assets
@@ -53,4 +60,5 @@ struct MediaAtom {
   9: optional string posterUrl
   10: optional string description
   11: optional Metadata metadata
+  12: optional Settings settings
 }
