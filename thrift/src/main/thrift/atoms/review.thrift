@@ -56,7 +56,7 @@ struct GameReview {
 struct ReviewAtom {
   1: required ReviewType reviewType
   2: required string reviewer
-  3: optional Rating rating
+  3: required Rating rating
   4: optional string reviewSnippet
   5: optional RestaurantReview restaurantReview
   6: optional GameReview gameReview
