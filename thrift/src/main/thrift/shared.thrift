@@ -160,3 +160,26 @@ struct Taxonomy {
   5: optional list<Reference> references
 }
 
+struct ImageAssetDimensions {
+  1: required i32 height
+
+  2: required i32 width
+}
+
+struct ImageAsset {
+  1: optional string mimeType
+
+  2: required string file
+
+  3: optional ImageAssetDimensions dimensions
+
+  4: optional i64 size
+}
+
+struct Image {
+  1: required list<ImageAsset> assets
+
+  2: optional ImageAsset master
+
+  3: required string mediaId
+}
