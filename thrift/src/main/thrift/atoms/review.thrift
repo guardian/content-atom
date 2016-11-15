@@ -30,6 +30,12 @@ struct Address {
   10: optional string postCode
 }
 
+struct Price {
+  //ISO 4217 currency code
+  1: required string currency
+  2: required double value
+}
+
 struct RestaurantReview {
   1: required string restaurantName
   2: optional string approximateLocation
@@ -38,10 +44,20 @@ struct RestaurantReview {
   5: optional Geolocation geolocation
 }
 
+struct GameReview {
+  1: required string title
+  2: optional string publisher
+  3: required list<string> platforms
+  4: optional Price price
+  5: optional i32 pegiRating
+  6: optional string genre
+}
+
 struct ReviewAtom {
   1: required ReviewType reviewType
   2: required string reviewer
   3: optional Rating rating
   4: optional string reviewSnippet
   5: optional RestaurantReview restaurantReview
+  6: optional GameReview gameReview
 }
