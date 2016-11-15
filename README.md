@@ -31,6 +31,13 @@ https://www.npmjs.com/package/publish
 
 and `npm help publish`.
 
+If you're unfamiliar with publishing on npm the following commands can be useful:
+
+* `npm whoami` - to find out your username (if you have created one)
+* `npm adduser` - to create a user
+* `npm owner ls` - to check the owners of content-atom.
+* `npm owner add <username>` - to add a new owner allowing them to publish content-atom.
+
 But in summary:
 
 1. Bump the version number in `package.json`
