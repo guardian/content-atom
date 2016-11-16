@@ -33,7 +33,8 @@ struct Address {
 struct Price {
   //ISO 4217 currency code
   1: required string currency
-  2: required double value
+  //Value in the minor unit, e.g. pence/cents
+  2: required i32 value
 }
 
 struct RestaurantReview {
