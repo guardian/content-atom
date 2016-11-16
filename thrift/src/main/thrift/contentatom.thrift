@@ -54,6 +54,7 @@ struct ContentChangeDetails {
 
 struct Flags {
   1: optional bool suppressFurniture
+  2: optional bool legallySensitive
 }
 
 struct Atom {
