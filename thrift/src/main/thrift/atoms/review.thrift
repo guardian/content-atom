@@ -4,6 +4,7 @@ namespace java com.gu.contentatom.thrift.atom.review
 
 enum ReviewType {
   RESTAURANT = 1
+  GAME = 2
 }
 
 struct Rating {
