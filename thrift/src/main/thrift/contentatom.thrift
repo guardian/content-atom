@@ -53,7 +53,7 @@ struct ContentChangeDetails {
 }
 
 struct Flags {
-  1: optional bool suppressFurniture
+//1: optional bool suppressFurniture DEPRECATED
   2: optional bool legallySensitive
 }
 
