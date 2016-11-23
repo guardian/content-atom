@@ -8,4 +8,4 @@ addSbtPlugin("com.jsuereth" % "sbt-pgp" % "1.0.0")
 
 addSbtPlugin("org.xerial.sbt" % "sbt-sonatype" % "1.1")
 
-addSbtPlugin("com.twitter" %% "scrooge-sbt-plugin" % "3.16.3")
+addSbtPlugin("com.twitter" %% "scrooge-sbt-plugin" % "4.5.0")

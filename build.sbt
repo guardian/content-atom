@@ -1,9 +1,10 @@
 import com.github.bigtoast.sbtthrift.ThriftPlugin._
-import com.twitter.scrooge.ScroogeSBT
 
 import sbtrelease._
 
 import ReleaseStateTransformations._
+
+import com.twitter.scrooge.ScroogeSBT
 
 Sonatype.sonatypeSettings
 
@@ -20,6 +21,21 @@ val commonSettings = Seq(
       <id>paulmr</id>
       <name>Paul Roberts</name>
       <url>https://github.com/paulmr</url>
+    </developer>
+    <developer>
+      <id>LATaylor-guardian</id>
+      <name>Luke Taylor</name>
+      <url>https://github.com/LATaylor-guardian</url>
+    </developer>
+    <developer>
+      <id>mchv</id>
+      <name>Mariot Chauvin</name>
+      <url>https://github.com/mchv</url>
+    </developer>
+    <developer>
+      <id>tomrf1</id>
+      <name>Tom Forbes</name>
+      <url>https://github.com/tomrf1</url>
     </developer>
   </developers>
   ),
@@ -42,39 +58,47 @@ val commonSettings = Seq(
   )
 )
 
-lazy val root = (project in file("."))
+lazy val root = Project(id = "root", base = file("."))
   .aggregate(thrift, scala)
   .settings(commonSettings)
   .settings(
     publishArtifact := false
   )
 
-lazy val scala = (project in file("scala"))
-  .settings(ScroogeSBT.newSettings: _*)
+lazy val thrift = Project(id = "content-atom-model-thrift", base = file("thrift"))
   .settings(commonSettings)
+  .disablePlugins(ScroogeSBT)
   .settings(
-    name := "content-atom-model",
-    description := "Scala library built from Content-atom thrift definition",
-
-    scroogeThriftSourceFolder in Compile := baseDirectory.value / "../thrift/src/main/thrift",
-    includeFilter in unmanagedResources := "*.thrift",
-    unmanagedResourceDirectories in Compile += baseDirectory.value / "../thrift/src/main/thrift",
-    managedSourceDirectories in Compile += (scroogeThriftOutputFolder in Compile).value,
-    libraryDependencies ++= Seq(
-      "org.apache.thrift" % "libthrift" % "0.9.2",
-      "com.twitter" %% "scrooge-core" % "3.17.0"
-    )
-  )
-
-lazy val thrift = (project in file("thrift"))
-  .settings(commonSettings)
-  .settings(
-    name := "content-atom-model-thrift",
+    resolvers += Resolver.sonatypeRepo("releases"),
     description := "Content atom model Thrift files",
     crossPaths := false,
     publishArtifact in packageDoc := false,
     publishArtifact in packageSrc := false,
-    unmanagedResourceDirectories in Compile += { baseDirectory.value / "src/main/thrift" }
+    includeFilter in unmanagedResources := "*.thrift",
+    unmanagedResourceDirectories in Compile += { baseDirectory.value / "src/main/thrift" },
+    libraryDependencies ++= Seq(
+    "com.gu" % "content-entity-thrift" % "0.1.0"
+    )
+  )
+
+lazy val scala = Project(id = "content-atom-model", base = file("scala"))
+  .settings(commonSettings)
+  .dependsOn(thrift)
+  .settings(
+    description := "Scala library built from Content-atom thrift definition",
+    scroogeThriftSourceFolder in Compile := baseDirectory.value / "../thrift/src/main/thrift",
+    includeFilter in unmanagedResources := "*.thrift",
+    scroogeThriftDependencies in Compile ++= Seq(
+      "content-entity-thrift"
+    ),
+    // See: https://github.com/twitter/scrooge/issues/199
+    scroogeThriftSources in Compile ++= {
+      (scroogeUnpackDeps in Compile).value.flatMap { dir => (dir ** "*.thrift").get }
+    },
+    libraryDependencies ++= Seq(
+      "org.apache.thrift" % "libthrift" % "0.9.2",
+      "com.twitter" %% "scrooge-core" % "4.5.0"
+    )
   )
 
 // settings for the thrift plugin, both default and custom
