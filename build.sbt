@@ -1,4 +1,4 @@
-import com.github.bigtoast.sbtthrift.ThriftPlugin._
+import com.github.bigtoast.sbtthrift.ThriftPlugin.{thrift => thriftExecutable, _}
 
 import sbtrelease._
 
@@ -146,7 +146,10 @@ thriftSettings ++ inConfig(Thrift) {
     thriftJavaEnabled := false,
     thriftJsOptions := Seq("node"),
     thriftOutputDir <<= baseDirectory / "generated",
-    thriftJsOutputDir <<= thriftOutputDir
+    thriftJsOutputDir <<= thriftOutputDir,
+    thriftExecutable += {
+      " -I " + extractJarsTarget.value.toString
+    }
   )
 }
 
