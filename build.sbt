@@ -6,7 +6,41 @@ import ReleaseStateTransformations._
 
 import com.twitter.scrooge.ScroogeSBT
 
+import Classpaths.managedJars
+
 Sonatype.sonatypeSettings
+
+lazy val jarsToExtract = TaskKey[Seq[File]]("jars-to-extract", "JAR files to be extracted")
+
+lazy val extractJarsTarget = SettingKey[File]("extract-jars-target", "Target directory for extracted JAR files")
+
+lazy val extractJars = TaskKey[Unit]("extract-jars", "Extracts JAR files")
+
+lazy val testSettings = Defaults.defaultSettings ++ Seq(
+  // define dependencies
+  libraryDependencies ++= Seq(
+    "com.gu" % "content-entity-thrift" % "0.1.0"
+  ),
+
+  // collect jar files to be extracted from managed jar dependencies
+  jarsToExtract <<= (classpathTypes, update) map { (ct, up) =>
+    managedJars(Compile, ct, up) map { _.data } filter { _.getName.startsWith("content-entity-thrift") }
+  },
+
+  // define the target directory
+  extractJarsTarget <<= baseDirectory(_ / "thrift/target/classes"),
+
+  // task to extract jar files
+  extractJars <<= (jarsToExtract, extractJarsTarget, streams) map { (jars, target, streams) =>
+    jars foreach { jar =>
+      streams.log.info("Extracting " + jar.getName + " to " + target)
+      IO.unzip(jar, target)
+    }
+  },
+
+  // make it run before compile
+  compile in Compile <<= extractJars map { _ => sbt.inc.Analysis.Empty }
+)
 
 val commonSettings = Seq(
   organization := "com.gu",
@@ -61,9 +95,8 @@ val commonSettings = Seq(
 lazy val root = Project(id = "root", base = file("."))
   .aggregate(thrift, scala)
   .settings(commonSettings)
-  .settings(
-    publishArtifact := false
-  )
+  .settings(testSettings: _*)
+  .settings(publishArtifact := false)
 
 lazy val thrift = Project(id = "content-atom-model-thrift", base = file("thrift"))
   .settings(commonSettings)
