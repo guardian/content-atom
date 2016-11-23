@@ -27,6 +27,12 @@ enum Category {
   HOSTED = 4// commercial content supplied by advertiser
 }
 
+enum PrivacyStatus {
+   PRIVATE = 0,
+   UNLISTED = 1,
+   PUBLIC = 2
+}
+
 struct Asset {
   1: required AssetType assetType
   2: required Version version
@@ -41,6 +47,7 @@ struct Metadata {
   3: optional string license
   4: optional bool commentsEnabled
   5: optional string channelId
+  6: optional PrivacyStatus privacyStatus
 }
 
 struct MediaAtom {
