@@ -16,19 +16,14 @@ lazy val extractJarsTarget = SettingKey[File]("extract-jars-target", "Target dir
 
 lazy val extractJars = TaskKey[Unit]("extract-jars", "Extracts JAR files")
 
-lazy val testSettings = Defaults.defaultSettings ++ Seq(
-  // define dependencies
-  libraryDependencies ++= Seq(
-    "com.gu" % "content-entity-thrift" % "0.1.0"
-  ),
-
+lazy val extractJarSettings = Defaults.coreDefaultSettings ++ Seq(
   // collect jar files to be extracted from managed jar dependencies
   jarsToExtract <<= (classpathTypes, update) map { (ct, up) =>
     managedJars(Compile, ct, up) map { _.data } filter { _.getName.startsWith("content-entity-thrift") }
   },
 
   // define the target directory
-  extractJarsTarget <<= baseDirectory(_ / "thrift/target/classes"),
+  extractJarsTarget <<= baseDirectory(_ / "thrift/target/extracted"),
 
   // task to extract jar files
   extractJars <<= (jarsToExtract, extractJarsTarget, streams) map { (jars, target, streams) =>
@@ -89,13 +84,16 @@ val commonSettings = Seq(
     commitNextVersion,
     releaseStepCommand("sonatypeReleaseAll"),
     pushChanges
+  ),
+  libraryDependencies ++= Seq(
+    "com.gu" % "content-entity-thrift" % "0.1.0"
   )
 )
 
 lazy val root = Project(id = "root", base = file("."))
   .aggregate(thrift, scala)
   .settings(commonSettings)
-  .settings(testSettings: _*)
+  .settings(extractJarSettings: _*)
   .settings(publishArtifact := false)
 
 lazy val thrift = Project(id = "content-atom-model-thrift", base = file("thrift"))
@@ -108,15 +106,11 @@ lazy val thrift = Project(id = "content-atom-model-thrift", base = file("thrift"
     publishArtifact in packageDoc := false,
     publishArtifact in packageSrc := false,
     includeFilter in unmanagedResources := "*.thrift",
-    unmanagedResourceDirectories in Compile += { baseDirectory.value / "src/main/thrift" },
-    libraryDependencies ++= Seq(
-    "com.gu" % "content-entity-thrift" % "0.1.0"
-    )
+    unmanagedResourceDirectories in Compile += { baseDirectory.value / "src/main/thrift" }
   )
 
 lazy val scala = Project(id = "content-atom-model", base = file("scala"))
   .settings(commonSettings)
-  .dependsOn(thrift)
   .settings(
     description := "Scala library built from Content-atom thrift definition",
     scroogeThriftSourceFolder in Compile := baseDirectory.value / "../thrift/src/main/thrift",
