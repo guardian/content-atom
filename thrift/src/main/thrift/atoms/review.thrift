@@ -1,5 +1,6 @@
 include "entities/game.thrift"
 include "entities/restaurant.thrift"
+include "entities/film.thrift"
 
 namespace * contentatom.review
 namespace java com.gu.contentatom.thrift.atom.review
@@ -8,6 +9,7 @@ namespace java com.gu.contentatom.thrift.atom.review
 enum ReviewType {
   RESTAURANT = 1
   GAME = 2
+  FILM = 3
 }
 
 struct Rating {
@@ -24,4 +26,5 @@ struct ReviewAtom {
   5: required string entityId
   6: optional restaurant.Restaurant restaurant
   7: optional game.Game game
+  8: optional film.Film film
 }
