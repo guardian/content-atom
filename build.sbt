@@ -39,7 +39,8 @@ lazy val extractJarSettings = Defaults.coreDefaultSettings ++ Seq(
 
 val commonSettings = Seq(
   organization := "com.gu",
-  scalaVersion := "2.11.8",
+  scalaVersion := "2.12.0",
+	crossScalaVersions := Seq("2.11.8", scalaVersion.value),
   scmInfo := Some(ScmInfo(url("https://github.com/guardian/content-atom"),
                           "scm:git:git@github.com:guardian/content-atom.git")),
 
@@ -123,8 +124,8 @@ lazy val scala = Project(id = "content-atom-model", base = file("scala"))
       (scroogeUnpackDeps in Compile).value.flatMap { dir => (dir ** "*.thrift").get }
     },
     libraryDependencies ++= Seq(
-      "org.apache.thrift" % "libthrift" % "0.9.2",
-      "com.twitter" %% "scrooge-core" % "4.5.0"
+      "org.apache.thrift" % "libthrift" % "0.9.3",
+      "com.twitter" %% "scrooge-core" % "4.12.0"
     )
   )
 
