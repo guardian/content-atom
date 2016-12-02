@@ -13,13 +13,14 @@ You need to have [french-thrift 0.9.3](https://github.com/guardian/french-thrift
 ## How to release
 
 ```
-$ sbt release
+$ sbt release cross
 ```
 
-This will release 2 artifacts to Maven Central:
+This will release 3 artifacts to Maven Central:
 
-* `content-atom-model_2.11-$version.jar` contains the Thrift files and Scrooge-generated Scala 2.11 classes
 * `content-atom-model-thrift-$version.jar` contains only the Thrift files
+* `content-atom-model_2.11-$version.jar` contains the Thrift files and Scrooge-generated Scala 2.11 classes
+* `content-atom-model_2.12-$version.jar` contains the Thrift files and Scrooge-generated Scala 2.12 classes
 
 You will need a PGP key and Sonatype credentials.  
 
