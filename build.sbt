@@ -87,7 +87,7 @@ val commonSettings = Seq(
     pushChanges
   ),
   libraryDependencies ++= Seq(
-    "com.gu" % "content-entity-thrift" % "0.1.1"
+    "com.gu" % "content-entity-thrift" % "0.1.2"
   )
 )
 
