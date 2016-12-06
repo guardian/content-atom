@@ -13,7 +13,7 @@ You need to have [french-thrift 0.9.3](https://github.com/guardian/french-thrift
 ## How to release
 
 ```
-$ sbt release cross
+$ sbt 'release cross'
 ```
 
 This will release 3 artifacts to Maven Central:
