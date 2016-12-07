@@ -22,7 +22,13 @@ This will release 3 artifacts to Maven Central:
 * `content-atom-model_2.11-$version.jar` contains the Thrift files and Scrooge-generated Scala 2.11 classes
 * `content-atom-model_2.12-$version.jar` contains the Thrift files and Scrooge-generated Scala 2.12 classes
 
-You will need a PGP key and Sonatype credentials.  
+You will need a PGP key and Sonatype credentials.
+
+To cross release locally use
+
+```
+$ sbt '+publishLocal'
+```
 
 ### JavaScript
 
