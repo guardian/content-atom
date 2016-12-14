@@ -18,6 +18,7 @@ struct Serves {
   1: required string type
   2: required i16 from
   3: required i16 to
+  4: optional string unit
 }
 
 struct Ingredient {
