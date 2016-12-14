@@ -18,23 +18,20 @@ lazy val extractJars = TaskKey[Unit]("extract-jars", "Extracts JAR files")
 
 lazy val extractJarSettings = Defaults.coreDefaultSettings ++ Seq(
   // collect jar files to be extracted from managed jar dependencies
-  jarsToExtract <<= (classpathTypes, update) map { (ct, up) =>
-    managedJars(Compile, ct, up) map { _.data } filter { _.getName.startsWith("content-entity-thrift") }
-  },
+  jarsToExtract := { managedJars(Compile, classpathTypes.value, update.value) map { _.data } filter { _.getName.startsWith("content-entity-thrift") } },
 
   // define the target directory
-  extractJarsTarget <<= baseDirectory(_ / "thrift/target/extracted"),
+  extractJarsTarget := { baseDirectory(_ / "thrift/target/extracted").value },
 
   // task to extract jar files
-  extractJars <<= (jarsToExtract, extractJarsTarget, streams) map { (jars, target, streams) =>
-    jars foreach { jar =>
-      streams.log.info("Extracting " + jar.getName + " to " + target)
-      IO.unzip(jar, target)
+  extractJars := { jarsToExtract.value foreach { jar =>
+      streams.value.log.info("Extracting " + jar.getName + " to " + extractJarsTarget.value)
+      IO.unzip(jar, extractJarsTarget.value)
     }
   },
 
   // make it run before compile
-  compile in Compile <<= extractJars map { _ => sbt.inc.Analysis.Empty }
+  compile in Compile := sbt.inc.Analysis.Empty
 )
 
 val commonSettings = Seq(
@@ -140,8 +137,8 @@ thriftSettings ++ inConfig(Thrift) {
     thriftJsEnabled := true,
     thriftJavaEnabled := false,
     thriftJsOptions := Seq("node"),
-    thriftOutputDir <<= baseDirectory / "generated",
-    thriftJsOutputDir <<= thriftOutputDir,
+    thriftOutputDir := { baseDirectory.value / "generated" } ,
+    thriftJsOutputDir := { thriftOutputDir.value },
     thriftExecutable += {
       " -I " + extractJarsTarget.value.toString
     }
