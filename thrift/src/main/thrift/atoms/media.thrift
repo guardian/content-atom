@@ -48,6 +48,7 @@ struct Metadata {
   4: optional bool commentsEnabled
   5: optional string channelId
   6: optional PrivacyStatus privacyStatus
+  7: optional shared.DateTime expiryDate
 }
 
 struct MediaAtom {
