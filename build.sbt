@@ -122,10 +122,21 @@ lazy val scala = Project(id = "content-atom-model", base = file("scala"))
     },
     libraryDependencies ++= Seq(
       "org.apache.thrift" % "libthrift" % "0.9.3",
-      "com.twitter" %% "scrooge-core" % "4.12.0"
+      "com.twitter" %% "scrooge-core" % "4.12.0",
+      "org.sangria-graphql" %% "sangria" % "1.0.0-RC5"
+    )
+  ).dependsOn(sangriaScrooge)
+
+lazy val sangriaScrooge = Project(id = "sangria-scrooge", base = file("sangria-scrooge"))
+  .settings(
+    scalaVersion := "2.12.1",
+    libraryDependencies ++= Seq(
+      "com.twitter" %% "scrooge-core" % "4.12.0",
+      "org.sangria-graphql" %% "sangria" % "1.0.0-RC5",
+      "org.apache.thrift" % "libthrift" % "0.9.3"
     )
   )
-
+  
 // settings for the thrift plugin, both default and custom
 thriftSettings ++ inConfig(Thrift) {
 
@@ -144,4 +155,3 @@ thriftSettings ++ inConfig(Thrift) {
     }
   )
 }
-
