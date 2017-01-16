@@ -51,4 +51,5 @@ struct RecipeAtom {
   6: required list<string> steps
   7: required list<string> credits
   8: required list<shared.Image> images
+  9: optional string sourceArticleId
 }

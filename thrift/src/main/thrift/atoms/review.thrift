@@ -27,4 +27,5 @@ struct ReviewAtom {
   6: optional restaurant.Restaurant restaurant
   7: optional game.Game game
   8: optional film.Film film
+  9: optional string sourceArticleId
 }
