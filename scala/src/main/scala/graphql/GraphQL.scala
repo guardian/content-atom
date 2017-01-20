@@ -6,6 +6,7 @@ import sangria.schema._
 import sangria.validation.IntCoercionViolation
 import sangria.macros.derive._
 import com.gu.contentatom.thrift._
+import com.gu.contentatom.thrift.atom._
 
 import com.twitter.scrooge.{ ThriftStruct, ThriftEnum }
 
@@ -14,7 +15,7 @@ case class ContentAtomTest(name: String)
 object ContentAtomSchema {
 
   val shortType = ScalarType[Short](
-    name = "Short",
+      name = "Short",
     coerceUserInput = {
       case s: Short => Right(s)
       case i: Int if i.isValidShort => Right(i.toShort)

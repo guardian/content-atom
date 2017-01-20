@@ -31,7 +31,7 @@ class MacroImpl(val c: blackbox.Context) {
           val param = clCompanion.member(TermName("apply"))
             .asMethod.paramLists.head.head
           val dealiased = param.typeSignature.dealias.typeSymbol.asType.toTypeIn(companion)
-          val res = q"""implicitly[sangria.macros.derive.GraphQLOutputTypeLookup[${dealiased}]]"""
+          val res = q"""_root_.scala.Predef.implicitly[_root_.shapeless.Lazy[_root_.sangria.macros.derive.GraphQLOutputTypeLookup[${dealiased}]]].value"""
           res
         }
       //val classSymbol = tType.typeSymbol.asClass
@@ -55,7 +55,7 @@ class MacroImpl(val c: blackbox.Context) {
         val paramName = param.name.toTermName
         val fieldName = paramName.toString
         q"""sangria.schema.Field($fieldName,
-              implicitly[sangria.macros.derive.GraphQLOutputTypeLookup[$paramType]].graphqlType,
+              _root_.scala.Predef.implicitly[_root_.shapeless.Lazy[_root_.sangria.macros.derive.GraphQLOutputTypeLookup[$paramType]]].value.graphqlType,
               resolve = (_:Context[Unit, $tType]).value.${paramName})"""
       }
       q"""new sangria.macros.derive.GraphQLOutputTypeLookup[$tType] {
