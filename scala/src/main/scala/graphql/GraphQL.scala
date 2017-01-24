@@ -32,7 +32,16 @@ object ContentAtomSchema {
     def graphqlType = shortType
   }
 
-//implicit def lookupThriftEnum[T <: ThriftEnum]= new GraphQLOutputTypeLookup[T] {
+  //val atomData = new GraphQLOutputTypeLookup[AtomData] {
+    //def graphqlType = ObjectType(name = "AtomData",
+      //fields = fields[Unit, AtomData](
+        //Field("cta", implicitly[shapeless.Lazy[GraphQLOutputTypeLookup[AtomData.Cta]]].value.graphqlType.asInstanceOf[ObjectType[Unit, AtomData]],
+        //resolve = _.value)
+      //)
+    //)
+  //}
+
+  //implicit def lookupThriftEnum[T <: ThriftEnum]= new GraphQLOutputTypeLookup[T] {
     //def graphqlType = deriveThriftEnum[T]
   //}
 
@@ -42,9 +51,11 @@ object ContentAtomSchema {
   //}
 
   //println(implicitly[GraphQLOutputTypeLookup[AtomData]].graphqlType)
-  val atom = implicitly[GraphQLOutputTypeLookup[Atom]].graphqlType.asInstanceOf[ObjectType[Unit, Atom]]
+  //val atype = implicitly[GraphQLOutputTypeLookup[AtomData]]
+  val cta = implicitly[GraphQLOutputTypeLookup[AtomData.Cta]].graphqlType.asInstanceOf[ObjectType[Unit, AtomData.Cta]]
+  //val atom  = implicitly[GraphQLOutputTypeLookup[Atom]].graphqlType.asInstanceOf[ObjectType[Unit, Atom]]
   //val tmp = implicitly[sangria.macros.derive.GraphQLOutputTypeLookup[com.gu.contentatom.thrift.atom.cta.CTAAtom]]
-  //val schema = Schema(atom)
+  val schema = Schema(cta)
 }
 
 object TestMain extends App {
@@ -52,7 +63,7 @@ object TestMain extends App {
 //  val x = implicitly[sangria.macros.derive.GraphQLOutputTypeLookup[String]].graphqlType
   import sangria.renderer.SchemaRenderer
   //
-  //println(
-    //SchemaRenderer.renderSchema(ContentAtomSchema.schema)
-  //)
+  println(
+    SchemaRenderer.renderSchema(ContentAtomSchema.schema)
+  )
 }

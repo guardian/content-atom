@@ -22,7 +22,11 @@ class MacroImpl(val c: blackbox.Context) {
     val tType = weakTypeOf[T]
     val typeName = tType.typeSymbol.name.toTypeName
     val companion = tType.companion
-    if(tType <:< typeOf[ThriftUnion]) {
+    if(tType.typeSymbol.asClass.isCaseClass) { // if this is a case class we can just use the standard macros
+      q"""new sangria.macros.derive.GraphQLOutputTypeLookup[$tType] {
+        def graphqlType = sangria.macros.derive.deriveObjectType[Unit, $tType]()
+      }"""
+    } else if(tType <:< typeOf[ThriftUnion]) {
       val unionTypes = companion
         .members
         .filter(m => m.isClass && m.asType.toType <:< tType && !m.name.toString.startsWith("UnknownUnionField"))
@@ -30,8 +34,15 @@ class MacroImpl(val c: blackbox.Context) {
           val clCompanion = cl.asType.toTypeIn(companion).companion
           val param = clCompanion.member(TermName("apply"))
             .asMethod.paramLists.head.head
-          val dealiased = param.typeSignature.dealias.typeSymbol.asType.toTypeIn(companion)
-          val res = q"""_root_.scala.Predef.implicitly[_root_.shapeless.Lazy[_root_.sangria.macros.derive.GraphQLOutputTypeLookup[${dealiased}]]].value"""
+          val paramName = param.name.toTermName
+          val dealiased = cl.asType
+          //val dealiased = param.typeSignature.dealias.typeSymbol.asType.toTypeIn(companion)
+          //println(s"[PMR] 1656 $cl ${cl.asType.toType <:< tType}")
+          val res = q"""sangria.schema.Field(${paramName.toString},
+            _root_.scala.Predef.implicitly[_root_.shapeless.Lazy[_root_.sangria.macros.derive.GraphQLOutputTypeLookup[${dealiased}]]].value.graphqlType
+              .asInstanceOf[ObjectType[Unit, $tType]],
+            resolve = (_:Context[Unit, $dealiased]).value).asInstanceOf[Field[Unit, $tType]]"""
+//            resolve = (_:Context[Unit, $dealiased]).value match { case x @ (_: $dealiased) => x; case _ => ??? })"""
           res
         }
       //val classSymbol = tType.typeSymbol.asClass
@@ -41,13 +52,16 @@ class MacroImpl(val c: blackbox.Context) {
         //.knownDirectSubclasses
         //.filterNot(_.name.toString.startsWith("UnknownUnionField"))
         //.map
-      q"""new sangria.macros.derive.GraphQLOutputTypeLookup[$tType] {
+      val res = q"""new sangria.macros.derive.GraphQLOutputTypeLookup[$tType] {
         def graphqlType =
           sangria.schema.ObjectType(name = ${typeName.decodedName.toString},
-            fields = fields[Unit, $typeName](${unionTypes.toList}:_*)
+            fields = fields[Unit, $tType](${unionTypes.toList}:_*)
           )
       }"""
+      print(s"[PMR] 2100 $tType => ${showCode(res)}")
+      res
     } else {
+      print(s"[PMR] 2123 $tType")
       val applyMethod = companion.member(TermName("apply")).asMethod
 
       val fields = applyMethod.paramLists.head map { param =>
@@ -68,17 +82,21 @@ class MacroImpl(val c: blackbox.Context) {
   def deriveThriftEnum[T: c.WeakTypeTag] = {
     val tType = weakTypeOf[T]
     val typeName = tType.typeSymbol.name.toTypeName
+    val companion = tType.companion
     val classSymbol = tType.typeSymbol.asClass
 
-    val enumValues = classSymbol
-      .knownDirectSubclasses
-      .filterNot(_.name.toString.startsWith("EnumUnknown"))
-      .map(subclass => q"""sangria.schema.EnumValue(${subclass.name.toString}, value = ${tType}.${subclass.name.toTermName})""")
+    val enumValues = companion
+      .members
+      .filter{m => m.isTerm && m.info <:< tType }
+      .map(subclass => q"""sangria.schema.EnumValue(${subclass.name.toString}, value = ${subclass.asTerm})""")
+      //.map(subclass => q"""sangria.schema.EnumValue(${subclass.name.toString}, value = ${companion.termSymbol}.${subclass.name.toTermName})""")
+      .toList
 
- //${enumValues.toList})
-    q"""new sangria.macros.derive.GraphQLOutputTypeLookup[$tType] {
-      def graphqlType = sangria.schema.EnumType(name = ${typeName.decodedName.toString}, None, List())
+    val res = q"""new sangria.macros.derive.GraphQLOutputTypeLookup[$tType] {
+      def graphqlType = sangria.schema.EnumType(name = ${typeName.decodedName.toString}, None, ${enumValues})
     }"""
+    /*println(showCode(res))*/
+    res
 
     //val fields = applyMethod.paramLists.head map { param =>
       //val paramType = param.info
