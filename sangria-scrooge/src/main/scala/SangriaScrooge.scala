@@ -9,9 +9,20 @@ import sangria.schema._
 
 import scala.language.experimental.macros
 
+trait TypeMapping[T] {
+  def graphqlType: Type
+}
+
+object TypeMapping {
+  implicit def fromGraphQLLookup[T](implicit gqll: GraphQLOutputTypeLookup[T]): TypeMapping[T] = new TypeMapping[T] { def graphqlType = gqll.graphqlType.asInstanceOf[Type] }
+  implicit def optional[T](implicit tm: TypeMapping[T]): TypeMapping[Option[T]] = new TypeMapping[Option[T]] { def graphqlType = OptionType(tm.graphqlType.asInstanceOf[OutputType[T]]) }
+  implicit def seq[T](implicit tm: TypeMapping[T]): TypeMapping[Seq[T]] = new TypeMapping[Seq[T]] { def graphqlType = ListType(tm.graphqlType.asInstanceOf[OutputType[T]]) }
+}
+
 object Macros {
-  implicit def deriveThriftEnum[T <: ThriftEnum]: GraphQLOutputTypeLookup[T] = macro MacroImpl.deriveThriftEnum[T]
-  implicit def deriveThriftStruct[T <: ThriftStruct]: GraphQLOutputTypeLookup[T] = macro MacroImpl.deriveThriftStruct[T]
+  implicit def deriveThriftStruct[T <: ThriftStruct]: TypeMapping[T] = macro MacroImpl.deriveThriftStruct[T]
+  implicit def deriveThriftEnum[T <: ThriftEnum]: TypeMapping[T] = macro MacroImpl.deriveThriftEnum[T]
+  //implicit def deriveThriftStruct[T <: ThriftStruct]: GraphQLOutputTypeLookup[T] = macro MacroImpl.deriveThriftStruct[T]
   //implicit def deriveThriftUnion[T <: ThriftUnion]: GraphQLOutputTypeLookup[T] = macro MacroImpl.deriveThriftUnion[T]
 }
 
@@ -22,11 +33,13 @@ class MacroImpl(val c: blackbox.Context) {
     val tType = weakTypeOf[T]
     val typeName = tType.typeSymbol.name.toTypeName
     val companion = tType.companion
-    if(tType.typeSymbol.asClass.isCaseClass) { // if this is a case class we can just use the standard macros
-      q"""new sangria.macros.derive.GraphQLOutputTypeLookup[$tType] {
-        def graphqlType = sangria.macros.derive.deriveObjectType[Unit, $tType]()
-      }"""
-    } else if(tType <:< typeOf[ThriftUnion]) {
+    //if(tType.typeSymbol.asClass.isCaseClass) { // if this is a case class we can just use the standard macros
+      //print(s"[PMR] 1233 $tType")
+      //q"""new com.gu.sangriascrooge.TypeMapping[$tType] {
+        //def graphqlType = sangria.macros.derive.deriveObjectType[Unit, $tType]()
+      //}"""
+    //}
+    if(tType <:< typeOf[ThriftUnion] && !tType.typeSymbol.asClass.isCaseClass) {
       val unionTypes = companion
         .members
         .filter(m => m.isClass && m.asType.toType <:< tType && !m.name.toString.startsWith("UnknownUnionField"))
@@ -36,14 +49,16 @@ class MacroImpl(val c: blackbox.Context) {
             .asMethod.paramLists.head.head
           val paramName = param.name.toTermName
           val dealiased = cl.asType
+          val res = q"""_root_.scala.Predef.implicitly[_root_.shapeless.Lazy[_root_.com.gu.sangriascrooge.TypeMapping[${dealiased}]]].value.graphqlType.asInstanceOf[ObjectType[Unit, $dealiased]]"""
+          println(showCode(res))
+          res
           //val dealiased = param.typeSignature.dealias.typeSymbol.asType.toTypeIn(companion)
           //println(s"[PMR] 1656 $cl ${cl.asType.toType <:< tType}")
-          val res = q"""sangria.schema.Field(${paramName.toString},
-            _root_.scala.Predef.implicitly[_root_.shapeless.Lazy[_root_.sangria.macros.derive.GraphQLOutputTypeLookup[${dealiased}]]].value.graphqlType
-              .asInstanceOf[ObjectType[Unit, $tType]],
-            resolve = (_:Context[Unit, $dealiased]).value).asInstanceOf[Field[Unit, $tType]]"""
-//            resolve = (_:Context[Unit, $dealiased]).value match { case x @ (_: $dealiased) => x; case _ => ??? })"""
-          res
+          //val res = q"""sangria.schema.Field(${paramName.toString},
+            //$graphqlType,
+            //resolve = (_:Context[Unit, $dealiased]).value)"""
+            //resolve = (_:Context[Unit, $dealiased]).value match { case x @ (_: $dealiased) => x; case _ => ??? })"""
+          //res
         }
       //val classSymbol = tType.typeSymbol.asClass
       // hmm ... https://github.com/scala/scala/pull/5284
@@ -52,16 +67,16 @@ class MacroImpl(val c: blackbox.Context) {
         //.knownDirectSubclasses
         //.filterNot(_.name.toString.startsWith("UnknownUnionField"))
         //.map
-      val res = q"""new sangria.macros.derive.GraphQLOutputTypeLookup[$tType] {
+      val res = q"""new com.gu.sangriascrooge.TypeMapping[$tType] {
         def graphqlType =
-          sangria.schema.ObjectType(name = ${typeName.decodedName.toString},
-            fields = fields[Unit, $tType](${unionTypes.toList}:_*)
+          sangria.schema.UnionType(name = ${typeName.decodedName.toString},
+            types = ${unionTypes.toList}
           )
       }"""
-      print(s"[PMR] 2100 $tType => ${showCode(res)}")
+      println(s"[PMR] 2100 $tType => ${showCode(res)}")
       res
     } else {
-      print(s"[PMR] 2123 $tType")
+      println(s"[PMR] 2123 $tType")
       val applyMethod = companion.member(TermName("apply")).asMethod
 
       val fields = applyMethod.paramLists.head map { param =>
@@ -69,10 +84,10 @@ class MacroImpl(val c: blackbox.Context) {
         val paramName = param.name.toTermName
         val fieldName = paramName.toString
         q"""sangria.schema.Field($fieldName,
-              _root_.scala.Predef.implicitly[_root_.shapeless.Lazy[_root_.sangria.macros.derive.GraphQLOutputTypeLookup[$paramType]]].value.graphqlType,
+              _root_.scala.Predef.implicitly[_root_.shapeless.Lazy[_root_.com.gu.sangriascrooge.TypeMapping[$paramType]]].value.graphqlType.asInstanceOf[OutputType[Any]],
               resolve = (_:Context[Unit, $tType]).value.${paramName})"""
       }
-      q"""new sangria.macros.derive.GraphQLOutputTypeLookup[$tType] {
+      q"""new com.gu.sangriascrooge.TypeMapping[$tType] {
         def graphqlType =
           sangria.schema.ObjectType(name = ${typeName.decodedName.toString}, fields = fields[Unit, $tType]($fields:_*))
       }"""
@@ -92,7 +107,7 @@ class MacroImpl(val c: blackbox.Context) {
       //.map(subclass => q"""sangria.schema.EnumValue(${subclass.name.toString}, value = ${companion.termSymbol}.${subclass.name.toTermName})""")
       .toList
 
-    val res = q"""new sangria.macros.derive.GraphQLOutputTypeLookup[$tType] {
+    val res = q"""new com.gu.sangriascrooge.TypeMapping[$tType] {
       def graphqlType = sangria.schema.EnumType(name = ${typeName.decodedName.toString}, None, ${enumValues})
     }"""
     /*println(showCode(res))*/

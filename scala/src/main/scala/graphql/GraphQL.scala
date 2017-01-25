@@ -1,5 +1,6 @@
 package com.gu.contentatom.graphql
 
+import com.gu.sangriascrooge.TypeMapping
 import com.gu.sangriascrooge.Macros._
 import sangria.ast
 import sangria.schema._
@@ -51,11 +52,12 @@ object ContentAtomSchema {
   //}
 
   //println(implicitly[GraphQLOutputTypeLookup[AtomData]].graphqlType)
-  //val atype = implicitly[GraphQLOutputTypeLookup[AtomData]]
-  val cta = implicitly[GraphQLOutputTypeLookup[AtomData.Cta]].graphqlType.asInstanceOf[ObjectType[Unit, AtomData.Cta]]
-  //val atom  = implicitly[GraphQLOutputTypeLookup[Atom]].graphqlType.asInstanceOf[ObjectType[Unit, Atom]]
+  //val cta = implicitly[TypeMapping[AtomData.Cta]].graphqlType.asInstanceOf[UnionType[AtomData.Cta]]
+  //val a = implicitly[TypeMapping[atom.recipe.RecipeAtom]]
+  val atom  = implicitly[TypeMapping[Atom]].graphqlType.asInstanceOf[ObjectType[Unit, Atom]]
+  //val change = implicitly[TypeMapping[User]]
   //val tmp = implicitly[sangria.macros.derive.GraphQLOutputTypeLookup[com.gu.contentatom.thrift.atom.cta.CTAAtom]]
-  val schema = Schema(cta)
+  val schema = Schema(atom)
 }
 
 object TestMain extends App {
