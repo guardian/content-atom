@@ -1,6 +1,7 @@
 include "entities/game.thrift"
 include "entities/restaurant.thrift"
 include "entities/film.thrift"
+include "../shared.thrift"
 
 namespace * contentatom.review
 namespace java com.gu.contentatom.thrift.atom.review
@@ -28,4 +29,5 @@ struct ReviewAtom {
   7: optional game.Game game
   8: optional film.Film film
   9: optional string sourceArticleId
+  10: optional list<shared.Image> images
 }
