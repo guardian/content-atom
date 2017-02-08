@@ -58,7 +58,7 @@ struct MediaAtom {
   4: required string title
   5: required Category category
   6: optional string plutoProjectId
-  7: optional i64 duration // milliseconds
+  7: optional i64 duration // seconds
   8: optional string source
   9: optional string posterUrl
   10: optional string description
