@@ -2,6 +2,10 @@ namespace * contentatom.storyquestions
 namespace java com.gu.contentatom.thrift.atom.storyquestions
 #@namespace scala com.gu.contentatom.thrift.atom.storyquestions
 
+/* 
+ * Determines what the questions are linked to. This is fundamentally to work around the fact
+ * that we do not have the concept of a story yet.
+ */
 enum RelatedStoryLinkType {
   TAG = 0,
   STORY = 1,
