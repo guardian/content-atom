@@ -7,4 +7,4 @@ exports.quizTypes  = require('../generated/gen-nodejs/quiz_types');
 exports.reviewTypes  = require('../generated/gen-nodejs/review_types');
 exports.recipeTypes  = require('../generated/gen-nodejs/recipe_types');
 exports.shared = require('../generated/gen-nodejs/shared_types');
-exports.filmTypes = require('../generated/gen-nodejs/film_types');
+exports.storyQuestions = require('../generated/gen-nodejs/storyquestions_types');
