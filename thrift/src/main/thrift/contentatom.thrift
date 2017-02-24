@@ -53,6 +53,9 @@ struct ContentChangeDetails {
   * ensure message ordering.
   */
   4: required i64 revision
+
+  /** the atom taken down event */
+  5: optional shared.ChangeRecord takenDown
 }
 
 struct Flags {
@@ -68,6 +71,7 @@ struct Atom {
   5: required AtomData data       // the atom payload
   6: required ContentChangeDetails contentChangeDetails
   7: optional Flags flags
+  7: optional string title
  }
 
 enum EventType {
