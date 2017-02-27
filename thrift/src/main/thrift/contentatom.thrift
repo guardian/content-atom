@@ -34,7 +34,7 @@ union AtomData {
   6: interactive.InteractiveAtom interactive
   7: review.ReviewAtom review
   8: recipe.RecipeAtom recipe
-  9: storyquestions.StoryQuestionsAtom questions
+  9: storyquestions.StoryQuestionsAtom storyquestions
 }
 
 struct ContentChangeDetails {
