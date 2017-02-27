@@ -71,7 +71,7 @@ struct Atom {
   5: required AtomData data       // the atom payload
   6: required ContentChangeDetails contentChangeDetails
   7: optional Flags flags
-  7: optional string title
+  8: optional string title
  }
 
 enum EventType {
