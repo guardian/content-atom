@@ -21,7 +21,7 @@ enum AtomType {
   CTA = 4,
   INTERACTIVE = 5,
   REVIEW = 6,
-  RECIPE = 7, 
+  RECIPE = 7,
   STORYQUESTIONS = 8
 }
 
@@ -61,6 +61,7 @@ struct ContentChangeDetails {
 struct Flags {
 //1: optional bool suppressFurniture DEPRECATED
   2: optional bool legallySensitive
+  3: optional bool blockAds
 }
 
 struct Atom {
