@@ -62,6 +62,7 @@ struct Flags {
 //1: optional bool suppressFurniture DEPRECATED
   2: optional bool legallySensitive
   3: optional bool blockAds
+  4: optional bool sensitive
 }
 
 struct Atom {
