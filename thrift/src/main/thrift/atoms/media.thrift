@@ -41,6 +41,12 @@ struct Asset {
   5: optional string mimeType
 }
 
+struct PlutoData {
+  1: optional string commissionId
+  2: optional string projectId
+  3: optional string masterId
+}
+
 struct Metadata {
   1: optional list<string> tags
   2: optional string categoryId
@@ -49,15 +55,15 @@ struct Metadata {
   5: optional string channelId
   6: optional PrivacyStatus privacyStatus
   7: optional shared.DateTime expiryDate
+  8: optional PlutoData pluto
 }
 
 struct MediaAtom {
-  /* the unique ID will be stored in the `atom` data, and this should correspond to the pluto ID */
   2: required list<Asset> assets
   3: optional Version activeVersion
   4: required string title
   5: required Category category
-  6: optional string plutoProjectId
+  6: optional string plutoProjectId // deprecated in favour of `Metadata.pluto`
   7: optional i64 duration // seconds
   8: optional string source
   9: optional string posterUrl
