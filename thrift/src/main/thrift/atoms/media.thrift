@@ -64,4 +64,5 @@ struct MediaAtom {
   10: optional string description
   11: optional Metadata metadata
   12: optional shared.Image posterImage
+  14: optional string trailText
 }
