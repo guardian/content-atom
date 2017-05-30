@@ -2,6 +2,8 @@ namespace * contentatom.explainer
 namespace java com.gu.contentatom.thrift.atom.explainer
 #@namespace scala com.gu.contentatom.thrift.atom.explainer
 
+include "../shared.thrift"
+
 enum DisplayType {
   FLAT = 0,
   EXPANDABLE = 1,
@@ -26,17 +28,32 @@ union ExplainerData {
 }
 
 struct QAExplainerData {
-
+  1: optional Image eventshot
+  2: required string body
+  3: optional string marginalia
 }
 
 struct GuideExplainerData {
-
+  1: optional Image eventshot
+  2: required list<ExplainerContentItem> tidbits
 }
 
 struct TimelineExplainerData {
-
+  1: required list<ExplainerTimelineItem> events
 }
 
 struct ProfileExplainerData {
+  1: optional Image headshot
+  2: required list<ExplainerContentItem> tidbits
+}
 
+struct ExplainerContentItem {
+  1: optional string title
+  2: required string body
+}
+
+struct ExplainerTimelineItem {
+  1: optional string title
+  2: required DateTime date
+  2: required string body
 }
