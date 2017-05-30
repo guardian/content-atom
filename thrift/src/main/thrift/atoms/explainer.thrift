@@ -35,14 +35,14 @@ struct ExplainerAtom {
 }
 
 struct QAndAExplainerData {
-  1: optional Image eventshot
-  2: required list<ExplainerContentItem> tidbits
+  1: optional Image eventImage
+  2: required list<ExplainerContentItem> items
   3: optional string sidenote
 }
 
 struct GuideExplainerData {
-  1: optional Image eventshot
-  2: required list<ExplainerContentItem> tidbits
+  1: optional Image eventImage
+  2: required list<ExplainerContentItem> items
 }
 
 struct TimelineExplainerData {
@@ -52,7 +52,7 @@ struct TimelineExplainerData {
 
 struct ProfileExplainerData {
   1: optional Image headshot
-  2: required list<ExplainerContentItem> tidbits
+  2: required list<ExplainerContentItem> items
   3: optional Entity entity
 }
 
