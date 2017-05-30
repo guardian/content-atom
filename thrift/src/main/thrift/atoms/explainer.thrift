@@ -9,6 +9,7 @@ enum DisplayType {
 }
 
 struct ExplainerAtom {
+  1: optional string label
   /* the unique ID will be stored in the `atom` data*/
   2: required string title
   3: required string body
