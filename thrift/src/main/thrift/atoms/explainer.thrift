@@ -56,7 +56,7 @@ struct ExplainerContentItem {
 }
 
 struct ExplainerTimelineItem {
-  1: optional string title
+  1: required string title
   2: required DateTime date
-  2: required string body
+  3: optional string body
 }
