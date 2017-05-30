@@ -16,7 +16,7 @@ struct SideNoteAtom {
   1: optional string typeLabel
   3: optional list<string> tags
 
-  4: optional SideNoteType SideNoteType
+  4: required SideNoteType sidenoteType
   5: optional QAndA qa
   6: optional Guide guide
   7: optional Timeline timeline
