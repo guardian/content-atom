@@ -30,8 +30,8 @@ union ExplainerData {
 
 struct QAndAExplainerData {
   1: optional Image eventshot
-  2: required string body
-  3: optional string marginalia
+  2: required list<ExplainerContentItem> tidbits
+  3: optional string sidenote
 }
 
 struct GuideExplainerData {
