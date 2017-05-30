@@ -14,6 +14,7 @@ struct ExplainerAtom {
   1: optional string label
   /* the unique ID will be stored in the `atom` data*/
   2: required string title
+  /* hopefully we can get rid of this one later: */
   3: required string body
   4: required DisplayType displayType
   5: optional list<string> tags
