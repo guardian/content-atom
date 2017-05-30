@@ -14,7 +14,6 @@ enum SideNoteType {
 
 struct SideNoteAtom {
   1: optional string typeLabel
-  2: required string title
   3: optional list<string> tags
 
   4: optional SideNoteType SideNoteType
