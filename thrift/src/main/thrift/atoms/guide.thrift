@@ -3,6 +3,7 @@ namespace java com.gu.contentatom.thrift.atom.guide
 #@namespace scala com.gu.contentatom.thrift.atom.guide
 
 include "../shared.thrift"
+include "entity.thrift"
 
 struct GuideAtom {
   1: optional string typeLabel
@@ -14,4 +15,5 @@ struct GuideAtom {
 struct GuideItem {
   1: optional string title
   2: required string body
+  5: optional list<Entity> entities
 }
