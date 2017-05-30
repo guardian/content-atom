@@ -9,11 +9,11 @@ struct TimelineAtom {
   1: optional string typeLabel
   2: optional list<string> tags
   3: required list<TimelineItem> events
-  4: optional Entity entity
 }
 
 struct TimelineItem {
   1: required string title
   2: required DateTime date
   3: optional string body
+  4: optional list<Entity> entities
 }
