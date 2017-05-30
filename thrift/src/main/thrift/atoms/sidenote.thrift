@@ -14,13 +14,13 @@ enum SideNoteType {
 
 struct SideNoteAtom {
   1: optional string typeLabel
-  3: optional list<string> tags
+  2: optional list<string> tags
 
-  4: required SideNoteType sidenoteType
-  5: optional QAndA qa
-  6: optional Guide guide
-  7: optional Timeline timeline
-  8: optional Profile profile
+  3: required SideNoteType sidenoteType
+  4: optional QAndA qa
+  5: optional Guide guide
+  6: optional Timeline timeline
+  7: optional Profile profile
 }
 
 struct QAndA {
@@ -36,7 +36,7 @@ struct Guide {
 
 struct Timeline {
   1: required list<TimelineContentItem> events
-  3: optional Entity entity
+  2: optional Entity entity
 }
 
 struct Profile {
