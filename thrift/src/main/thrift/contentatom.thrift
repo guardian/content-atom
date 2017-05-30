@@ -8,6 +8,7 @@ include "atoms/cta.thrift"
 include "atoms/interactive.thrift"
 include "atoms/review.thrift"
 include "atoms/recipe.thrift"
+include "atoms/sidenote.thrift"
 include "atoms/storyquestions.thrift"
 include "shared.thrift"
 
@@ -22,7 +23,8 @@ enum AtomType {
   INTERACTIVE = 5,
   REVIEW = 6,
   RECIPE = 7,
-  STORYQUESTIONS = 8
+  STORYQUESTIONS = 8,
+  SIDENOTE = 9
 }
 
 union AtomData {
@@ -35,6 +37,7 @@ union AtomData {
   7: review.ReviewAtom review
   8: recipe.RecipeAtom recipe
   9: storyquestions.StoryQuestionsAtom storyquestions
+  9: sidenote.SideNoteAtom sidenote
 }
 
 struct ContentChangeDetails {
