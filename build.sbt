@@ -154,4 +154,3 @@ thriftSettings ++ inConfig(Thrift) {
     }
   )
 }
-

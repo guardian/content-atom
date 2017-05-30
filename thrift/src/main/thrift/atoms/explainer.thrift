@@ -11,6 +11,13 @@ enum DisplayType {
   CAROUSEL = 2
 }
 
+enum ExplainerType {
+  QA = 0,
+  GUIDE = 1,
+  TIMELINE = 2,
+  PROFILE = 3
+}
+
 struct ExplainerAtom {
   1: optional string label
   /* the unique ID will be stored in the `atom` data*/
@@ -19,14 +26,12 @@ struct ExplainerAtom {
   3: required string body
   4: required DisplayType displayType
   5: optional list<string> tags
-  6: optional ExplainerData explainerBody
-}
 
-union ExplainerData {
-  1: QAndAExplainerData qa
-  2: GuideExplainerData guide
-  3: TimelineExplainerData timeline
-  4: ProfileExplainerData profile
+  6: optional ExplainerType explainerType
+  7: optional QAndAExplainerData qa
+  8: optional GuideExplainerData guide
+  9: optional TimelineExplainerData timeline
+  10: optional ProfileExplainerData profile
 }
 
 struct QAndAExplainerData {
