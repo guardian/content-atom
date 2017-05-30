@@ -22,13 +22,13 @@ struct ExplainerAtom {
 }
 
 union ExplainerData {
-  1: QAExplainerData qa
+  1: QAndAExplainerData qa
   2: GuideExplainerData guide
   3: TimelineExplainerData timeline
   4: ProfileExplainerData profile
 }
 
-struct QAExplainerData {
+struct QAndAExplainerData {
   1: optional Image eventshot
   2: required string body
   3: optional string marginalia
