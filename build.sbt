@@ -65,12 +65,12 @@ val commonSettings = Seq(
       <url>https://github.com/tomrf1</url>
     </developer>
     <developer>
-      <id>tomrf1</id>
+      <id>annebyrne</id>
       <name>Anne Byrne</name>
       <url>https://github.com/annebyrne</url>
     </developer>
     <developer>
-      <id>tomrf1</id>
+      <id>regiskuckaertz</id>
       <name>Regis Kuckaertz</name>
       <url>https://github.com/regiskuckaertz</url>
     </developer>
