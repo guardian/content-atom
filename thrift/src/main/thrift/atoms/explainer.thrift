@@ -41,11 +41,13 @@ struct GuideExplainerData {
 
 struct TimelineExplainerData {
   1: required list<ExplainerTimelineItem> events
+  3: optional Entity entity
 }
 
 struct ProfileExplainerData {
   1: optional Image headshot
   2: required list<ExplainerContentItem> tidbits
+  3: optional Entity entity
 }
 
 struct ExplainerContentItem {
