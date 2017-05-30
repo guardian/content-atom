@@ -5,7 +5,7 @@ namespace java com.gu.contentatom.thrift.atom.qanda
 include "entity.thrift"
 include "../shared.thrift"
 
-struct QAndA {
+struct QAndAAtom {
   1: optional string typeLabel
   2: optional list<string> tags
   3: optional Image eventImage

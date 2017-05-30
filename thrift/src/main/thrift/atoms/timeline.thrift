@@ -5,7 +5,7 @@ namespace java com.gu.contentatom.thrift.atom.timeline
 include "entity.thrift"
 include "../shared.thrift"
 
-struct Timeline {
+struct TimelineAtom {
   1: optional string typeLabel
   2: optional list<string> tags
   3: required list<TimelineItem> events

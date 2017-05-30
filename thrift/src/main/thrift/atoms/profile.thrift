@@ -5,7 +5,7 @@ namespace java com.gu.contentatom.thrift.atom.profile
 include "entity.thrift"
 include "../shared.thrift"
 
-struct Profile {
+struct ProfileAtom {
   1: optional string typeLabel
   2: optional list<string> tags
   3: optional Image headshot
