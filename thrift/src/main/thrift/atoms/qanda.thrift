@@ -8,9 +8,10 @@ struct QAndAAtom {
   1: optional string typeLabel
   2: optional list<string> tags
   3: optional Image eventImage
-  4: required list<QAndAItem> items
-  // Ask Nathan: should we link to a StoryQuestions instead?
-  5: optional string sidenote
+  4: required QAndAItem item
+  5: optional Question question
+  // in the future, we may add an optional attribute for
+  // journalists to provide some aside
 }
 
 struct QAndAItem {
