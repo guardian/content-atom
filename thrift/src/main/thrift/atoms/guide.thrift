@@ -5,15 +5,15 @@ namespace java com.gu.contentatom.thrift.atom.guide
 include "../shared.thrift"
 include "entity.thrift"
 
-struct GuideAtom {
-  1: optional string typeLabel
-  2: optional list<string> tags
-  3: optional Image eventImage
-  4: required list<GuideItem> items
-}
-
 struct GuideItem {
   1: optional string title
   2: required string body
-  5: optional list<Entity> entities
+  3: optional list<entity.Entity> entities
+}
+
+struct GuideAtom {
+  1: optional string typeLabel
+  2: optional list<string> tags
+  3: optional shared.Image eventImage
+  4: required list<GuideItem> items
 }
