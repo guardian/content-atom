@@ -12,7 +12,6 @@ struct QAndAItem {
 
 struct QAndAAtom {
   1: optional string typeLabel
-  2: optional list<string> tags
   3: optional shared.Image eventImage
   4: required QAndAItem item
   5: optional storyquestions.Question question

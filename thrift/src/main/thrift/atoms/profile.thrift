@@ -12,7 +12,6 @@ struct ProfileItem {
 
 struct ProfileAtom {
   1: optional string typeLabel
-  2: optional list<string> tags
   3: optional shared.Image headshot
   4: required list<ProfileItem> items
   5: optional entity.Entity entity
