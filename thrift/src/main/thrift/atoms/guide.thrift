@@ -13,6 +13,6 @@ struct GuideItem {
 
 struct GuideAtom {
   1: optional string typeLabel
-  3: optional shared.Image eventImage
+  3: optional shared.Image guideImage
   4: required list<GuideItem> items
 }
