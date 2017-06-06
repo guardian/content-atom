@@ -5,10 +5,14 @@ include "atoms/quiz.thrift"
 include "atoms/media.thrift"
 include "atoms/explainer.thrift"
 include "atoms/cta.thrift"
+include "atoms/guide.thrift"
 include "atoms/interactive.thrift"
+include "atoms/profile.thrift"
+include "atoms/qanda.thrift"
 include "atoms/review.thrift"
 include "atoms/recipe.thrift"
 include "atoms/storyquestions.thrift"
+include "atoms/timeline.thrift"
 include "shared.thrift"
 
 typedef string ContentAtomID
@@ -22,7 +26,11 @@ enum AtomType {
   INTERACTIVE = 5,
   REVIEW = 6,
   RECIPE = 7,
-  STORYQUESTIONS = 8
+  STORYQUESTIONS = 8,
+  QANDA = 9,
+  PROFILE = 10,
+  GUIDE = 11,
+  TIMELINE = 12
 }
 
 union AtomData {
@@ -35,6 +43,10 @@ union AtomData {
   7: review.ReviewAtom review
   8: recipe.RecipeAtom recipe
   9: storyquestions.StoryQuestionsAtom storyquestions
+  10: qanda.QAndAAtom qa
+  11: guide.GuideAtom guide
+  12: profile.ProfileAtom profile
+  13: timeline.TimelineAtom timeline
 }
 
 struct ContentChangeDetails {

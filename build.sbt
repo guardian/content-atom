@@ -64,6 +64,16 @@ val commonSettings = Seq(
       <name>Tom Forbes</name>
       <url>https://github.com/tomrf1</url>
     </developer>
+    <developer>
+      <id>annebyrne</id>
+      <name>Anne Byrne</name>
+      <url>https://github.com/annebyrne</url>
+    </developer>
+    <developer>
+      <id>regiskuckaertz</id>
+      <name>Regis Kuckaertz</name>
+      <url>https://github.com/regiskuckaertz</url>
+    </developer>
   </developers>
   ),
   licenses := Seq("Apache V2" -> url("http://www.apache.org/licenses/LICENSE-2.0.html")),
@@ -84,7 +94,7 @@ val commonSettings = Seq(
     pushChanges
   ),
   libraryDependencies ++= Seq(
-    "com.gu" % "content-entity-thrift" % "0.1.3"
+    "com.gu" % "content-entity-thrift" % "0.1.5"
   )
 )
 
@@ -144,4 +154,3 @@ thriftSettings ++ inConfig(Thrift) {
     }
   )
 }
-
