@@ -43,7 +43,7 @@ union AtomData {
   7: review.ReviewAtom review
   8: recipe.RecipeAtom recipe
   9: storyquestions.StoryQuestionsAtom storyquestions
-  10: qanda.QAndAAtom qa
+  10: qanda.QAndAAtom qanda
   11: guide.GuideAtom guide
   12: profile.ProfileAtom profile
   13: timeline.TimelineAtom timeline
