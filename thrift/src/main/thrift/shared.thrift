@@ -164,6 +164,8 @@ struct ImageAssetDimensions {
   1: required i32 height
 
   2: required i32 width
+
+  3: optional string aspectRatio
 }
 
 struct ImageAsset {
@@ -182,4 +184,6 @@ struct Image {
   2: optional ImageAsset master
 
   3: required string mediaId
+
+  4: optional string source
 }
