@@ -183,3 +183,18 @@ struct Image {
 
   3: required string mediaId
 }
+
+/**
+ * An abstraction to represent email subscriber lists
+ */
+struct EmailProvider {
+  1: required string name = "exact-target"
+  2: required string listId
+}
+
+/**
+ * Reference to a third-party service used to send notifications
+ */
+struct NotificationProvider {
+  1: optional EmailProvider email
+}
