@@ -2,7 +2,7 @@ namespace * contentatom.storyquestions
 namespace java com.gu.contentatom.thrift.atom.storyquestions
 #@namespace scala com.gu.contentatom.thrift.atom.storyquestions
 
-/* 
+/*
  * Determines what the questions are linked to. This is fundamentally to work around the fact
  * that we do not have the concept of a story yet.
  */
@@ -24,8 +24,9 @@ struct QuestionSet {
 
 struct StoryQuestionsAtom {
   1: required string relatedStoryId
-  2: required RelatedStoryLinkType relatedStoryLinkType 
+  2: required RelatedStoryLinkType relatedStoryLinkType
   3: required string title
   4: optional list<QuestionSet> editorialQuestions
   5: optional list<QuestionSet> userQuestions
+  6: optional string listId
 }
