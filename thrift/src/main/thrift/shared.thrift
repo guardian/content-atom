@@ -195,6 +195,6 @@ struct EmailProvider {
 /**
  * Reference to a third-party service used to send notifications
  */
-struct NotificationProvider {
+struct NotificationProviders {
   1: optional EmailProvider email
 }
