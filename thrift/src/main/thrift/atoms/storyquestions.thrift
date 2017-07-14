@@ -28,5 +28,5 @@ struct StoryQuestionsAtom {
   3: required string title
   4: optional list<QuestionSet> editorialQuestions
   5: optional list<QuestionSet> userQuestions
-  6: optional string listId
+  6: optional string emailListId
 }
