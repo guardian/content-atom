@@ -31,5 +31,5 @@ struct StoryQuestionsAtom {
   3: required string title
   4: optional list<QuestionSet> editorialQuestions
   5: optional list<QuestionSet> userQuestions
-  6: optional shared.NotificationProviders providers
+  6: optional shared.NotificationProviders notifications
 }
