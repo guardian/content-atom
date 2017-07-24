@@ -6,7 +6,7 @@ include "entity.thrift"
 include "../shared.thrift"
 
 struct TimelineItem {
-  1: required string title
+  1: optional string title
   2: required shared.DateTime date
   3: optional string body
   4: optional list<entity.Entity> entities
