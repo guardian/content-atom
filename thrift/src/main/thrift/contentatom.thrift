@@ -75,6 +75,7 @@ struct Flags {
   2: optional bool legallySensitive
   3: optional bool blockAds
   4: optional bool sensitive
+  5: optional bool optimisedForWeb
 }
 
 struct Atom {
