@@ -32,5 +32,5 @@ struct StoryQuestionsAtom {
   4: optional list<QuestionSet> editorialQuestions
   5: optional list<QuestionSet> userQuestions
   6: optional shared.NotificationProviders notifications
-  7: optional DateTime closeDate
+  7: optional shared.DateTime closeDate
 }
