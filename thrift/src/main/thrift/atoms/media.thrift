@@ -27,10 +27,11 @@ enum Category {
   HOSTED = 4// commercial content supplied by advertiser
 }
 
+/** how a YouTube video can be watched **/
 enum PrivacyStatus {
-   PRIVATE = 0,
-   UNLISTED = 1,
-   PUBLIC = 2
+   PRIVATE = 0, // requires login, not returned by search
+   UNLISTED = 1, // requires knowledge of URL, not returned by search
+   PUBLIC = 2 // can be viewed and found by search
 }
 
 struct Asset {
@@ -48,13 +49,33 @@ struct PlutoData {
 }
 
 struct Metadata {
+  /**
+    * tags to be applied to the YouTube video
+    * https://developers.google.com/youtube/v3/docs/videos#snippet.tags[]
+    * **/
   1: optional list<string> tags
+
+  /**
+    * YouTube video category
+    * https://developers.google.com/youtube/v3/docs/videos#snippet.categoryId
+    * **/
   2: optional string categoryId
+
   3: optional string license
+
+  /** are comments enabled on the YouTube video **/
   4: optional bool commentsEnabled
+
+  /** the channel the YouTube video is in **/
   5: optional string channelId
+
+  /** how a YouTube video can be watched **/
   6: optional PrivacyStatus privacyStatus
+
+  /** when the PrivacyStatus will change to Private **/
   7: optional shared.DateTime expiryDate
+
+  /** where the master is in Pluto **/
   8: optional PlutoData pluto
 }
 
