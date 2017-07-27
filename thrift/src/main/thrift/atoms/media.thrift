@@ -82,18 +82,52 @@ struct Metadata {
 struct MediaAtom {
   2: required list<Asset> assets
   3: optional Version activeVersion
+
+  /** video title aka headline **/
   4: required string title
+
   5: required Category category
-  6: optional string plutoProjectId // deprecated in favour of `Metadata.pluto`
+
+  /** DEPRECATED in favour of `Metadata.pluto` **/
+  6: optional string plutoProjectId
+
   7: optional i64 duration // seconds
+
+  /** video source **/
   8: optional string source
+
+  /** DEPRECATED **/
   9: optional string posterUrl
+
+  /** video description aka standfirst **/
   10: optional string description
+
   11: optional Metadata metadata
+
+  /** poster image of the video on YouTube and in article **/
   12: optional shared.Image posterImage
+
+  /** trail text of the (optional) Composer page **/
   14: optional string trailText
+
+  /** byline of the (optional) Composer page **/
   15: optional list<string> byline
+
+  /** commissioning desk of the (optional) Composer page **/
   16: optional list<string> commissioningDesks
+
+  /** tags of the (optional) Composer page **/
   17: optional list<string> keywords
+
+  /** trail image of the (optional) Composer page **/
   18: optional shared.Image trailImage
+
+  /** optimised for web of the (optional) Composer page **/
+  19: optional bool optimisedForWeb
+
+  /** comments enabled of the (optional) Composer page **/
+  20: optional bool commentsEnabled
+
+  /** suppress related content of the (optional) Composer page **/
+  21: optional bool suppressRelatedContent
 }
