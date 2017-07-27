@@ -74,4 +74,5 @@ struct MediaAtom {
   15: optional list<string> byline
   16: optional list<string> commissioningDesks
   17: optional list<string> keywords
+  18: optional shared.Image trailImage
 }
