@@ -186,6 +186,11 @@ struct Image {
   3: required string mediaId
 
   4: optional string source
+
+  5: optional string suppliersReference
+
+  6: optional string photographer
+
 }
 
 /**
