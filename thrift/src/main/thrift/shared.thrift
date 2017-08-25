@@ -185,12 +185,14 @@ struct Image {
 
   3: required string mediaId
 
+  /** aka `credit` or `provider` in the IPTC metadata spec **/
   4: optional string source
 
-  5: optional string suppliersReference
+  /** fullname of the image photographer **/
+  5: optional string photographer
 
-  6: optional string photographer
-
+  /** description of image, used by screen readers **/
+  6: optional string altText
 }
 
 /**
