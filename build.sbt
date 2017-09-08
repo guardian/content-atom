@@ -132,7 +132,7 @@ lazy val scala = Project(id = "content-atom-model", base = file("scala"))
     },
     libraryDependencies ++= Seq(
       "org.apache.thrift" % "libthrift" % "0.9.3",
-      "com.twitter" %% "scrooge-core" % "4.12.0"
+      "com.twitter" %% "scrooge-core" % "4.16.0"
     )
   )
 
