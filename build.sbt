@@ -36,8 +36,8 @@ lazy val extractJarSettings = Defaults.coreDefaultSettings ++ Seq(
 
 val commonSettings = Seq(
   organization := "com.gu",
-  scalaVersion := "2.12.1",
-	crossScalaVersions := Seq("2.11.8", scalaVersion.value),
+  scalaVersion := "2.12.3",
+	crossScalaVersions := Seq("2.11.11", scalaVersion.value),
   scmInfo := Some(ScmInfo(url("https://github.com/guardian/content-atom"),
                           "scm:git:git@github.com:guardian/content-atom.git")),
 
