@@ -26,7 +26,7 @@ struct Answer {
 struct Question {
   1: required string questionId
   2: required string questionText
-  3: optional list<Answer> answers = empty
+  3: optional list<Answer> answers = []
 }
 
 struct QuestionSet {
