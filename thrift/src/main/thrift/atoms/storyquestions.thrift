@@ -13,9 +13,20 @@ enum RelatedStoryLinkType {
   STORY = 1,
 }
 
+enum AnswerType {
+  CONTENT = 0,
+  ATOM = 1
+}
+
+struct Answer {
+  1: required string answerId
+  2: required AnswerType answerType
+}
+
 struct Question {
   1: required string questionId
   2: required string questionText
+  3: optional list<Answer> answers = empty
 }
 
 struct QuestionSet {
