@@ -86,6 +86,7 @@ struct Atom {
   6: required ContentChangeDetails contentChangeDetails
   7: optional Flags flags
   8: optional string title
+  9: optional list<string> commissioningDesks = [] 
  }
 
 enum EventType {
