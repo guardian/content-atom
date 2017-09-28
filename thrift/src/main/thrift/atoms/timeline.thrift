@@ -15,4 +15,5 @@ struct TimelineItem {
 struct TimelineAtom {
   1: optional string typeLabel
   3: required list<TimelineItem> events
+  4: optional string description
 }
