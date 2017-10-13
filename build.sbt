@@ -130,8 +130,9 @@ lazy val scala = Project(id = "content-atom-model", base = file("scala"))
     scroogeThriftSources in Compile ++= {
       (scroogeUnpackDeps in Compile).value.flatMap { dir => (dir ** "*.thrift").get }
     },
+    /** DO NOT CHANGE THE VERSION OF LIBTHRIFT */
     libraryDependencies ++= Seq(
-      "org.apache.thrift" % "libthrift" % "0.9.3",
+      "org.apache.thrift" % "libthrift" % "0.9.1",
       "com.twitter" %% "scrooge-core" % "4.18.0"
     )
   )
