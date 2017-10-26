@@ -68,6 +68,9 @@ struct ContentChangeDetails {
 
   /** the atom taken down event */
   5: optional shared.ChangeRecord takenDown
+
+  /** scheduled launch date */
+  6: optional shared.ChangeRecord scheduledLaunch
 }
 
 struct Flags {
@@ -86,7 +89,7 @@ struct Atom {
   6: required ContentChangeDetails contentChangeDetails
   7: optional Flags flags
   8: optional string title
-  9: optional list<string> commissioningDesks = [] 
+  9: optional list<string> commissioningDesks = []
  }
 
 enum EventType {
