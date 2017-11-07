@@ -176,6 +176,8 @@ struct ImageAsset {
   4: optional i64 size
 
   5: optional string aspectRatio
+
+  6: optional string credit
 }
 
 struct Image {
