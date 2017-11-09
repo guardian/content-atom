@@ -10,6 +10,7 @@ struct TimelineItem {
   2: required shared.DateTime date
   3: optional string body
   4: optional list<entity.Entity> entities
+  5: optional string dateFormat
 }
 
 struct TimelineAtom {
