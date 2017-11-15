@@ -71,6 +71,9 @@ struct ContentChangeDetails {
 
   /** scheduled launch date */
   6: optional shared.ChangeRecord scheduledLaunch
+
+  /*** embargo date **/
+  7: optional shared.ChangeRecord embargo
 }
 
 struct Flags {
