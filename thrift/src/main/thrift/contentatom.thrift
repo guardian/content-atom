@@ -75,8 +75,11 @@ struct ContentChangeDetails {
   /** embargo date */
   7: optional shared.ChangeRecord embargo
 
+//this has been deprecated due to incorrect naming and should not be used
+//8: optional shared.ChangeRecord expiryDate
+
   /** expiry date */
-  8: optional shared.ChangeRecord expiryDate
+  9: optional shared.ChangeRecord expiry
 }
 
 struct Flags {
