@@ -178,6 +178,14 @@ struct ImageAsset {
   5: optional string aspectRatio
 
   6: optional string credit
+  
+  7: optional string copyright
+  
+  8: optional string source
+  
+  9: optional string photographer
+  
+  10: optional string suppliersReference
 }
 
 struct Image {
