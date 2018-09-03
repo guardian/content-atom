@@ -14,6 +14,7 @@ include "atoms/recipe.thrift"
 include "atoms/storyquestions.thrift"
 include "atoms/timeline.thrift"
 include "atoms/commonsdivision.thrift"
+include "atoms/chart.thrift"
 include "shared.thrift"
 
 typedef string ContentAtomID
@@ -32,7 +33,8 @@ enum AtomType {
   PROFILE = 10,
   GUIDE = 11,
   TIMELINE = 12,
-  COMMONSDIVISION = 13
+  COMMONSDIVISION = 13,
+  CHART = 14
 }
 
 union AtomData {
@@ -50,6 +52,7 @@ union AtomData {
   12: profile.ProfileAtom profile
   13: timeline.TimelineAtom timeline
   14: commonsdivision.CommonsDivision commonsDivision
+  15: chart.ChartAtom chart
 }
 
 struct ContentChangeDetails {
