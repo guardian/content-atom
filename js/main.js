@@ -8,3 +8,4 @@ exports.reviewTypes  = require('../generated/gen-nodejs/review_types');
 exports.recipeTypes  = require('../generated/gen-nodejs/recipe_types');
 exports.shared = require('../generated/gen-nodejs/shared_types');
 exports.storyQuestions = require('../generated/gen-nodejs/storyquestions_types');
+exports.chartAtom = require('../generated/gen-nodejs/chartatom_types');
