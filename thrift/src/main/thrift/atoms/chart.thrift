@@ -3,23 +3,6 @@ namespace java com.gu.contentatom.thrift.atom.chart
 
 enum ChartType {
     BAR = 0
-    BARGROUP = 1
-    BARGROUPSTACK = 2
-    BARGROUPSTACK100 = 3
-    BAR100 = 4
-    BROKENBAR100 = 5
-    COL = 6
-    COLGROUP = 7
-    COLGROUPSTACK = 8
-    COLGROUPSTACK100 = 9
-    LINEDISCRETE = 10
-    LINECONTINUE = 11
-    PLOTDOT = 12
-    PLOTSCATTER = 13
-    ONBARDIFFARROW = 14
-    ONBARDIFFDOTS = 15
-    ONBARTICKS = 16
-    SLOPEGRAPH = 17
 }
 
 struct Range {
@@ -48,7 +31,8 @@ enum RowType {
 struct TabularData {
     1: required RowType rowHeadersType
     2: required list<string> columnHeaders
-    3: required map<string, list<double>> rows
+    3: required list<string> rowHeaders
+    4: required list<list<double>> rowData
 }
 
 struct SeriesColour {
