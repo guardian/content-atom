@@ -45,19 +45,10 @@ enum RowType {
     DATE = 1
 }
 
-struct RowHeader {
-    1: required RowType rowType
-    2: required string value
-}
-
-struct Row {
-    1: required RowHeader rowHeader
-    2: required list<double> values
-}
-
 struct TabularData {
-    1: required list<string> columnHeaders
-    2: required list<Row> rows
+    1: required RowType rowHeadersType
+    2: required list<string> columnHeaders
+    3: required map<string, list<double>> rows
 }
 
 struct SeriesColour {
