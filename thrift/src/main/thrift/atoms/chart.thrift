@@ -1,5 +1,6 @@
 namespace * contentatom.chart
 namespace java com.gu.contentatom.thrift.atom.chart
+#@namespace scala com.gu.contentatom.thrift.atom.chart
 
 enum ChartType {
     BAR = 0
