@@ -34,7 +34,8 @@ enum AtomType {
   GUIDE = 11,
   TIMELINE = 12,
   COMMONSDIVISION = 13,
-  CHART = 14
+  CHART = 14,
+  AUDIO = 15
 }
 
 union AtomData {
@@ -53,6 +54,7 @@ union AtomData {
   13: timeline.TimelineAtom timeline
   14: commonsdivision.CommonsDivision commonsDivision
   15: chart.ChartAtom chart
+  16: audio.AudioAtom audio
 }
 
 struct ContentChangeDetails {
