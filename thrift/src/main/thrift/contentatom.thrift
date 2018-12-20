@@ -15,6 +15,7 @@ include "atoms/storyquestions.thrift"
 include "atoms/timeline.thrift"
 include "atoms/commonsdivision.thrift"
 include "atoms/chart.thrift"
+include "atoms/audio.thrift"
 include "shared.thrift"
 
 typedef string ContentAtomID
