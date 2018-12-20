@@ -4,6 +4,14 @@ namespace java com.gu.contentatom.thrift.atom.audio
 
 include "../shared.thrift"
 
+struct OffPlatform {
+  1: optional string applePodcastsUrl
+
+  2: optional string googlePodcastsUrl
+
+  3: optional string spotifyUrl
+}
+
 struct AudioAtom {
   // Most probably the title of the podcast, but can be a generic
   // term if necessary
@@ -21,4 +29,7 @@ struct AudioAtom {
 
   // ID of the article page to link to
   5: required string contentId
+
+  // Off-platform links
+  6: optional OffPlatform offPlatformLinks
 }
