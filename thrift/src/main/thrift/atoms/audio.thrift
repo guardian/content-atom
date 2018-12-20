@@ -16,5 +16,9 @@ struct AudioAtom {
   // MP3 audio track. We don't support other formats
   3: required string trackUrl
 
+  // Length in seconds of the audio track
   4: required i32 duration
+
+  // ID of the article page to link to
+  5: required string contentId
 }
