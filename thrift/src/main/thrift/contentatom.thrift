@@ -15,6 +15,7 @@ include "atoms/storyquestions.thrift"
 include "atoms/timeline.thrift"
 include "atoms/commonsdivision.thrift"
 include "atoms/chart.thrift"
+include "atoms/audio.thrift"
 include "shared.thrift"
 
 typedef string ContentAtomID
@@ -34,7 +35,8 @@ enum AtomType {
   GUIDE = 11,
   TIMELINE = 12,
   COMMONSDIVISION = 13,
-  CHART = 14
+  CHART = 14,
+  AUDIO = 15
 }
 
 union AtomData {
@@ -53,6 +55,7 @@ union AtomData {
   13: timeline.TimelineAtom timeline
   14: commonsdivision.CommonsDivision commonsDivision
   15: chart.ChartAtom chart
+  16: audio.AudioAtom audio
 }
 
 struct ContentChangeDetails {
