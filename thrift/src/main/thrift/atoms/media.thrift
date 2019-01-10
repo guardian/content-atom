@@ -131,7 +131,4 @@ struct MediaAtom {
 
   /** suppress related content of the (optional) Composer page **/
   21: optional bool suppressRelatedContent
-
-  /** alt text for Composer page trail image**/
-  22: optional string altText
 }
