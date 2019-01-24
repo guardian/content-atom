@@ -25,7 +25,8 @@ enum Category {
   FEATURE = 2,
   NEWS = 3,
   HOSTED = 4, // commercial content supplied by advertiser
-  PAID = 5 // commercial content paid for by third-party
+  PAID = 5, // commercial content paid for by third-party
+  LIVESTREAM = 6
 }
 
 /** how a YouTube video can be watched **/
