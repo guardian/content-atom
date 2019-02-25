@@ -50,6 +50,11 @@ struct PlutoData {
   3: optional string masterId
 }
 
+struct YoutubeData {
+  1: required string title
+  2: optional string description
+}
+
 struct Metadata {
   /**
     * tags to be applied to the YouTube video
@@ -79,6 +84,8 @@ struct Metadata {
 
   /** where the master is in Pluto **/
   8: optional PlutoData pluto
+
+  9: optional YoutubeData youtube
 }
 
 struct MediaAtom {
