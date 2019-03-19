@@ -131,9 +131,14 @@ lazy val scala = Project(id = "content-atom-model", base = file("scala"))
       (scroogeUnpackDeps in Compile).value.flatMap { dir => (dir ** "*.thrift").get }
     },
     libraryDependencies ++= Seq(
-      "org.apache.thrift" % "libthrift" % "0.9.3",
+      "org.apache.thrift" % "libthrift" % "0.9.1",
       "com.twitter" %% "scrooge-core" % "4.18.0"
-    )
+    ),
+    
+    /**
+      * WARNING - upgrading the following will break clients
+      */
+    dependencyOverrides += "org.apache.thrift" % "libthrift" % "0.9.1"
   )
 
 // settings for the thrift plugin, both default and custom
