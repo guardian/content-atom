@@ -1,5 +1,3 @@
-import com.github.bigtoast.sbtthrift.ThriftPlugin.{thrift => thriftExecutable, _}
-
 import sbtrelease._
 
 import ReleaseStateTransformations._
@@ -25,13 +23,10 @@ lazy val extractJarSettings = Defaults.coreDefaultSettings ++ Seq(
 
   // task to extract jar files
   extractJars := { jarsToExtract.value foreach { jar =>
-      streams.value.log.info("Extracting " + jar.getName + " to " + extractJarsTarget.value)
+      // streams.value.log.info("Extracting " + jar.getName + " to " + extractJarsTarget.value)
       IO.unzip(jar, extractJarsTarget.value)
     }
-  },
-
-  // make it run before compile
-  compile in Compile := sbt.inc.Analysis.Empty
+  }
 )
 
 val commonSettings = Seq(
@@ -131,31 +126,26 @@ lazy val scala = Project(id = "content-atom-model", base = file("scala"))
       (scroogeUnpackDeps in Compile).value.flatMap { dir => (dir ** "*.thrift").get }
     },
     libraryDependencies ++= Seq(
-      "org.apache.thrift" % "libthrift" % "0.9.1",
-      "com.twitter" %% "scrooge-core" % "4.18.0"
-    ),
-    
-    /**
-      * WARNING - upgrading the following will break clients
-      */
-    dependencyOverrides += "org.apache.thrift" % "libthrift" % "0.9.1"
+      "org.apache.thrift" % "libthrift" % "0.10.0",
+      "com.twitter" %% "scrooge-core" % "19.3.0"
+    )
   )
 
 // settings for the thrift plugin, both default and custom
-thriftSettings ++ inConfig(Thrift) {
+// thriftSettings ++ inConfig(Thrift) {
 
   // add the node option to the js generator, as that is the style of
   // code that we want to generate
 
-  Seq(
-    thriftSourceDir := file("thrift/src/main/thrift"),
-    thriftJsEnabled := true,
-    thriftJavaEnabled := false,
-    thriftJsOptions := Seq("node"),
-    thriftOutputDir := { baseDirectory.value / "generated" } ,
-    thriftJsOutputDir := { thriftOutputDir.value },
-    thriftExecutable += {
-      " -I " + extractJarsTarget.value.toString
-    }
-  )
-}
+//   Seq(
+//     thriftSourceDir := file("thrift/src/main/thrift"),
+//     thriftJsEnabled := true,
+//     thriftJavaEnabled := false,
+//     thriftJsOptions := Seq("node"),
+//     thriftOutputDir := { baseDirectory.value / "generated" } ,
+//     thriftJsOutputDir := { thriftOutputDir.value },
+//     thriftExecutable += {
+//       " -I " + extractJarsTarget.value.toString
+//     }
+//   )
+// }
