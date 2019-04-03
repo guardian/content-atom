@@ -1,12 +1,6 @@
 import sbtrelease._
-
 import ReleaseStateTransformations._
-
-import com.twitter.scrooge.ScroogeSBT
-
 import Classpaths.managedJars
-
-Sonatype.sonatypeSettings
 
 lazy val jarsToExtract = TaskKey[Seq[File]]("jars-to-extract", "JAR files to be extracted")
 
@@ -73,6 +67,7 @@ val commonSettings = Seq(
   ),
   licenses := Seq("Apache V2" -> url("http://www.apache.org/licenses/LICENSE-2.0.html")),
 
+  publishTo := sonatypePublishTo.value,
   releasePublishArtifactsAction := PgpKeys.publishSigned.value,
   releaseProcess := Seq[ReleaseStep](
     checkSnapshotDependencies,
@@ -89,12 +84,12 @@ val commonSettings = Seq(
     pushChanges
   ),
   libraryDependencies ++= Seq(
-    "com.gu" % "content-entity-thrift" % "1.0.0"
+    "com.gu" % "content-entity-thrift" % "2.0.0"
   )
 )
 
 lazy val root = Project(id = "root", base = file("."))
-  .aggregate(thrift, scala)
+  .aggregate(thrift, scalaClasses)
   .settings(commonSettings)
   .settings(extractJarSettings: _*)
   .settings(publishArtifact := false)
@@ -112,15 +107,16 @@ lazy val thrift = Project(id = "content-atom-model-thrift", base = file("thrift"
     unmanagedResourceDirectories in Compile += { baseDirectory.value / "src/main/thrift" }
   )
 
-lazy val scala = Project(id = "content-atom-model", base = file("scala"))
+lazy val scalaClasses = Project(id = "content-atom-model", base = file("scala"))
   .settings(commonSettings)
   .settings(
     description := "Scala library built from Content-atom thrift definition",
     scroogeThriftSourceFolder in Compile := baseDirectory.value / "../thrift/src/main/thrift",
+    scroogeThriftOutputFolder in Compile := sourceManaged.value,
+    scroogePublishThrift in Compile := true,
+    managedSourceDirectories in Compile += (scroogeThriftOutputFolder in Compile).value,
+    scroogeThriftDependencies in Compile ++= Seq("content-entity-thrift"),
     includeFilter in unmanagedResources := "*.thrift",
-    scroogeThriftDependencies in Compile ++= Seq(
-      "content-entity-thrift"
-    ),
     // See: https://github.com/twitter/scrooge/issues/199
     scroogeThriftSources in Compile ++= {
       (scroogeUnpackDeps in Compile).value.flatMap { dir => (dir ** "*.thrift").get }
@@ -130,22 +126,3 @@ lazy val scala = Project(id = "content-atom-model", base = file("scala"))
       "com.twitter" %% "scrooge-core" % "19.3.0"
     )
   )
-
-// settings for the thrift plugin, both default and custom
-// thriftSettings ++ inConfig(Thrift) {
-
-  // add the node option to the js generator, as that is the style of
-  // code that we want to generate
-
-//   Seq(
-//     thriftSourceDir := file("thrift/src/main/thrift"),
-//     thriftJsEnabled := true,
-//     thriftJavaEnabled := false,
-//     thriftJsOptions := Seq("node"),
-//     thriftOutputDir := { baseDirectory.value / "generated" } ,
-//     thriftJsOutputDir := { thriftOutputDir.value },
-//     thriftExecutable += {
-//       " -I " + extractJarsTarget.value.toString
-//     }
-//   )
-// }
