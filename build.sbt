@@ -116,13 +116,10 @@ lazy val scalaClasses = Project(id = "content-atom-model", base = file("scala"))
     scroogeThriftOutputFolder in Compile := sourceManaged.value,
     managedSourceDirectories in Compile += (scroogeThriftOutputFolder in Compile).value,
     scroogeThriftDependencies in Compile ++= Seq("content-entity-thrift"),
-    includeFilter in unmanagedResources := "*.thrift",
-    // See: https://github.com/twitter/scrooge/issues/199
-    scroogeThriftSources in Compile ++= {
-      (scroogeUnpackDeps in Compile).value.flatMap { dir => (dir ** "*.thrift").get }
-    },
     libraryDependencies ++= Seq(
       "org.apache.thrift" % "libthrift" % "0.10.0",
       "com.twitter" %% "scrooge-core" % "19.3.0"
-    )
+    ),
+    // Include the Thrift file in the published jar
+    scroogePublishThrift in Compile := true
   )
