@@ -83,9 +83,6 @@ val commonSettings = Seq(
     commitNextVersion,
     releaseStepCommand("sonatypeReleaseAll"),
     pushChanges
-  ),
-  libraryDependencies ++= Seq(
-    "com.gu" % "content-entity-thrift" % "2.0.0"
   )
 )
 
@@ -99,7 +96,6 @@ lazy val thrift = Project(id = "content-atom-model-thrift", base = file("thrift"
   .settings(commonSettings)
   .disablePlugins(ScroogeSBT)
   .settings(
-    resolvers += Resolver.sonatypeRepo("releases"),
     description := "Content atom model Thrift files",
     crossPaths := false,
     publishArtifact in packageDoc := false,
@@ -116,7 +112,10 @@ lazy val scalaClasses = Project(id = "content-atom-model", base = file("scala"))
     scroogeThriftOutputFolder in Compile := sourceManaged.value,
     managedSourceDirectories in Compile += (scroogeThriftOutputFolder in Compile).value,
     scroogeThriftDependencies in Compile ++= Seq("content-entity-thrift"),
+    resolvers += Resolver.sonatypeRepo("public"),
     libraryDependencies ++= Seq(
+      "com.gu" % "content-entity-thrift" % "2.0.1",
+      "com.gu" %% "content-entity-model" % "2.0.1",
       "org.apache.thrift" % "libthrift" % "0.10.0",
       "com.twitter" %% "scrooge-core" % "19.3.0"
     ),
