@@ -110,7 +110,6 @@ lazy val scalaClasses = Project(id = "content-atom-model", base = file("scala"))
     description := "Scala library built from Content-atom thrift definition",
     scroogeThriftSourceFolder in Compile := baseDirectory.value / "../thrift/src/main/thrift",
     scroogeThriftOutputFolder in Compile := sourceManaged.value,
-    managedSourceDirectories in Compile += (scroogeThriftOutputFolder in Compile).value,
     scroogeThriftDependencies in Compile ++= Seq("content-entity-thrift"),
     resolvers += Resolver.sonatypeRepo("public"),
     libraryDependencies ++= Seq(
