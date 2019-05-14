@@ -2,7 +2,7 @@ namespace * contentatom.audio
 namespace java com.gu.contentatom.thrift.atom.audio
 #@namespace scala com.gu.contentatom.thrift.atom.audio
 
-include "../shared.thrift"
+include "shared.thrift"
 
 struct OffPlatform {
   1: optional string applePodcastsUrl

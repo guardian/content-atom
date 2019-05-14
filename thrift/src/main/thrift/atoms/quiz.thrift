@@ -6,7 +6,7 @@ namespace java com.gu.contentatom.thrift.atom.quiz
 # Thrift.
 #@namespace scala com.gu.contentatom.thrift.atom.quiz
 
-include "../shared.thrift"
+include "shared.thrift"
 
 struct ResultGroup {
   1: required string title

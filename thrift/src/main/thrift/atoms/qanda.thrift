@@ -2,7 +2,7 @@ namespace * contentatom.qanda
 namespace java com.gu.contentatom.thrift.atom.qanda
 #@namespace scala com.gu.contentatom.thrift.atom.qanda
 
-include "../shared.thrift"
+include "shared.thrift"
 include "storyquestions.thrift"
 
 struct QAndAItem {

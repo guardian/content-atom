@@ -23,7 +23,7 @@ If you want to use any of the types in `shared.thrift`, include the
 file and reference the types with the prefix `shared.`
 
 ```
-include "../shared.thrift"
+include "shared.thrift"
 ...
 struct Example {
    1: required shared.OpaqueJson data
