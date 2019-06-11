@@ -2,7 +2,7 @@ namespace * contentatom.storyquestions
 namespace java com.gu.contentatom.thrift.atom.storyquestions
 #@namespace scala com.gu.contentatom.thrift.atom.storyquestions
 
-include "../shared.thrift"
+include "shared.thrift"
 
 /*
  * Determines what the questions are linked to. This is fundamentally to work around the fact

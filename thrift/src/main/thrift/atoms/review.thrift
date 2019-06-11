@@ -1,7 +1,7 @@
 include "entities/game.thrift"
 include "entities/restaurant.thrift"
 include "entities/film.thrift"
-include "../shared.thrift"
+include "shared.thrift"
 
 namespace * contentatom.review
 namespace java com.gu.contentatom.thrift.atom.review

@@ -11,10 +11,6 @@ languages.
 In order for the scala code generated from the thrift definitions to be packaged correctly a scala namespace needs to be included. For example for the chart atom this would be:
 `#@namespace scala com.gu.contentatom.thrift.atom.chart`
 
-## Thrift
-
-You need to have [french-thrift 0.9.3](https://github.com/guardian/french-thrift) installed locally.
-
 ## How to release
 
 ```

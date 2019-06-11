@@ -3,7 +3,7 @@ namespace java com.gu.contentatom.thrift.atom.timeline
 #@namespace scala com.gu.contentatom.thrift.atom.timeline
 
 include "entity.thrift"
-include "../shared.thrift"
+include "shared.thrift"
 
 struct TimelineItem {
   1: required string title

@@ -3,7 +3,7 @@ namespace java com.gu.contentatom.thrift.atom.profile
 #@namespace scala com.gu.contentatom.thrift.atom.profile
 
 include "entity.thrift"
-include "../shared.thrift"
+include "shared.thrift"
 
 struct ProfileItem {
   1: optional string title

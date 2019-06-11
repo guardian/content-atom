@@ -2,7 +2,7 @@ namespace * contentatom.commonsdivision
 namespace java com.gu.contentatom.thrift.atom.commonsdivision
 #@namespace scala com.gu.contentatom.thrift.atom.commonsdivision
 
-include "../shared.thrift"
+include "shared.thrift"
 
 struct MP {
   1: required string name

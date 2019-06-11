@@ -2,7 +2,7 @@ namespace * contentatom.guide
 namespace java com.gu.contentatom.thrift.atom.guide
 #@namespace scala com.gu.contentatom.thrift.atom.guide
 
-include "../shared.thrift"
+include "shared.thrift"
 include "entity.thrift"
 
 struct GuideItem {

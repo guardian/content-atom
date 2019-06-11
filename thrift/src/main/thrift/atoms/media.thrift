@@ -2,7 +2,7 @@ namespace * contentatom.media
 namespace java com.gu.contentatom.thrift.atom.media
 #@namespace scala com.gu.contentatom.thrift.atom.media
 
-include "../shared.thrift"
+include "shared.thrift"
 
 typedef i64 Version
 

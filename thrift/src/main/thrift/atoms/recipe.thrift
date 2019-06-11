@@ -2,7 +2,7 @@ namespace * contentatom.recipe
 namespace java com.gu.contentatom.thrift.atom.recipe
 #@namespace scala com.gu.contentatom.thrift.atom.recipe
 
-include "../shared.thrift"
+include "shared.thrift"
 
 struct Tags {
   1: required list<string> cuisine
