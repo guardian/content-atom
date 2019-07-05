@@ -111,7 +111,7 @@ struct Atom {
   9: optional list<string> commissioningDesks = []
 
   /** tag IDs for the people who authored that atom */
-  10: optional list<Profile.Profile> authors = []
+  10: optional list<Profile.Profile> authors
  }
 
 enum EventType {
