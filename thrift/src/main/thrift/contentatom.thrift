@@ -17,6 +17,7 @@ include "atoms/commonsdivision.thrift"
 include "atoms/chart.thrift"
 include "atoms/audio.thrift"
 include "atoms/shared.thrift"
+include "Profile.thrift"
 
 typedef string ContentAtomID
 
