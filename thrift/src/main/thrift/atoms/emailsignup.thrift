@@ -8,10 +8,14 @@ struct EmailSignUpAtom {
   // email list name
   1: required string emailListName
 
-  // Text to be displayed to users to describe what they are signing up for
-  // e.g. "Sign up to the daily Business Today email"
-  2: required string text
+  // Main text to be displayed to user asking for sign up action,
+  // e.g. "Sign up to get emials for this series, Guns and lies in America"
+  2: required string formTitle
+
+  // Additional text describing what will happen on sign up,
+  // e.g. "You'll get an email each time we release a part of our investigation."
+  3: required string formDescription
 
   // The exact target ID for the email list
-  3: required string emailListId
+  4: required string emailListId
 }
