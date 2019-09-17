@@ -25,8 +25,8 @@ lazy val extractJarSettings = Defaults.coreDefaultSettings ++ Seq(
 
 val commonSettings = Seq(
   organization := "com.gu",
-  scalaVersion := "2.12.8",
-	crossScalaVersions := Seq("2.11.12", scalaVersion.value),
+  scalaVersion := "2.13.0",
+	crossScalaVersions := Seq("2.11.12", "2.12.10", scalaVersion.value),
   scmInfo := Some(ScmInfo(url("https://github.com/guardian/content-atom"),
                           "scm:git:git@github.com:guardian/content-atom.git")),
 
@@ -81,7 +81,7 @@ val commonSettings = Seq(
     publishArtifacts,
     setNextVersion,
     commitNextVersion,
-    releaseStepCommand("sonatypeReleaseAll"),
+    releaseStepCommand("sonatypeReleaseBundle"),
     pushChanges
   )
 )
@@ -113,10 +113,10 @@ lazy val scalaClasses = Project(id = "content-atom-model", base = file("scala"))
     scroogeThriftDependencies in Compile ++= Seq("content-entity-thrift"),
     resolvers += Resolver.sonatypeRepo("public"),
     libraryDependencies ++= Seq(
-      "com.gu" % "content-entity-thrift" % "2.0.1",
-      "com.gu" %% "content-entity-model" % "2.0.1",
-      "org.apache.thrift" % "libthrift" % "0.10.0",
-      "com.twitter" %% "scrooge-core" % "19.3.0"
+      "com.gu" % "content-entity-thrift" % "2.0.2",
+      "com.gu" %% "content-entity-model" % "2.0.2",
+      "org.apache.thrift" % "libthrift" % "0.12.0",
+      "com.twitter" %% "scrooge-core" % "19.9.0"
     ),
     // Include the Thrift file in the published jar
     scroogePublishThrift in Compile := true
