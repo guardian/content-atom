@@ -81,7 +81,7 @@ val commonSettings = Seq(
     publishArtifacts,
     setNextVersion,
     commitNextVersion,
-    releaseStepCommand("sonatypeReleaseBundle"),
+    releaseStepCommand("sonatypeRelease"),
     pushChanges
   )
 )
