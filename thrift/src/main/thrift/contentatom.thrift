@@ -11,7 +11,6 @@ include "atoms/profile.thrift"
 include "atoms/qanda.thrift"
 include "atoms/review.thrift"
 include "atoms/recipe.thrift"
-include "atoms/storyquestions.thrift"
 include "atoms/timeline.thrift"
 include "atoms/commonsdivision.thrift"
 include "atoms/chart.thrift"
@@ -29,7 +28,7 @@ enum AtomType {
   INTERACTIVE = 5,
   REVIEW = 6,
   RECIPE = 7,
-  STORYQUESTIONS = 8,
+  // STORYQUESTIONS = 8, DEPRECATED
   QANDA = 9,
   PROFILE = 10,
   GUIDE = 11,
@@ -48,7 +47,7 @@ union AtomData {
   6: interactive.InteractiveAtom interactive
   7: review.ReviewAtom review
   8: recipe.RecipeAtom recipe
-  9: storyquestions.StoryQuestionsAtom storyquestions
+  // 9: storyquestions.StoryQuestionsAtom storyquestions DEPRECATED
   10: qanda.QAndAAtom qanda
   11: guide.GuideAtom guide
   12: profile.ProfileAtom profile
