@@ -5,7 +5,7 @@ namespace java com.gu.contentatom.thrift.atom.emailsignup
 include "shared.thrift"
 
 struct EmailSignUpAtom {
-  // email list name
+  // Email list name for selection in atom-workshop
   1: required string emailListName
 
   // Main text to be displayed to user asking for sign up action,
@@ -14,8 +14,8 @@ struct EmailSignUpAtom {
 
   // Additional text describing what will happen on sign up,
   // e.g. "You'll get an email each time we release a part of our investigation."
-  3: required string formDescription
+  3: optional string formDescription
 
-  // The exact target ID for the email list
+  // Identifier for the email list
   4: required string emailListId
 }
