@@ -33,26 +33,4 @@ $ sbt '+publishLocal'
 ```
 
 ### JavaScript
-
-The JS library should be published to npmjs, see:
-
-https://www.npmjs.com/package/publish
-
-and `npm help publish`.
-
-If you're unfamiliar with publishing on npm the following commands can be useful:
-
-* `npm whoami` - to find out your username (if you have created one)
-* `npm adduser` - to create a user
-* `npm owner ls` - to check the owners of content-atom.
-* `npm owner add <username>` - to add a new owner allowing them to publish content-atom.
-
-But in summary:
-
-1. Bump the version number in `package.json`
-
-2. Make sure you have built the latest version of the JS library with `sbt compile`
-
-3. If you've added another type, be sure to add it to `js/main.js`
-
-4. Then, `npm publish` in the same directory as `package.json`
+Formerly this repo contained a js package that was published to NPM, this is no longer being used: https://www.npmjs.com/package/guardian-contentatom. The module should be deprecated 
