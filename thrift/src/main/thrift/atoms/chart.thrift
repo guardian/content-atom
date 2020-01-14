@@ -5,7 +5,7 @@ namespace java com.gu.contentatom.thrift.atom.chart
 enum ChartType {
     BAR = 0,
     LINEDISCRETE = 1,
-    LINECONTINUE = 2
+    LINE = 2
 }
 
 struct Range {
