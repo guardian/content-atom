@@ -3,7 +3,9 @@ namespace java com.gu.contentatom.thrift.atom.chart
 #@namespace scala com.gu.contentatom.thrift.atom.chart
 
 enum ChartType {
-    BAR = 0
+    BAR = 0,
+    LINEDISCRETE = 1,
+    LINE = 2
 }
 
 struct Range {
