@@ -15,7 +15,4 @@ struct EmailSignUpAtom {
   // Additional text describing what will happen on sign up,
   // e.g. "You'll get an email each time we release a part of our investigation."
   3: optional string formDescription
-
-  // Identifier for the email list
-  4: required string emailListId
 }
