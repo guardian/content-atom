@@ -1,27 +1,5 @@
 import sbtrelease._
 import ReleaseStateTransformations._
-import Classpaths.managedJars
-
-lazy val jarsToExtract = TaskKey[Seq[File]]("jars-to-extract", "JAR files to be extracted")
-
-lazy val extractJarsTarget = SettingKey[File]("extract-jars-target", "Target directory for extracted JAR files")
-
-lazy val extractJars = TaskKey[Unit]("extract-jars", "Extracts JAR files")
-
-lazy val extractJarSettings = Defaults.coreDefaultSettings ++ Seq(
-  // collect jar files to be extracted from managed jar dependencies
-  jarsToExtract := { managedJars(Compile, classpathTypes.value, update.value) map { _.data } filter { _.getName.startsWith("content-entity-thrift") } },
-
-  // define the target directory
-  extractJarsTarget := { baseDirectory(_ / "thrift/target/extracted").value },
-
-  // task to extract jar files
-  extractJars := { jarsToExtract.value foreach { jar =>
-      // streams.value.log.info("Extracting " + jar.getName + " to " + extractJarsTarget.value)
-      IO.unzip(jar, extractJarsTarget.value)
-    }
-  }
-)
 
 val commonSettings = Seq(
   organization := "com.gu",
@@ -89,7 +67,6 @@ val commonSettings = Seq(
 lazy val root = Project(id = "root", base = file("."))
   .aggregate(thrift, scalaClasses)
   .settings(commonSettings)
-  .settings(extractJarSettings: _*)
   .settings(publishArtifact := false)
 
 lazy val thrift = Project(id = "content-atom-model-thrift", base = file("thrift"))
