@@ -1,5 +1,6 @@
 namespace java  com.gu.contentatom.thrift
 #@namespace scala com.gu.contentatom.thrift
+#@namespace typescript _at_guardian.content_atom_model
 
 /** date times are reprsented as i64 - epoch millis */
 typedef i64 DateTime

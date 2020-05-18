@@ -1,6 +1,7 @@
 namespace * contentatom.media
 namespace java com.gu.contentatom.thrift.atom.media
 #@namespace scala com.gu.contentatom.thrift.atom.media
+#@namespace typescript _at_guardian.content_atom_model.media
 
 include "shared.thrift"
 

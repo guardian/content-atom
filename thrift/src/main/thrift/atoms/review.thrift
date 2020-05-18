@@ -6,6 +6,7 @@ include "shared.thrift"
 namespace * contentatom.review
 namespace java com.gu.contentatom.thrift.atom.review
 #@namespace scala com.gu.contentatom.thrift.atom.review
+#@namespace typescript _at_guardian.content_atom_model.review
 
 enum ReviewType {
   RESTAURANT = 1

@@ -5,6 +5,7 @@ namespace java com.gu.contentatom.thrift.atom.quiz
 # this so they have allowed this special format which appears as a comment to
 # Thrift.
 #@namespace scala com.gu.contentatom.thrift.atom.quiz
+#@namespace typescript _at_guardian.content_atom_model.quiz
 
 include "shared.thrift"
 

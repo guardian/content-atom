@@ -93,8 +93,31 @@ lazy val scalaClasses = Project(id = "content-atom-model", base = file("scala"))
       "com.gu" % "content-entity-thrift" % "2.0.2",
       "com.gu" %% "content-entity-model" % "2.0.2",
       "org.apache.thrift" % "libthrift" % "0.12.0",
-      "com.twitter" %% "scrooge-core" % "20.4.0"
+      "com.twitter" %% "scrooge-core" % "20.4.1"
     ),
     // Include the Thrift file in the published jar
     scroogePublishThrift in Compile := true
+  )
+
+lazy val typescriptClasses = (project in file("ts"))
+  .enablePlugins(ScroogeTypescriptGen)
+  .settings(commonSettings)
+  .settings(
+    name := "content-atom-typescript",
+    scroogeTypescriptNpmPackageName := "@guardian/content-atom-model",
+    Compile / scroogeDefaultJavaNamespace := scroogeTypescriptNpmPackageName.value,
+    Test / scroogeDefaultJavaNamespace := scroogeTypescriptNpmPackageName.value,
+    description := "Typescript library built from Content-atom thrift definition",
+
+    scroogeLanguages in Compile := Seq("typescript"),
+    scroogeThriftSourceFolder in Compile := baseDirectory.value / "../thrift/src/main/thrift",
+
+    scroogeTypescriptPackageLicense := "Apache-2.0",
+    scroogeThriftDependencies in Compile ++= Seq("content-entity-thrift"),
+    scroogeTypescriptPackageMapping := Map(
+      "content-entity-thrift" -> "@guardian/content-entity-model"
+    ),
+    libraryDependencies ++= Seq(
+      "com.gu" % "content-entity-thrift" % "2.0.2"
+    ),
   )

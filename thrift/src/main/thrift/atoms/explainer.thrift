@@ -1,6 +1,7 @@
 namespace * contentatom.explainer
 namespace java com.gu.contentatom.thrift.atom.explainer
 #@namespace scala com.gu.contentatom.thrift.atom.explainer
+#@namespace typescript _at_guardian.content_atom_model.explainer
 
 enum DisplayType {
   FLAT = 0,

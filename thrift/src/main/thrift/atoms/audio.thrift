@@ -1,6 +1,7 @@
 namespace * contentatom.audio
 namespace java com.gu.contentatom.thrift.atom.audio
 #@namespace scala com.gu.contentatom.thrift.atom.audio
+#@namespace typescript _at_guardian.content_atom_model.audio
 
 include "shared.thrift"
 

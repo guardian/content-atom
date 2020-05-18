@@ -1,6 +1,7 @@
 namespace * contentatom.qanda
 namespace java com.gu.contentatom.thrift.atom.qanda
 #@namespace scala com.gu.contentatom.thrift.atom.qanda
+#@namespace typescript _at_guardian.content_atom_model.qanda
 
 include "shared.thrift"
 
