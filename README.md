@@ -13,13 +13,14 @@ In order for the scala code generated from the thrift definitions to be packaged
 
 Ensure you have the following installed on your machine:
  - `tsc` (`brew install typescript`)
- - `thrift` (`brew install thrift`)
  - `npm` (not sure! there are so many ways to install it)
-
+ 
 Ensure you have an NPM account, part of the [@guardian](https://www.npmjs.com/org/guardian) org with a [configured token](https://docs.npmjs.com/creating-and-viewing-authentication-tokens)
 
-```
-$ sbt 'release cross'
+```sbtshell
+release // will release the scala / thrift projects
+project typescriptClasses
+release 1.0.0 // you have to specify the version again
 ```
 
 This will release 3 artifacts to Maven Central:
