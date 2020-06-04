@@ -1,6 +1,7 @@
 namespace * contentatom.recipe
 namespace java com.gu.contentatom.thrift.atom.recipe
 #@namespace scala com.gu.contentatom.thrift.atom.recipe
+#@namespace typescript _at_guardian.content_atom_model.recipe
 
 include "shared.thrift"
 

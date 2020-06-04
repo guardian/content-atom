@@ -1,6 +1,7 @@
 namespace * contentatom.timeline
 namespace java com.gu.contentatom.thrift.atom.timeline
 #@namespace scala com.gu.contentatom.thrift.atom.timeline
+#@namespace typescript _at_guardian.content_atom_model.timeline
 
 include "entity.thrift"
 include "shared.thrift"

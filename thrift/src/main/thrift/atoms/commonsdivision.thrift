@@ -1,6 +1,7 @@
 namespace * contentatom.commonsdivision
 namespace java com.gu.contentatom.thrift.atom.commonsdivision
 #@namespace scala com.gu.contentatom.thrift.atom.commonsdivision
+#@namespace typescript _at_guardian.content_atom_model.commonsdivision
 
 include "shared.thrift"
 

@@ -1,32 +1,10 @@
 import sbtrelease._
 import ReleaseStateTransformations._
-import Classpaths.managedJars
-
-lazy val jarsToExtract = TaskKey[Seq[File]]("jars-to-extract", "JAR files to be extracted")
-
-lazy val extractJarsTarget = SettingKey[File]("extract-jars-target", "Target directory for extracted JAR files")
-
-lazy val extractJars = TaskKey[Unit]("extract-jars", "Extracts JAR files")
-
-lazy val extractJarSettings = Defaults.coreDefaultSettings ++ Seq(
-  // collect jar files to be extracted from managed jar dependencies
-  jarsToExtract := { managedJars(Compile, classpathTypes.value, update.value) map { _.data } filter { _.getName.startsWith("content-entity-thrift") } },
-
-  // define the target directory
-  extractJarsTarget := { baseDirectory(_ / "thrift/target/extracted").value },
-
-  // task to extract jar files
-  extractJars := { jarsToExtract.value foreach { jar =>
-      // streams.value.log.info("Extracting " + jar.getName + " to " + extractJarsTarget.value)
-      IO.unzip(jar, extractJarsTarget.value)
-    }
-  }
-)
 
 val commonSettings = Seq(
   organization := "com.gu",
-  scalaVersion := "2.13.0",
-	crossScalaVersions := Seq("2.11.12", "2.12.10", scalaVersion.value),
+  scalaVersion := "2.13.2",
+	crossScalaVersions := Seq("2.11.12", "2.12.11", scalaVersion.value),
   scmInfo := Some(ScmInfo(url("https://github.com/guardian/content-atom"),
                           "scm:git:git@github.com:guardian/content-atom.git")),
 
@@ -89,7 +67,6 @@ val commonSettings = Seq(
 lazy val root = Project(id = "root", base = file("."))
   .aggregate(thrift, scalaClasses)
   .settings(commonSettings)
-  .settings(extractJarSettings: _*)
   .settings(publishArtifact := false)
 
 lazy val thrift = Project(id = "content-atom-model-thrift", base = file("thrift"))
@@ -113,11 +90,34 @@ lazy val scalaClasses = Project(id = "content-atom-model", base = file("scala"))
     scroogeThriftDependencies in Compile ++= Seq("content-entity-thrift"),
     resolvers += Resolver.sonatypeRepo("public"),
     libraryDependencies ++= Seq(
-      "com.gu" % "content-entity-thrift" % "2.0.2",
-      "com.gu" %% "content-entity-model" % "2.0.2",
+      "com.gu" % "content-entity-thrift" % "2.0.5",
+      "com.gu" %% "content-entity-model" % "2.0.5",
       "org.apache.thrift" % "libthrift" % "0.12.0",
-      "com.twitter" %% "scrooge-core" % "19.9.0"
+      "com.twitter" %% "scrooge-core" % "20.4.1"
     ),
     // Include the Thrift file in the published jar
     scroogePublishThrift in Compile := true
+  )
+
+lazy val typescriptClasses = (project in file("ts"))
+  .enablePlugins(ScroogeTypescriptGen)
+  .settings(commonSettings)
+  .settings(
+    name := "content-atom-typescript",
+    scroogeTypescriptNpmPackageName := "@guardian/content-atom-model",
+    Compile / scroogeDefaultJavaNamespace := scroogeTypescriptNpmPackageName.value,
+    Test / scroogeDefaultJavaNamespace := scroogeTypescriptNpmPackageName.value,
+    description := "Typescript library built from Content-atom thrift definition",
+
+    scroogeLanguages in Compile := Seq("typescript"),
+    scroogeThriftSourceFolder in Compile := baseDirectory.value / "../thrift/src/main/thrift",
+
+    scroogeTypescriptPackageLicense := "Apache-2.0",
+    scroogeThriftDependencies in Compile ++= Seq("content-entity-thrift"),
+    scroogeTypescriptPackageMapping := Map(
+      "content-entity-thrift" -> "@guardian/content-entity-model"
+    ),
+    libraryDependencies ++= Seq(
+      "com.gu" % "content-entity-thrift" % "2.0.5"
+    ),
   )

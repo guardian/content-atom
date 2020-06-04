@@ -1,6 +1,7 @@
 namespace * contentatom.interactive
 namespace java com.gu.contentatom.thrift.atom.interactive
 #@namespace scala com.gu.contentatom.thrift.atom.interactive
+#@namespace typescript _at_guardian.content_atom_model.interactive
 
 struct InteractiveAtom {
   /* the unique ID will be stored in the `atom` data*/

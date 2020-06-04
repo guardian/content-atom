@@ -1,6 +1,7 @@
 namespace * contentatom.guide
 namespace java com.gu.contentatom.thrift.atom.guide
 #@namespace scala com.gu.contentatom.thrift.atom.guide
+#@namespace typescript _at_guardian.content_atom_model.guide
 
 include "shared.thrift"
 include "entity.thrift"

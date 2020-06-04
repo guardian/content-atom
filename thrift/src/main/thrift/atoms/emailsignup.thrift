@@ -1,6 +1,7 @@
 namespace * contentatom.emailsignup
 namespace java com.gu.contentatom.thrift.atom.emailsignup
 #@namespace scala com.gu.contentatom.thrift.atom.emailsignup
+#@namespace typescript _at_guardian.content_atom_model.emailsignup
 
 include "shared.thrift"
 

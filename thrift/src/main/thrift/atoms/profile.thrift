@@ -1,6 +1,7 @@
 namespace * contentatom.profile
 namespace java com.gu.contentatom.thrift.atom.profile
 #@namespace scala com.gu.contentatom.thrift.atom.profile
+#@namespace typescript _at_guardian.content_atom_model.profile
 
 include "entity.thrift"
 include "shared.thrift"
