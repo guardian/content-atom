@@ -81,6 +81,8 @@ lazy val thrift = Project(id = "content-atom-model-thrift", base = file("thrift"
     unmanagedResourceDirectories in Compile += { baseDirectory.value / "src/main/thrift" }
   )
 
+val contentEntityVersion = "2.0.6"
+
 lazy val scalaClasses = Project(id = "content-atom-model", base = file("scala"))
   .settings(commonSettings)
   .settings(
@@ -90,8 +92,8 @@ lazy val scalaClasses = Project(id = "content-atom-model", base = file("scala"))
     scroogeThriftDependencies in Compile ++= Seq("content-entity-thrift"),
     resolvers += Resolver.sonatypeRepo("public"),
     libraryDependencies ++= Seq(
-      "com.gu" % "content-entity-thrift" % "2.0.5",
-      "com.gu" %% "content-entity-model" % "2.0.5",
+      "com.gu" % "content-entity-thrift" % contentEntityVersion,
+      "com.gu" %% "content-entity-model" % contentEntityVersion,
       "org.apache.thrift" % "libthrift" % "0.12.0",
       "com.twitter" %% "scrooge-core" % "20.4.1"
     ),
@@ -118,6 +120,6 @@ lazy val typescriptClasses = (project in file("ts"))
       "content-entity-thrift" -> "@guardian/content-entity-model"
     ),
     libraryDependencies ++= Seq(
-      "com.gu" % "content-entity-thrift" % "2.0.5"
+      "com.gu" % "content-entity-thrift" % contentEntityVersion
     ),
   )
