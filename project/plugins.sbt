@@ -9,4 +9,4 @@ addSbtPlugin("org.xerial.sbt" % "sbt-sonatype" % "3.7")
 addSbtPlugin("com.twitter" % "scrooge-sbt-plugin" % "20.4.1")
 
 resolvers += "Guardian Platform Bintray" at "https://dl.bintray.com/guardian/platforms"
-addSbtPlugin("com.gu" % "sbt-scrooge-typescript" % "1.2.0")
+addSbtPlugin("com.gu" % "sbt-scrooge-typescript" % "1.2.3")
