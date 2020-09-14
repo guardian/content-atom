@@ -17,5 +17,5 @@ struct InteractiveAtom {
   a placeholder field is required to for the iframe to be displayed at the top of the AMP.
   See here: https://amp.dev/documentation/components/amp-iframe/ for more information.
    */
-  7: optional string placeholder
+  7: optional string placeholderUrl
 }
