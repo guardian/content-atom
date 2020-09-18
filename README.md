@@ -11,29 +11,33 @@ In order for the scala code generated from the thrift definitions to be packaged
 
 ## How to release
 
-Ensure you have the following installed on your machine:
- - `tsc` (`brew install typescript`)
- - `npm` (not sure! there are so many ways to install it)
- 
-Ensure you have an NPM account, part of the [@guardian](https://www.npmjs.com/org/guardian) org with a [configured token](https://docs.npmjs.com/creating-and-viewing-authentication-tokens)
-
+Prior to releasing, you will need to ensure that:
+ - `tsc` is installed on your machine (e.g. `brew install typescript`)
+ - `npm` is installed on your machine
+ - you have an NPM account which is part of the [@guardian](https://www.npmjs.com/org/guardian) org
+ - you have configured an NPM [access token](https://docs.npmjs.com/creating-and-viewing-authentication-tokens) to 
+   publish to @guardian; a convenient way to set this up is to execute `npm login` locally and follow the prompts;
+   this will create/append to an `~/.npmrc` file with the sufficient config
+ - you have the followed the [guide](https://docs.google.com/document/d/1rNXjoZDqZMsQblOVXPAIIOMWuwUKe3KzTCttuqS7AcY/edit)
+   for publishing to Maven and Sonatype
+   
+To release to Maven Central:
 ```sbtshell
-release // will release the scala / thrift projects
+release cross
+```
+This will release 3 artifacts:
+- `content-atom-model-thrift-$version.jar` contains only the Thrift files
+- `content-atom-model_2.13-$version.jar` contains the Thrift files and Scrooge-generated Scala 2.13 classes
+- `content-atom-model_2.12-$version.jar` contains the Thrift files and Scrooge-generated Scala 2.12 classes
+- `content-atom-model_2.11-$version.jar` contains the Thrift files and Scrooge-generated Scala 2.11 classes
+
+To release to NPM:
+```sbtshell
 project typescriptClasses
-releaseNpm 1.0.0 // you have to specify the version again
+releaseNpm <version released to Maven>
 ```
 
-This will release 3 artifacts to Maven Central:
-
-* `content-atom-model-thrift-$version.jar` contains only the Thrift files
-* `content-atom-model_2.13-$version.jar` contains the Thrift files and Scrooge-generated Scala 2.13 classes
-* `content-atom-model_2.12-$version.jar` contains the Thrift files and Scrooge-generated Scala 2.12 classes
-* `content-atom-model_2.11-$version.jar` contains the Thrift files and Scrooge-generated Scala 2.11 classes
-
-You will need a PGP key and Sonatype credentials. See [here](https://www.scala-sbt.org/1.x/docs/Using-Sonatype.html) and [here](https://docs.google.com/document/d/1M_MiE8qntdDn97QIRnIUci5wdVQ8_defCqpeAwoKY8g/edit#heading=h.r815791vmxv5) for some helpful guides.
-
 To cross release locally use
-
 ```
 $ sbt '+publishLocal'
 ```
