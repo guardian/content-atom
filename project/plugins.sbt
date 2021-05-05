@@ -6,4 +6,4 @@ addSbtPlugin("org.xerial.sbt" % "sbt-sonatype" % "3.7")
 
 addSbtPlugin("com.twitter" % "scrooge-sbt-plugin" % "20.4.1")
 
-addSbtPlugin("com.gu" % "sbt-scrooge-typescript" % "1.2.7-RC1")
+addSbtPlugin("com.gu" % "sbt-scrooge-typescript" % "1.3.0")
