@@ -4,6 +4,6 @@ addSbtPlugin("com.jsuereth" % "sbt-pgp" % "2.0.0")
 
 addSbtPlugin("org.xerial.sbt" % "sbt-sonatype" % "3.7")
 
-addSbtPlugin("com.twitter" % "scrooge-sbt-plugin" % "20.4.1")
+addSbtPlugin("com.twitter" % "scrooge-sbt-plugin" % "21.12.0")
 
-addSbtPlugin("com.gu" % "sbt-scrooge-typescript" % "1.3.0")
+addSbtPlugin("com.gu" % "sbt-scrooge-typescript" % "1.5.0-RC1")

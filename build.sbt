@@ -1,10 +1,15 @@
 import sbtrelease._
 import ReleaseStateTransformations._
 
+val contentEntityVersion = "2.1.0-RC2"
+val scroogeVersion = "21.12.0"
+val thriftVersion = "0.15.0"
+
 val commonSettings = Seq(
   organization := "com.gu",
   scalaVersion := "2.13.2",
-	crossScalaVersions := Seq("2.11.12", "2.12.11", scalaVersion.value),
+  // Scrooge 21.3.0 dropped support for scala < 2.13, so our builds similarly only support Scala 2.12+
+	crossScalaVersions := Seq("2.12.11", scalaVersion.value),
   scmInfo := Some(ScmInfo(url("https://github.com/guardian/content-atom"),
                           "scm:git:git@github.com:guardian/content-atom.git")),
 
@@ -41,6 +46,11 @@ val commonSettings = Seq(
       <name>Regis Kuckaertz</name>
       <url>https://github.com/regiskuckaertz</url>
     </developer>
+    <developer>
+      <id>justinpinner</id>
+      <name>Justin Pinner</name>
+      <url>https://github.com/justinpinner</url>
+    </developer>
   </developers>
   ),
   licenses := Seq("Apache V2" -> url("http://www.apache.org/licenses/LICENSE-2.0.html")),
@@ -75,30 +85,28 @@ lazy val thrift = Project(id = "content-atom-model-thrift", base = file("thrift"
   .settings(
     description := "Content atom model Thrift files",
     crossPaths := false,
-    publishArtifact in packageDoc := false,
-    publishArtifact in packageSrc := false,
-    includeFilter in unmanagedResources := "*.thrift",
-    unmanagedResourceDirectories in Compile += { baseDirectory.value / "src/main/thrift" }
+    packageDoc / publishArtifact := false,
+    packageSrc / publishArtifact := false,
+    unmanagedResources / includeFilter := "*.thrift",
+    Compile / unmanagedResourceDirectories += { baseDirectory.value / "src/main/thrift" }
   )
-
-val contentEntityVersion = "2.0.6"
 
 lazy val scalaClasses = Project(id = "content-atom-model", base = file("scala"))
   .settings(commonSettings)
   .settings(
     description := "Scala library built from Content-atom thrift definition",
-    scroogeThriftSourceFolder in Compile := baseDirectory.value / "../thrift/src/main/thrift",
-    scroogeThriftOutputFolder in Compile := sourceManaged.value,
-    scroogeThriftDependencies in Compile ++= Seq("content-entity-thrift"),
+    Compile / scroogeThriftSourceFolder := baseDirectory.value / "../thrift/src/main/thrift",
+    Compile / scroogeThriftOutputFolder := sourceManaged.value,
+    Compile / scroogeThriftDependencies ++= Seq("content-entity-thrift"),
     resolvers += Resolver.sonatypeRepo("public"),
     libraryDependencies ++= Seq(
       "com.gu" % "content-entity-thrift" % contentEntityVersion,
       "com.gu" %% "content-entity-model" % contentEntityVersion,
-      "org.apache.thrift" % "libthrift" % "0.12.0",
-      "com.twitter" %% "scrooge-core" % "20.4.1"
+      "org.apache.thrift" % "libthrift" % thriftVersion,
+      "com.twitter" %% "scrooge-core" % scroogeVersion
     ),
     // Include the Thrift file in the published jar
-    scroogePublishThrift in Compile := true
+    Compile / scroogePublishThrift := true
   )
 
 lazy val typescriptClasses = (project in file("ts"))
@@ -111,11 +119,11 @@ lazy val typescriptClasses = (project in file("ts"))
     Test / scroogeDefaultJavaNamespace := scroogeTypescriptNpmPackageName.value,
     description := "Typescript library built from Content-atom thrift definition",
 
-    scroogeLanguages in Compile := Seq("typescript"),
-    scroogeThriftSourceFolder in Compile := baseDirectory.value / "../thrift/src/main/thrift",
+    Compile / scroogeLanguages := Seq("typescript"),
+    Compile / scroogeThriftSourceFolder := baseDirectory.value / "../thrift/src/main/thrift",
 
     scroogeTypescriptPackageLicense := "Apache-2.0",
-    scroogeThriftDependencies in Compile ++= Seq("content-entity-thrift"),
+    Compile / scroogeThriftDependencies ++= Seq("content-entity-thrift"),
     scroogeTypescriptPackageMapping := Map(
       "content-entity-thrift" -> "@guardian/content-entity-model"
     ),
