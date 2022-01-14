@@ -25,17 +25,31 @@ To release to Maven Central:
 ```sbtshell
 release cross
 ```
-This will release 3 artifacts:
+This will release these artifacts:
 - `content-atom-model-thrift-$version.jar` contains only the Thrift files
 - `content-atom-model_2.13-$version.jar` contains the Thrift files and Scrooge-generated Scala 2.13 classes
 - `content-atom-model_2.12-$version.jar` contains the Thrift files and Scrooge-generated Scala 2.12 classes
-- `content-atom-model_2.11-$version.jar` contains the Thrift files and Scrooge-generated Scala 2.11 classes
+
+Note that support for scala 2.11 ended with scrooge 21.3, so we won't output
+- `content-atom-model_2.11-$version.jar`
+any more.
 
 To release to NPM:
 ```sbtshell
 project typescriptClasses
 releaseNpm <version released to Maven>
 ```
+
+If you need to make a candidate release build available for testing elsewhere, start sbt with
+```
+$ sbt -DRELEASE_TYPE=candidate
+```
+then follow the above release steps as usual. You'll be prompted that this is a CANDIDATE release
+and for a version number that looks like 1.2.3-RCn where n is the candidate build number
+you'll specify. This isn't really tracked so make sure it's a new build by checking Maven and NPM first.
+
+When releasing to NPM for typescript, you'll have to manually type the version number to match what you 
+released to Sonatype/Maven for Scala.
 
 To cross release locally use
 ```

@@ -18,19 +18,15 @@ struct Time {
 }
 
 struct Serves {
-  /* note that `from` (field 2) has been renamed `minimum` due to `from` becoming a reserved word in scrooge */
-  /* and that `to` (field 3) is now `maximum` to keep it semantically in line with `from` becoming `minimum` */
   1: required string type
-  2: required i16 minimum
-  3: required i16 maximum
+  2: required i16 from
+  3: required i16 to
   4: optional string unit
 }
 
 struct Range {
-  /* note that `from` (field 1) has been renamed `minimum` due to `from` becoming a reserved word in scrooge */
-  /* and that `to` (field 2) is now `maximum` to keep it semantically in line with `from` becoming `minimum` */
-  1: required i16 minimum
-  2: required i16 maximum
+  1: required i16 from
+  2: required i16 to
 }
 
 struct Ingredient {
