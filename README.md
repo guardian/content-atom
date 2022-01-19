@@ -40,16 +40,17 @@ project typescriptClasses
 releaseNpm <version released to Maven>
 ```
 
-If you need to make a candidate release build available for testing elsewhere, start sbt with
+If you need to make a beta release build available for testing elsewhere, start sbt with
 ```
-$ sbt -DRELEASE_TYPE=candidate
+$ sbt -DRELEASE_TYPE=beta
 ```
-then follow the above release steps as usual. You'll be prompted that this is a CANDIDATE release
-and for a version number that looks like 1.2.3-RCn where n is the candidate build number
+then follow the above release steps as usual. You'll be prompted that this is a BETA release
+and for a version number that looks like 1.2.3-beta.n where n is the beta version number
 you'll specify. This isn't really tracked so make sure it's a new build by checking Maven and NPM first.
 
-When releasing to NPM for typescript, you'll have to manually type the version number to match what you 
-released to Sonatype/Maven for Scala.
+When releasing the typescript classes to NPM, you'll manually type the version number to match what you 
+released to Sonatype/Maven for Scala. Our `sbt-scrooge-typescript` sbt plugin takes care of applying a `--tag beta` 
+to the NPM release when the `RELEASE_TYPE=beta` system property is available.
 
 To cross release locally use
 ```

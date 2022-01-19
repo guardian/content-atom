@@ -1,16 +1,16 @@
 import sbtrelease._
 import ReleaseStateTransformations._
 
-val contentEntityVersion = "2.1.0-RC2"
-val scroogeVersion = "21.12.0"
+val contentEntityVersion = "2.2.0-beta.4"
+val scroogeVersion = "22.1.0"   // remember to also update plugins.sbt if the scrooge version changes
 val thriftVersion = "0.15.0"
 
-val candidateReleaseType = "candidate"
-val candidateReleaseSuffix = "-RC1"
+val betaReleaseType = "beta"
+val betaReleaseSuffix = "-beta.0"
 
 lazy val versionSettingsMaybe = {
   sys.props.get("RELEASE_TYPE").map {
-    case v if v == candidateReleaseType => candidateReleaseSuffix
+    case v if v == betaReleaseType => betaReleaseSuffix
   }.map { suffix =>
     releaseVersion := {
       ver => Version(ver).map(_.withoutQualifier.string).map(_.concat(suffix)).getOrElse(versionFormatError(ver))
@@ -66,7 +66,7 @@ lazy val mavenSettings = Seq(
 
 lazy val checkReleaseType: ReleaseStep = ReleaseStep({ st: State =>
   val releaseType = sys.props.get("RELEASE_TYPE").map {
-    case v if v == candidateReleaseType => candidateReleaseType.toUpperCase
+    case v if v == betaReleaseType => betaReleaseType.toUpperCase
   }.getOrElse("PRODUCTION")
 
   SimpleReader.readLine(s"This will be a $releaseType release. Continue? [y/N]: ") match {
@@ -99,18 +99,18 @@ lazy val releaseProcessSteps: Seq[ReleaseStep] = {
   )
 
   /*
-  Release Candidate assemblies can be published to Sonatype and Maven.
+  Beta assemblies can be published to Sonatype and Maven.
 
-  To make this work, start SBT with the candidate RELEASE_TYPE variable set;
-    sbt -DRELEASE_TYPE=candidate
+  To make this work, start SBT with the beta RELEASE_TYPE variable set;
+    sbt -DRELEASE_TYPE=beta
 
   This gets around the "problem" of sbt-sonatype assuming that a -SNAPSHOT build should not be delivered to Maven.
 
-  In this mode, the version number will be presented as e.g. 1.2.3-RC1, but the git tagging and version-updating
+  In this mode, the version number will be presented as e.g. 1.2.3-beta.n, but the git tagging and version-updating
   steps are not triggered, so it's up to the developer to keep track of what was released and manipulate subsequent
   release and next versions appropriately.
   */
-  val candidateSteps: Seq[ReleaseStep] = Seq(
+  val betaSteps: Seq[ReleaseStep] = Seq(
     setReleaseVersion,
     releaseStepCommandAndRemaining("+publishSigned"),
     releaseStepCommand("sonatypeBundleRelease"),
@@ -118,7 +118,7 @@ lazy val releaseProcessSteps: Seq[ReleaseStep] = {
   )
 
   commonSteps ++ (sys.props.get("RELEASE_TYPE") match {
-    case Some(v) if v == candidateReleaseType => candidateSteps // this enables a release candidate build to sonatype and Maven
+    case Some(v) if v == betaReleaseType => betaSteps // this enables a release candidate build to sonatype and Maven
     case None => prodSteps  // our normal deploy route
   })
 
@@ -175,9 +175,19 @@ lazy val scalaClasses = Project(id = "content-atom-model", base = file("scala"))
     Compile / scroogePublishThrift := true
   )
 
+lazy val npmBetaReleaseTagMaybe =
+  sys.props.get("RELEASE_TYPE").map {
+    case v if v == betaReleaseType =>
+      // Why hard-code "beta" instead of using the value of the variable? That's to ensure it's always presented as
+      // --tag beta to the npm release process provided by the ScroogeTypescriptGen plugin regardless of how we identify
+      // a beta release here
+      scroogeTypescriptPublishTag := "beta"
+  }.toSeq
+
 lazy val typescriptClasses = (project in file("ts"))
   .enablePlugins(ScroogeTypescriptGen)
   .settings(commonSettings)
+  .settings(npmBetaReleaseTagMaybe)
   .settings(
     name := "content-atom-typescript",
     scroogeTypescriptNpmPackageName := "@guardian/content-atom-model",
