@@ -140,4 +140,7 @@ struct MediaAtom {
 
   /** suppress related content of the (optional) Composer page **/
   21: optional bool suppressRelatedContent
+
+  /** optional override (of poster image) for the YouTube thumbnail **/
+  22: optional shared.Image youtubeOverrideImage
 }
