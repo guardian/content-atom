@@ -9,6 +9,7 @@ struct Tags {
   1: required list<string> cuisine
   2: required list<string> category
   3: required list<string> celebration
+  // 4: required list<string> dietary
 }
 
 struct Time {
@@ -31,11 +32,14 @@ struct Range {
 struct Ingredient {
   1: required string item
   2: optional string comment
-  3: required Range quantityRange
-  4: optional string unit
-  5: optional string dietaryInfo
-  6: optional Range caloryRange
+  // 3: optional double quantity
+  4: optional Range quantityRange
+  5: optional string unit
+  6: optional string dietaryInfo
+  7: optional Range caloryRange
+  8: required Range quantityRange
 }
+
 
 struct IngredientsList {
   1: optional string title
@@ -51,13 +55,14 @@ struct RecipeStep {
 
 struct RecipeAtom {
   1: required string title
-  2: required string description
-  3: required list<string> authorOrAuthors
-  4: required list<shared.Image> leadImageOrImages
-  5: required Tags tags
-  6: required Time time
-  7: required Serves serves
-  8: required list<IngredientsList> ingredientsLists
-  9: required list<RecipeStep> steps
-  10: optional string canonicalArticleId
+  2: required Tags tags
+  3: required Time time
+  4: optional Serves serves
+  5: required list<IngredientsList> ingredientsLists
+  // 6: required list<string> steps
+  7: required list<string> credits
+  8: required list<shared.Image> images
+  9: optional string sourceArticleId
+  10: required string description
+  11: required list<RecipeStep> steps
 }
