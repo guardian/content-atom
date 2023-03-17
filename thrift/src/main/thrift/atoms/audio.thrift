@@ -11,6 +11,8 @@ struct OffPlatform {
   2: optional string googlePodcastsUrl
 
   3: optional string spotifyUrl
+
+  4: optional string pocketCastsUrl
 }
 
 struct AudioAtom {
