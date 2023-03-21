@@ -1,6 +1,6 @@
 {
   "name": "guardian-contentatom",
-  "version": "2.4.62",
+  "version": "3.4.3",
   "description": "Content Atom JavaScript, automatically generated from the Thrift definition.",
   "repository": "https://github.com/guardian/content-atom",
   "main": "js/main.js",
