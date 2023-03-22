@@ -11,6 +11,12 @@ In order for the scala code generated from the thrift definitions to be packaged
 
 ## How to release
 
+### A note on version numbers
+
+The version field in `package.json` should be kept in sync with the version in `version.sbt`
+
+### Prerequisites
+
 Prior to releasing, you will need to ensure that:
  - `tsc` is installed on your machine (e.g. `brew install typescript`)
  - `npm` is installed on your machine
@@ -20,6 +26,8 @@ Prior to releasing, you will need to ensure that:
    this will create/append to an `~/.npmrc` file with the sufficient config
  - you have the followed the [guide](https://docs.google.com/document/d/1rNXjoZDqZMsQblOVXPAIIOMWuwUKe3KzTCttuqS7AcY/edit)
    for publishing to Maven and Sonatype
+
+### Releasing
    
 To release to Maven Central:
 ```sbtshell
