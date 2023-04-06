@@ -32,20 +32,29 @@ struct Range {
 struct Ingredient {
   1: required string item
   2: optional string comment
-  3: optional double quantity
+  // 3: optional double quantity
   4: optional Range quantityRange
   5: optional string unit
+  6: optional string dietaryInfo
+  7: optional Range caloryRange
 }
+
 
 struct IngredientsList {
   1: optional string title
   2: required list<Ingredient> ingredients
 }
 
+struct RecipeStep {
+    1: optional string name
+    2: optional string text
+    3: optional shared.Image image
+    4: optional string link
+}
+
 struct RecipeAtom {
-  /* the unique ID will be stored in the `atom` data */
   1: required string title
-  2: required Tags tags 
+  2: required Tags tags
   3: required Time time
   4: optional Serves serves
   5: required list<IngredientsList> ingredientsLists
@@ -53,4 +62,6 @@ struct RecipeAtom {
   7: required list<string> credits
   8: required list<shared.Image> images
   9: optional string sourceArticleId
+  10: optional string description
+  11: optional list<RecipeStep> recipeSteps
 }
