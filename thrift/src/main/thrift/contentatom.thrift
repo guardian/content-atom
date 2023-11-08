@@ -28,7 +28,7 @@ enum AtomType {
   CTA = 4,
   INTERACTIVE = 5,
   REVIEW = 6,
-//RECIPE = 7, DEPRECATED
+//RECIPE = 7, DEPRECATED in favour of Recipe Element
 //STORYQUESTIONS = 8, DEPRECATED
   QANDA = 9,
   PROFILE = 10,
@@ -48,7 +48,7 @@ union AtomData {
   5: cta.CTAAtom cta
   6: interactive.InteractiveAtom interactive
   7: review.ReviewAtom review
-//8: recipe.RecipeAtom recipe
+//8: recipe.RecipeAtom recipe DEPRECATED
 //9: storyquestions.StoryQuestionsAtom storyquestions DEPRECATED
   10: qanda.QAndAAtom qanda
   11: guide.GuideAtom guide
