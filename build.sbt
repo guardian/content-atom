@@ -17,39 +17,41 @@ lazy val mavenSettings = Seq(
 val snapshotReleaseType = "snapshot"
 
 lazy val releaseProcessSteps: Seq[ReleaseStep] = {
-  val commonSteps: Seq[ReleaseStep] = Seq(
+  val commonSteps:Seq[ReleaseStep] = Seq(
     checkSnapshotDependencies,
     inquireVersions,
     runClean,
     runTest,
-    setReleaseVersion
+    setReleaseVersion,
   )
 
-  val snapshotSteps: Seq[ReleaseStep] = Seq(
+  val localExtraSteps:Seq[ReleaseStep] = Seq(
+    commitReleaseVersion,
+    tagRelease,
+    publishArtifacts,
+    setNextVersion,
+    commitNextVersion
+  )
+
+  val snapshotSteps:Seq[ReleaseStep] = Seq(
     publishArtifacts,
     releaseStepCommand("sonatypeReleaseAll")
   )
 
-  val prodSteps: Seq[ReleaseStep] = Seq(
-    commitReleaseVersion,
-    tagRelease,
-    publishArtifacts,
+  val prodSteps:Seq[ReleaseStep] = Seq(
     releaseStepCommandAndRemaining("+publishSigned"),
-    releaseStepCommand("sonatypeBundleRelease"),
-    setNextVersion,
-    commitNextVersion,
+    releaseStepCommand("sonatypeBundleRelease")
   )
 
-
-  val localPostRelease: Seq[ReleaseStep] = Seq(
+  val localPostRelease:Seq[ReleaseStep]  = Seq(
     pushChanges,
   )
 
   (sys.props.get("RELEASE_TYPE"), sys.env.get("CI")) match {
-    case (Some(v), None) if v == snapshotReleaseType => commonSteps ++ snapshotSteps ++ localPostRelease
-    case (_, None) => commonSteps ++ prodSteps ++ localPostRelease
+    case (Some(v), None) if v == snapshotReleaseType => commonSteps ++ localExtraSteps ++ snapshotSteps ++ localPostRelease
+    case (_, None) => commonSteps ++ localExtraSteps ++ prodSteps ++ localPostRelease
     case (Some(v), _) if v == snapshotReleaseType => commonSteps ++ snapshotSteps
-    case (_, _) => commonSteps ++ prodSteps
+    case (_, _)=> commonSteps ++ prodSteps
   }
 }
 
