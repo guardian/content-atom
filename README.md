@@ -27,40 +27,49 @@ Prior to releasing, you will need to ensure that:
  - you have the followed the [guide](https://docs.google.com/document/d/1rNXjoZDqZMsQblOVXPAIIOMWuwUKe3KzTCttuqS7AcY/edit)
    for publishing to Maven and Sonatype
 
-### Releasing
-   
-To release to Maven Central:
-```sbtshell
-release cross
-```
-This will release these artifacts:
-- `content-atom-model-thrift-$version.jar` contains only the Thrift files
-- `content-atom-model_2.13-$version.jar` contains the Thrift files and Scrooge-generated Scala 2.13 classes
-- `content-atom-model_2.12-$version.jar` contains the Thrift files and Scrooge-generated Scala 2.12 classes
 
-Note that support for scala 2.11 ended with scrooge 21.3, so we won't output
-- `content-atom-model_2.11-$version.jar`
-any more.
+#### Non-production releases:
 
-To release to NPM:
-```sbtshell
-project typescriptClasses
-releaseNpm <version released to Maven>
-```
+The easiest way to release a snapshot version is via the github UI.
+[This](https://github.com/guardian/content-api-firehose-client/pull/28/373) PR introduced the ability to use a github action to trigger the release.
 
-If you need to make a beta release build available for testing elsewhere, start sbt with
-```
-$ sbt -DRELEASE_TYPE=beta
-```
-then follow the above release steps as usual. You'll be prompted that this is a BETA release
-and for a version number that looks like 1.2.3-beta.n where n is the beta version number
-you'll specify. This isn't really tracked so make sure it's a new build by checking Maven and NPM first.
+The steps you should take are:
+- Push the branch with the changes you want to release to Github.
+- [Click here](https://github.com/guardian/content-api-firehose-client/releases/new?prerelease=true) to create prerelease using Github releases.
 
-When releasing the typescript classes to NPM, you'll manually type the version number to match what you 
-released to Sonatype/Maven for Scala. Our `sbt-scrooge-typescript` sbt plugin takes care of applying a `--tag beta` 
-to the NPM release when the `RELEASE_TYPE=beta` system property is available.
+- You must then:
+- Set the Target to your branch.
+- Create a tag for the snapshot release (the tag can be created from this same UI if it doesn't already exist).
+- The tag should ideally have format "vX.X.X-SNAPSHOT".
+- Double-check that the "Set as pre-release" box is ticket.
+- To automatically release the snapshot to sonatype then click the "Publish release" button.
 
-To cross release locally use
-```
-$ sbt '+publishLocal'
-```
+And then manually release the npm module:
+`npm i -g typescript && sbt 'project typescriptClasses; releaseNpm X.X.X-SNAPSHOT'`
+
+
+#### Production releases:
+
+When your changes are done and tested and you're ready to release a new production version, edit the `version.sbt` file to reflect the version you are about to release.
+
+Typically this should just require the removal of the -SNAPSHOT part, but check in [maven](https://repo1.maven.org/maven2/com/gu/content-api-firehose-client_2.13/) to make sure nobody else has released this version before you.
+
+Open a PR.
+
+When your PR is approved, merge it to `main` and ensure the build actions complete successfully.
+
+Then, on the [releases](https://github.com/guardian/content-api-firehose-client/releases) page:
+- Choose `Draft a new release`
+- Create a new tag of the version number e.g. `v1.0.10`
+- Set the target to the `main` branch
+- Add a release title (the version number again is fine)
+- Add an optional description
+- Ensure that `Set as pre-release` is **unchecked**
+- Click the `Publish release` button
+
+When the release process has finished, pull the updated `main` branch locally and update the `version.sbt` file to reflect the next build number, e.g. `1.0.11-SNAPSHOT` and commit that directly back to `main` - there's no need to open a PR for that.
+
+When your release shows up on [maven](https://repo1.maven.org/maven2/com/gu/content-api-firehose-client_2.13/) the updated version can be referenced in client code.
+
+And then manually release the npm module:
+`npm i -g typescript && sbt 'project typescriptClasses; releaseNpm X.X.X'`
