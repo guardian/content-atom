@@ -9,6 +9,44 @@ val thriftVersion = "0.15.0"    // remember to also update package.json if the t
 publishTo := sonatypePublishToBundle.value
 
 lazy val mavenSettings = Seq(
+  pomExtra := <url>https://github.com/guardian/content-atom</url>
+    <developers>
+      <developer>
+        <id>paulmr</id>
+        <name>Paul Roberts</name>
+        <url>https://github.com/paulmr</url>
+      </developer>
+      <developer>
+        <id>LATaylor-guardian</id>
+        <name>Luke Taylor</name>
+        <url>https://github.com/LATaylor-guardian</url>
+      </developer>
+      <developer>
+        <id>mchv</id>
+        <name>Mariot Chauvin</name>
+        <url>https://github.com/mchv</url>
+      </developer>
+      <developer>
+        <id>tomrf1</id>
+        <name>Tom Forbes</name>
+        <url>https://github.com/tomrf1</url>
+      </developer>
+      <developer>
+        <id>annebyrne</id>
+        <name>Anne Byrne</name>
+        <url>https://github.com/annebyrne</url>
+      </developer>
+      <developer>
+        <id>regiskuckaertz</id>
+        <name>Regis Kuckaertz</name>
+        <url>https://github.com/regiskuckaertz</url>
+      </developer>
+      <developer>
+        <id>justinpinner</id>
+        <name>Justin Pinner</name>
+        <url>https://github.com/justinpinner</url>
+      </developer>
+    </developers>,
   licenses := Seq("Apache V2" -> url("http://www.apache.org/licenses/LICENSE-2.0.html")),
   publishTo := sonatypePublishToBundle.value,
   publishConfiguration := publishConfiguration.value.withOverwrite(true)
