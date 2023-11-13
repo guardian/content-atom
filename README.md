@@ -28,7 +28,7 @@ Prior to releasing, you will need to ensure that:
    for publishing to Maven and Sonatype
 
 
-#### Non-production releases:
+#### Non-production releases (Sonatype only):
 
 The easiest way to release a snapshot version is via the github UI.
 [This](https://github.com/guardian/content-api-firehose-client/pull/28/373) PR introduced the ability to use a github action to trigger the release.
@@ -48,7 +48,7 @@ And then manually release the npm module:
 `npm i -g typescript && sbt 'project typescriptClasses; releaseNpm X.X.X-SNAPSHOT'`
 
 
-#### Production releases:
+#### Production releases (Sonatype and NPM):
 
 When your changes are done and tested and you're ready to release a new production version, edit the `version.sbt` file to reflect the version you are about to release.
 
@@ -70,6 +70,3 @@ Then, on the [releases](https://github.com/guardian/content-api-firehose-client/
 When the release process has finished, pull the updated `main` branch locally and update the `version.sbt` file to reflect the next build number, e.g. `1.0.11-SNAPSHOT` and commit that directly back to `main` - there's no need to open a PR for that.
 
 When your release shows up on [maven](https://repo1.maven.org/maven2/com/gu/content-api-firehose-client_2.13/) the updated version can be referenced in client code.
-
-And then manually release the npm module:
-`npm i -g typescript && sbt 'project typescriptClasses; releaseNpm X.X.X'`
