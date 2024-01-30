@@ -9,26 +9,8 @@ This is the Thrift definition of the Content Atom model, and the published versi
 In order for the scala code generated from the thrift definitions to be packaged correctly a scala namespace needs to be included. For example for the chart atom this would be:
 `#@namespace scala com.gu.contentatom.thrift.atom.chart`
 
-## How to release
 
-### A note on version numbers
-
-The version field in `package.json` should be kept in sync with the version in `version.sbt`
-
-### Prerequisites
-
-Prior to releasing, you will need to ensure that:
- - `tsc` is installed on your machine (e.g. `brew install typescript`)
- - `npm` is installed on your machine
- - you have an NPM account which is part of the [@guardian](https://www.npmjs.com/org/guardian) org
- - you have configured an NPM [access token](https://docs.npmjs.com/creating-and-viewing-authentication-tokens) to 
-   publish to @guardian; a convenient way to set this up is to execute `npm login` locally and follow the prompts;
-   this will create/append to an `~/.npmrc` file with the sufficient config
- - you have the followed the [guide](https://docs.google.com/document/d/1rNXjoZDqZMsQblOVXPAIIOMWuwUKe3KzTCttuqS7AcY/edit)
-   for publishing to Maven and Sonatype
-
-
-#### How to make releases (maven and npm):
+## How to make releases (maven and npm):
 
 This repo uses [`gha-scala-library-release-workflow`](https://github.com/guardian/gha-scala-library-release-workflow)
 to automate publishing releases (both full & preview releases) - see
