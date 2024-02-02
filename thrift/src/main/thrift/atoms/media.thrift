@@ -43,6 +43,7 @@ struct Asset {
   3: required string id
   4: required Platform platform
   5: optional string mimeType
+  6: optional string aspectRatio
 }
 
 struct PlutoData {
