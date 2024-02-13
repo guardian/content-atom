@@ -1,19 +1,14 @@
 name: Snyk
-
 on:
   push:
     branches:
-      - master
-  workflow_dispatch:
-
+      - main
+      - integrate-snyk-5514a8892997f4b7
+  workflow_dispatch: 
 jobs:
   security:
     uses: guardian/.github/.github/workflows/sbt-node-snyk.yml@main
     with:
-      DEBUG: true
-      ORG: guardian-capi
-      SKIP_NODE: false
-      NODE_PACKAGE_JSON_FILES_MISSING_LOCK: ./package.json
-      NODE_VERSION_OVERRIDE: 16
+      ORG: <SNYK_ORG_ID>
     secrets:
-       SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+      SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
