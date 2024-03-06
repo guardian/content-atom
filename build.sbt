@@ -5,117 +5,40 @@ val contentEntityVersion = "2.2.1"
 val scroogeVersion = "22.1.0"   // remember to also update plugins.sbt if the scrooge version changes
 val thriftVersion = "0.15.0"    // remember to also update package.json if the thrift version changes
 
-//https://github.com/xerial/sbt-sonatype/issues/103
-publishTo := sonatypePublishToBundle.value
-
-lazy val mavenSettings = Seq(
-  pomExtra := <url>https://github.com/guardian/content-atom</url>
-    <developers>
-      <developer>
-        <id>paulmr</id>
-        <name>Paul Roberts</name>
-        <url>https://github.com/paulmr</url>
-      </developer>
-      <developer>
-        <id>LATaylor-guardian</id>
-        <name>Luke Taylor</name>
-        <url>https://github.com/LATaylor-guardian</url>
-      </developer>
-      <developer>
-        <id>mchv</id>
-        <name>Mariot Chauvin</name>
-        <url>https://github.com/mchv</url>
-      </developer>
-      <developer>
-        <id>tomrf1</id>
-        <name>Tom Forbes</name>
-        <url>https://github.com/tomrf1</url>
-      </developer>
-      <developer>
-        <id>annebyrne</id>
-        <name>Anne Byrne</name>
-        <url>https://github.com/annebyrne</url>
-      </developer>
-      <developer>
-        <id>regiskuckaertz</id>
-        <name>Regis Kuckaertz</name>
-        <url>https://github.com/regiskuckaertz</url>
-      </developer>
-      <developer>
-        <id>justinpinner</id>
-        <name>Justin Pinner</name>
-        <url>https://github.com/justinpinner</url>
-      </developer>
-    </developers>,
-  licenses := Seq("Apache V2" -> url("http://www.apache.org/licenses/LICENSE-2.0.html")),
-  publishTo := sonatypePublishToBundle.value,
-  publishConfiguration := publishConfiguration.value.withOverwrite(true)
-)
-
-val snapshotReleaseType = "snapshot"
-
-lazy val releaseProcessSteps: Seq[ReleaseStep] = {
-  val commonSteps:Seq[ReleaseStep] = Seq(
-    checkSnapshotDependencies,
-    inquireVersions,
-    runClean,
-    runTest,
-    setReleaseVersion,
-  )
-
-  val localExtraSteps:Seq[ReleaseStep] = Seq(
-    commitReleaseVersion,
-    tagRelease,
-    publishArtifacts,
-    setNextVersion,
-    commitNextVersion
-  )
-
-  val snapshotSteps:Seq[ReleaseStep] = Seq(
-    publishArtifacts,
-    releaseStepCommand("sonatypeReleaseAll")
-  )
-
-  val prodSteps:Seq[ReleaseStep] = Seq(
-    releaseStepCommandAndRemaining("+publishSigned"),
-    releaseStepCommand("sonatypeBundleRelease")
-  )
-
-  val localPostRelease:Seq[ReleaseStep]  = Seq(
-    pushChanges,
-  )
-
-  (sys.props.get("RELEASE_TYPE"), sys.env.get("CI")) match {
-    case (Some(v), None) if v == snapshotReleaseType => commonSteps ++ localExtraSteps ++ snapshotSteps ++ localPostRelease
-    case (_, None) => commonSteps ++ localExtraSteps ++ prodSteps ++ localPostRelease
-    case (Some(v), _) if v == snapshotReleaseType => commonSteps ++ snapshotSteps
-    case (_, _)=> commonSteps ++ prodSteps
-  }
-}
-
-val commonSettings = Seq(
+val artifactProductionSettings = Seq(
   organization := "com.gu",
-  scalaVersion := "2.13.2",
+  scalaVersion := "2.13.12",
   // downgrade scrooge reserved word clashes to warnings
   Compile / scroogeDisableStrict := true,
   // Scrooge 21.3.0 dropped support for scala < 2.12, so we can only build for Scala 2.12+
   // https://twitter.github.io/scrooge/changelog.html#id11
-	crossScalaVersions := Seq("2.12.11", scalaVersion.value),
-  scmInfo := Some(ScmInfo(url("https://github.com/guardian/content-atom"),
-                          "scm:git:git@github.com:guardian/content-atom.git")),
-  releasePublishArtifactsAction := PgpKeys.publishSigned.value,
-) ++ mavenSettings
+	crossScalaVersions := Seq("2.12.18", scalaVersion.value),
+  licenses := Seq(License.Apache2)
+  /*
+  Test / testOptions +=
+    Tests.Argument(TestFrameworks.ScalaTest, "-u", s"test-results/scala-${scalaVersion.value}", "-o")
+   */ // Need to uncomment when testcases gets added.Also to change ci.yml to add "Build and Test" as well.
+)
 
 lazy val root = Project(id = "root", base = file("."))
-  .settings(commonSettings)
   .aggregate(thrift, scalaClasses)
   .settings(
-    publishArtifact := false,
-    releaseProcess := releaseProcessSteps
+    publish / skip := true,
+    releaseProcess := Seq[ReleaseStep](
+      checkSnapshotDependencies,
+      inquireVersions,
+      runClean,
+      runTest,
+      setReleaseVersion,
+      commitReleaseVersion,
+      tagRelease,
+      setNextVersion,
+      commitNextVersion
+    )
   )
 
 lazy val thrift = Project(id = "content-atom-model-thrift", base = file("thrift"))
-  .settings(commonSettings)
+  .settings(artifactProductionSettings)
   .disablePlugins(ScroogeSBT)
   .settings(
     description := "Content atom model Thrift files",
@@ -127,7 +50,7 @@ lazy val thrift = Project(id = "content-atom-model-thrift", base = file("thrift"
   )
 
 lazy val scalaClasses = Project(id = "content-atom-model", base = file("scala"))
-  .settings(commonSettings)
+  .settings(artifactProductionSettings)
   .settings(
     description := "Scala library built from Content-atom thrift definition",
     Compile / scroogeThriftSourceFolder := baseDirectory.value / "../thrift/src/main/thrift",
@@ -147,7 +70,7 @@ lazy val scalaClasses = Project(id = "content-atom-model", base = file("scala"))
 
 lazy val typescriptClasses = (project in file("ts"))
   .enablePlugins(ScroogeTypescriptGen)
-  .settings(commonSettings)
+  .settings(artifactProductionSettings)
   .settings(
     name := "content-atom-typescript",
     scroogeTypescriptNpmPackageName := "@guardian/content-atom-model",

@@ -9,64 +9,9 @@ This is the Thrift definition of the Content Atom model, and the published versi
 In order for the scala code generated from the thrift definitions to be packaged correctly a scala namespace needs to be included. For example for the chart atom this would be:
 `#@namespace scala com.gu.contentatom.thrift.atom.chart`
 
-## How to release
 
-### A note on version numbers
+## How to make releases (maven and npm):
 
-The version field in `package.json` should be kept in sync with the version in `version.sbt`
-
-### Prerequisites
-
-Prior to releasing, you will need to ensure that:
- - `tsc` is installed on your machine (e.g. `brew install typescript`)
- - `npm` is installed on your machine
- - you have an NPM account which is part of the [@guardian](https://www.npmjs.com/org/guardian) org
- - you have configured an NPM [access token](https://docs.npmjs.com/creating-and-viewing-authentication-tokens) to 
-   publish to @guardian; a convenient way to set this up is to execute `npm login` locally and follow the prompts;
-   this will create/append to an `~/.npmrc` file with the sufficient config
- - you have the followed the [guide](https://docs.google.com/document/d/1rNXjoZDqZMsQblOVXPAIIOMWuwUKe3KzTCttuqS7AcY/edit)
-   for publishing to Maven and Sonatype
-
-
-#### Non-production releases (Sonatype only):
-
-The easiest way to release a snapshot version is via the github UI.
-[This](https://github.com/guardian/content-api-firehose-client/pull/28/373) PR introduced the ability to use a github action to trigger the release.
-
-The steps you should take are:
-- Push the branch with the changes you want to release to Github.
-- [Click here](https://github.com/guardian/content-api-firehose-client/releases/new?prerelease=true) to create prerelease using Github releases.
-
-- You must then:
-- Set the Target to your branch.
-- Create a tag for the snapshot release (the tag can be created from this same UI if it doesn't already exist).
-- The tag should ideally have format "vX.X.X-SNAPSHOT".
-- Double-check that the "Set as pre-release" box is ticket.
-- To automatically release the snapshot to sonatype then click the "Publish release" button.
-
-And then manually release the npm module:
-`npm i -g typescript && sbt 'project typescriptClasses; releaseNpm X.X.X-SNAPSHOT'`
-
-
-#### Production releases (Sonatype and NPM):
-
-When your changes are done and tested and you're ready to release a new production version, edit the `version.sbt` file to reflect the version you are about to release.
-
-Typically this should just require the removal of the -SNAPSHOT part, but check in [maven](https://repo1.maven.org/maven2/com/gu/content-api-firehose-client_2.13/) to make sure nobody else has released this version before you.
-
-Open a PR.
-
-When your PR is approved, merge it to `main` and ensure the build actions complete successfully.
-
-Then, on the [releases](https://github.com/guardian/content-api-firehose-client/releases) page:
-- Choose `Draft a new release`
-- Create a new tag of the version number e.g. `v1.0.10`
-- Set the target to the `main` branch
-- Add a release title (the version number again is fine)
-- Add an optional description
-- Ensure that `Set as pre-release` is **unchecked**
-- Click the `Publish release` button
-
-When the release process has finished, pull the updated `main` branch locally and update the `version.sbt` file to reflect the next build number, e.g. `1.0.11-SNAPSHOT` and commit that directly back to `main` - there's no need to open a PR for that.
-
-When your release shows up on [maven](https://repo1.maven.org/maven2/com/gu/content-api-firehose-client_2.13/) the updated version can be referenced in client code.
+This repo uses [`gha-scala-library-release-workflow`](https://github.com/guardian/gha-scala-library-release-workflow)
+to automate publishing releases (both full & preview releases) - see
+[**Making a Release**](https://github.com/guardian/gha-scala-library-release-workflow/blob/main/docs/making-a-release.md).
