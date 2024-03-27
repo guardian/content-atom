@@ -1,5 +1,6 @@
-import sbtrelease._
-import ReleaseStateTransformations._
+import sbtrelease.*
+import ReleaseStateTransformations.*
+import sbtversionpolicy.withsbtrelease.ReleaseVersion
 
 val contentEntityVersion = "3.0.3"
 val scroogeVersion = "22.1.0"   // remember to also update plugins.sbt if the scrooge version changes
@@ -24,6 +25,7 @@ lazy val root = Project(id = "root", base = file("."))
   .aggregate(thrift, scalaClasses)
   .settings(
     publish / skip := true,
+    releaseVersion := ReleaseVersion.fromAggregatedAssessedCompatibilityWithLatestRelease().value,
     releaseProcess := Seq[ReleaseStep](
       checkSnapshotDependencies,
       inquireVersions,
