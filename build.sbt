@@ -4,7 +4,7 @@ import sbtversionpolicy.withsbtrelease.ReleaseVersion
 
 val contentEntityVersion = "3.0.3"
 val scroogeVersion = "22.1.0"   // remember to also update plugins.sbt if the scrooge version changes
-val thriftVersion = "0.15.0"    // remember to also update package.json if the thrift version changes
+val thriftVersion = "0.20.0"    // remember to also update package.json if the thrift version changes
 
 val artifactProductionSettings = Seq(
   organization := "com.gu",

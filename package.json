@@ -7,6 +7,9 @@
   "dependencies": {
     "thrift": "^0.20.0"
   },
+  "devDependencies": {
+    "typescript": "^4.5.4"
+  },
   "license": "Apache-2.0",
   "files": [
     "js/main.js",
