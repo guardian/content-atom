@@ -5,7 +5,7 @@
   "repository": "https://github.com/guardian/content-atom",
   "main": "js/main.js",
   "dependencies": {
-    "thrift": "^0.15.0"
+    "thrift": "^0.20.0"
   },
   "license": "Apache-2.0",
   "files": [
