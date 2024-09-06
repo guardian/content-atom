@@ -3,17 +3,17 @@ import ReleaseStateTransformations.*
 import sbtversionpolicy.withsbtrelease.ReleaseVersion
 
 val contentEntityVersion = "4.0.0"
-val scroogeVersion = "22.1.0"   // remember to also update plugins.sbt if the scrooge version changes
+val scroogeVersion = "22.12.0"   // remember to also update plugins.sbt if the scrooge version changes
 val thriftVersion = "0.20.0"    // remember to also update package.json if the thrift version changes
 
 val artifactProductionSettings = Seq(
   organization := "com.gu",
-  scalaVersion := "2.13.12",
+  scalaVersion := "2.13.14",
   // downgrade scrooge reserved word clashes to warnings
   Compile / scroogeDisableStrict := true,
   // Scrooge 21.3.0 dropped support for scala < 2.12, so we can only build for Scala 2.12+
   // https://twitter.github.io/scrooge/changelog.html#id11
-	crossScalaVersions := Seq("2.12.18", scalaVersion.value),
+	crossScalaVersions := Seq("2.12.20", scalaVersion.value),
   licenses := Seq(License.Apache2)
   /*
   Test / testOptions +=
