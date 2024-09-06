@@ -13,7 +13,7 @@ val artifactProductionSettings = Seq(
   Compile / scroogeDisableStrict := true,
   // Scrooge 21.3.0 dropped support for scala < 2.12, so we can only build for Scala 2.12+
   // https://twitter.github.io/scrooge/changelog.html#id11
-	crossScalaVersions := Seq("2.12.18", scalaVersion.value),
+	crossScalaVersions := Seq("2.12.20", scalaVersion.value),
   licenses := Seq(License.Apache2)
   /*
   Test / testOptions +=
