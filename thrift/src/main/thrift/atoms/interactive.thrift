@@ -3,6 +3,12 @@ namespace java com.gu.contentatom.thrift.atom.interactive
 #@namespace scala com.gu.contentatom.thrift.atom.interactive
 #@namespace typescript _at_guardian.content_atom_model.interactive
 
+struct CustomField {
+  1: required string fieldName
+  2: required string fieldType
+  3: required string defaultValue
+}
+
 struct InteractiveAtom {
   /* the unique ID will be stored in the `atom` data*/
   1: required string type
@@ -18,4 +24,5 @@ struct InteractiveAtom {
   See here: https://amp.dev/documentation/components/amp-iframe/ for more information.
    */
   7: optional string placeholderUrl
+  8: optional list<CustomField> customFields = []
 }
