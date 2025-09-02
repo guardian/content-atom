@@ -17,7 +17,8 @@ enum Platform {
 
 enum AssetType {
   AUDIO = 0,
-  VIDEO = 1
+  VIDEO = 1,
+  SUBTITLES = 2
 }
 
 enum Category {
