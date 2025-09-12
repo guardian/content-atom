@@ -144,4 +144,7 @@ struct MediaAtom {
 
   /** optional override (of poster image) for the YouTube thumbnail **/
   22: optional shared.Image youtubeOverrideImage
+
+  /** allow the (looping) video to autoplay in articles **/
+  23: optional bool autoloopVideoOnPageLoad
 }

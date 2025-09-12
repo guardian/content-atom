@@ -4,3 +4,5 @@ generated
 target/
 .idea/
 .bsp/
+.DS_Store
+thrift/.DS_Store
