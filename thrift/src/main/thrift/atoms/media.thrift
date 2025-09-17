@@ -146,5 +146,5 @@ struct MediaAtom {
   22: optional shared.Image youtubeOverrideImage
 
   /** allow the (looping) video to autoplay in articles **/
-  23: optional bool autoloopVideoOnPageLoad
+  23: optional bool isLoopingVideo
 }
