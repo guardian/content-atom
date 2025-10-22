@@ -44,6 +44,10 @@ struct Asset {
   3: required string id
   4: required Platform platform
   5: optional string mimeType
+  /** video only: width and height of the video frame in pixels **/
+  6: optional shared.ImageAssetDimensions dimensions
+  /** video only: width:height ratio of the video frame **/
+  7: optional string aspectRatio
 }
 
 struct PlutoData {
