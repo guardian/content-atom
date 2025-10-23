@@ -38,6 +38,21 @@ enum PrivacyStatus {
    PUBLIC = 2 // can be viewed and found by search
 }
 
+/** intended format for Self-Hosted videos
+  * enum values are a shorthand for a collection of fine grained attributes such as:
+  * - has progress bar
+  * - subtitle position
+  * - click behaviour (e.g. pause or clickthrough)
+  * - mute controls
+  * - autoplay
+  * - looping
+  * etc
+  * **/
+enum VideoFormat {
+  LOOP = 0,  // autoplay, looping, has progress bar and controls etc
+  CINEMAGRAPH = 1  // acts like a gif i.e. autoplay, looping, no controls
+}
+
 struct Asset {
   1: required AssetType assetType
   2: required Version version
@@ -59,6 +74,10 @@ struct PlutoData {
 struct YoutubeData {
   1: required string title
   2: optional string description
+}
+
+struct SelfHostData {
+  1: required VideoFormat videoFormat = VideoFormat.LOOP
 }
 
 struct Metadata {
@@ -92,6 +111,8 @@ struct Metadata {
   8: optional PlutoData pluto
 
   9: optional YoutubeData youtube
+
+  10: optional SelfHostData selfHost
 }
 
 struct MediaAtom {
