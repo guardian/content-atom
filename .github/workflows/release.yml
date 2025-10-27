@@ -3,6 +3,9 @@ name: Release
 on:
   workflow_dispatch:
 
+permissions:
+  id-token: write  # Required for OIDC
+
 jobs:
   scala-maven-release:
     name: Maven Release
