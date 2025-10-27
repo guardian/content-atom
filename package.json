@@ -4,7 +4,7 @@
   "description": "Content Atom JavaScript, automatically generated from the Thrift definition.",
   "repository": {
     "type": "git",
-    "url": "https://github.com/guardian/content-atom.git"
+    "url": "git+https://github.com/guardian/content-atom.git"
   },
   "main": "js/main.js",
   "dependencies": {
