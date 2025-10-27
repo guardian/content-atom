@@ -2,7 +2,10 @@
   "name": "@guardian/content-atom-model",
   "version": "7.0.2",
   "description": "Content Atom JavaScript, automatically generated from the Thrift definition.",
-  "repository": "github:guardian/content-atom",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/guardian/content-atom.git"
+  },
   "main": "js/main.js",
   "dependencies": {
     "thrift": "^0.20.0"
