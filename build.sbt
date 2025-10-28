@@ -1,6 +1,9 @@
 import sbtrelease.*
 import ReleaseStateTransformations.*
+import sbt.Keys.scmInfo
 import sbtversionpolicy.withsbtrelease.ReleaseVersion
+
+import java.net.URI
 
 val contentEntityVersion = "4.0.0"
 val scroogeVersion = "22.1.0"   // remember to also update plugins.sbt if the scrooge version changes
@@ -90,5 +93,7 @@ lazy val typescriptClasses = (project in file("ts"))
     ),
     libraryDependencies ++= Seq(
       "com.gu" % "content-entity-thrift" % contentEntityVersion
-    )
+    ),
+    scmInfo := Some(ScmInfo(URI.create("https://github.com/guardian/content-atom").toURL,
+      "scm:git:https://github.com/guardian/content-atom.git"))
   )
