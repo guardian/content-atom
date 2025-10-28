@@ -94,6 +94,7 @@ lazy val typescriptClasses = (project in file("ts"))
     libraryDependencies ++= Seq(
       "com.gu" % "content-entity-thrift" % contentEntityVersion
     ),
+    // for npm publish via sbt, scmInfo is used instead of `repository` in package.json
     scmInfo := Some(ScmInfo(URI.create("https://github.com/guardian/content-atom").toURL,
       "scm:git:https://github.com/guardian/content-atom.git"))
   )

@@ -1,8 +1,16 @@
 {
+  "//0": "-----------------------------",
+  "//1": "* npm publish is done by the sbt-scrooge-typescript plugin",
+  "//2": "* contents of this file are ignored by the plugin",
+  "//3": "* name and repository values are set in build.sbt (see scroogeTypescriptNpmPackageName and scmInfo)",
+  "//4": "-----------------------------",
   "name": "@guardian/content-atom-model",
   "version": "7.0.2",
   "description": "Content Atom JavaScript, automatically generated from the Thrift definition.",
-  "repository": "guardian/content-atom",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/guardian/content-atom.git"
+  },
   "main": "js/main.js",
   "dependencies": {
     "thrift": "^0.20.0"
