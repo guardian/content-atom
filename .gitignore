@@ -4,3 +4,5 @@ generated
 target/
 .idea/
 .bsp/
+.metals
+.vscode
