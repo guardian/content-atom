@@ -72,11 +72,18 @@ struct PlutoData {
   3: optional string masterId
 }
 
+struct IconikData {
+  1: optional string workingGroupId
+  2: optional string commissionId
+  3: optional string projectId
+  4: optional string masterPlaceholderId
+}
+
 struct YoutubeData {
   1: required string title
   2: optional string description
 }
-
+ 
 struct SelfHostData {
   1: optional VideoPlayerFormat videoPlayerFormat
 }
@@ -114,6 +121,8 @@ struct Metadata {
   9: optional YoutubeData youtube
 
   10: optional SelfHostData selfHost
+
+  11: optional IconikData iconik
 }
 
 struct MediaAtom {
