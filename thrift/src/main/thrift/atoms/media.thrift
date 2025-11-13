@@ -179,4 +179,7 @@ struct MediaAtom {
 
   /** optional override (of poster image) for the YouTube thumbnail **/
   22: optional shared.Image youtubeOverrideImage
+
+  /** determines what assets can be included in the atom **/
+  23: optional Platform platform
 }
