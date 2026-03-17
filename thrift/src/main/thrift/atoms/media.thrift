@@ -51,7 +51,8 @@ enum PrivacyStatus {
 enum VideoPlayerFormat {
   DEFAULT = 0,  // non-autoplay, non-looping, vanilla player with typical set of controls
   LOOP = 1,  // autoplay, looping, has progress bar and controls etc
-  CINEMAGRAPH = 2  // acts like a gif i.e. autoplay, looping, no controls
+  CINEMAGRAPH = 2,  // acts like a gif i.e. autoplay, looping, no controls
+  PODCAST = 3 // much like default, but mp4 of audio only is available
 }
 
 struct Asset {
