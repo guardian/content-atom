@@ -182,4 +182,7 @@ struct MediaAtom {
 
   /** determines what assets can be included in the atom **/
   23: optional Platform platform
+  
+  /** exposes if audio tracks have been included in the atom **/
+  24: optional bool hasAudio
 }
