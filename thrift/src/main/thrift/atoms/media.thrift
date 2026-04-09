@@ -64,6 +64,8 @@ struct Asset {
   6: optional shared.ImageAssetDimensions dimensions
   /** video only: width:height ratio of the video frame **/
   7: optional string aspectRatio
+  /** video only: if audio tracks have been included **/
+  24: optional bool hasAudio
 }
 
 struct PlutoData {
