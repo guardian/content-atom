@@ -86,6 +86,7 @@ struct YoutubeData {
  
 struct SelfHostData {
   1: optional VideoPlayerFormat videoPlayerFormat
+  2: optional map<Version, bool> audioByVersion
 }
 
 struct Metadata {
