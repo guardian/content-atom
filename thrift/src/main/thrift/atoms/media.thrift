@@ -65,6 +65,9 @@ struct Asset {
   /** video only: width:height ratio of the video frame **/
   7: optional string aspectRatio
   8: optional i64 duration // seconds
+  /** video only: if a video has non-silent audio tracks **/
+  9: optional bool hasAudio
+
 }
 
 struct PlutoData {
