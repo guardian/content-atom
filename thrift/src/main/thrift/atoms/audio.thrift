@@ -35,4 +35,8 @@ struct AudioAtom {
 
   // Off-platform links
   6: optional OffPlatform offPlatformLinks
+
+  // MP3 audio track with ads. We don't support other formats. 
+  // If this is absent, concierge may add it in
+  7: optional string trackUrlWithAds
 }
