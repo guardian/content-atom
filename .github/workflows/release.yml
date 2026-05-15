@@ -31,6 +31,10 @@ jobs:
       - run: npm install -g npm@11.6.1
       - name: Release Typescript to NPM
         run: |
-          sbt "project typescriptClasses" "releaseNpm ${{ needs.scala-maven-release.outputs.RELEASE_VERSION }}"
+          if [ "${{ needs.scala-maven-release.outputs.RELEASE_TYPE }}" = "PREVIEW_FEATURE_BRANCH" ]; then
+            sbt "project typescriptClasses" "set scroogeTypescriptPublishTag := \"PREVIEW_FEATURE_BRANCH\"" "releaseNpm ${{ needs.scala-maven-release.outputs.RELEASE_VERSION }}"
+          else
+            sbt "project typescriptClasses" "releaseNpm ${{ needs.scala-maven-release.outputs.RELEASE_VERSION }}"
+          fi
         env:
           RELEASE_TYPE: ${{ needs.scala-maven-release.outputs.RELEASE_TYPE }}
