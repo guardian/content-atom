@@ -16,7 +16,7 @@
     "thrift": "^0.20.0"
   },
   "devDependencies": {
-    "typescript": "^4.5.4"
+    "typescript": "^5.9.3"
   },
   "license": "Apache-2.0",
   "files": [
