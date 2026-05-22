@@ -72,10 +72,14 @@ lazy val scalaClasses = Project(id = "content-atom-model", base = file("scala"))
     Compile / scroogePublishThrift := true
   )
 
+lazy val npmPreviewReleaseTagMaybe = if (sys.env.get("RELEASE_TYPE").contains("PREVIEW_FEATURE_BRANCH")) {
+  Seq(scroogeTypescriptPublishTag := "preview")
+} else Seq.empty
 
 lazy val typescriptClasses = (project in file("ts"))
   .enablePlugins(ScroogeTypescriptGen)
   .settings(artifactProductionSettings)
+  .settings(npmPreviewReleaseTagMaybe)
   .settings(
     name := "content-atom-typescript",
     scroogeTypescriptNpmPackageName := "@guardian/content-atom-model",
