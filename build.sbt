@@ -11,12 +11,12 @@ val thriftVersion = "0.20.0"    // remember to also update package.json if the t
 
 val artifactProductionSettings = Seq(
   organization := "com.gu",
-  scalaVersion := "2.13.12",
+  scalaVersion := "2.13.18",
   // downgrade scrooge reserved word clashes to warnings
   Compile / scroogeDisableStrict := true,
   // Scrooge 21.3.0 dropped support for scala < 2.12, so we can only build for Scala 2.12+
   // https://twitter.github.io/scrooge/changelog.html#id11
-	crossScalaVersions := Seq("2.12.18", scalaVersion.value),
+	crossScalaVersions := Seq("2.12.21", scalaVersion.value),
   licenses := Seq(License.Apache2)
   /*
   Test / testOptions +=
