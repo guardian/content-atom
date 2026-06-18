@@ -68,7 +68,8 @@ struct Asset {
   8: optional i64 duration // seconds
   /** video only: if a video has non-silent audio tracks **/
   9: optional bool hasAudio
-
+  /** e.g. "avc1.64001e". See https://developer.mozilla.org/en-US/docs/Web/API/WebCodecs_API/Codec_selection **/
+  10: optional set<string> codecs
 }
 
 struct PlutoData {
