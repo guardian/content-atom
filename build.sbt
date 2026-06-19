@@ -28,7 +28,7 @@ lazy val root = Project(id = "root", base = file("."))
   .aggregate(thrift, scalaClasses)
   .settings(
     publish / skip := true,
-    //releaseVersion := ReleaseVersion.fromAggregatedAssessedCompatibilityWithLatestRelease().value,
+    releaseVersion := ReleaseVersion.fromAggregatedAssessedCompatibilityWithLatestRelease().value,
     releaseProcess := Seq[ReleaseStep](
       checkSnapshotDependencies,
       inquireVersions,
