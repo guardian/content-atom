@@ -17,6 +17,7 @@ include "atoms/chart.thrift"
 include "atoms/audio.thrift"
 include "atoms/shared.thrift"
 include "atoms/emailsignup.thrift"
+include "atoms/footballcompetition.thrift"
 
 typedef string ContentAtomID
 
@@ -37,7 +38,8 @@ enum AtomType {
   COMMONSDIVISION = 13,
   CHART = 14,
   AUDIO = 15,
-  EMAILSIGNUP = 16
+  EMAILSIGNUP = 16,
+  FOOTBALLCOMPETITION = 17
 }
 
 union AtomData {
@@ -58,6 +60,7 @@ union AtomData {
   15: chart.ChartAtom chart
   16: audio.AudioAtom audio
   17: emailsignup.EmailSignUpAtom emailsignup
+  18: footballcompetition.FootballCompetitionAtom footballCompetition
 }
 
 struct ContentChangeDetails {
