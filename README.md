@@ -7,7 +7,7 @@ This is the Thrift definition of the Content Atom model, and the published versi
 
 ## Adding a new atom type
 
-In order for the scala code generated from the thrift definitions to be packaged correctly a scala namespace needs to be included. For example for the chart atom this would be:
+In order for the Scala code generated from the thrift definitions to be packaged correctly a scala namespace needs to be included. For example for the chart atom this would be:
 `#@namespace scala com.gu.contentatom.thrift.atom.chart`
 
 
