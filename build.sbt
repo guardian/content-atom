@@ -11,12 +11,12 @@ val thriftVersion = "0.20.0"    // remember to also update package.json if the t
 
 val artifactProductionSettings = Seq(
   organization := "com.gu",
-  scalaVersion := "2.13.12",
+  scalaVersion := "2.13.14", // bug prevents building json package at >= 2.13.15
   // downgrade scrooge reserved word clashes to warnings
   Compile / scroogeDisableStrict := true,
   // Scrooge 21.3.0 dropped support for scala < 2.12, so we can only build for Scala 2.12+
   // https://twitter.github.io/scrooge/changelog.html#id11
-	crossScalaVersions := Seq("2.12.18", scalaVersion.value),
+  crossScalaVersions := Seq("2.12.21", scalaVersion.value),
   licenses := Seq(License.Apache2)
   /*
   Test / testOptions +=
@@ -25,7 +25,7 @@ val artifactProductionSettings = Seq(
 )
 
 lazy val root = Project(id = "root", base = file("."))
-  .aggregate(thrift, scalaClasses)
+  .aggregate(thrift, scalaClasses, json)
   .settings(
     publish / skip := true,
     releaseVersion := ReleaseVersion.fromAggregatedAssessedCompatibilityWithLatestRelease().value,
@@ -51,7 +51,7 @@ lazy val thrift = Project(id = "content-atom-model-thrift", base = file("thrift"
     packageDoc / publishArtifact := false,
     packageSrc / publishArtifact := false,
     unmanagedResources / includeFilter := "*.thrift",
-    Compile / unmanagedResourceDirectories += { baseDirectory.value / "src/main/thrift" }
+    Compile / unmanagedResourceDirectories += { baseDirectory.value / "src/main/thrift" },
   )
 
 lazy val scalaClasses = Project(id = "content-atom-model", base = file("scala"))
@@ -60,8 +60,8 @@ lazy val scalaClasses = Project(id = "content-atom-model", base = file("scala"))
     description := "Scala library built from Content-atom thrift definition",
     Compile / scroogeThriftSourceFolder := baseDirectory.value / "../thrift/src/main/thrift",
     Compile / scroogeThriftOutputFolder := sourceManaged.value,
+    Compile / managedSourceDirectories += (Compile / scroogeThriftOutputFolder).value,
     Compile / scroogeThriftDependencies ++= Seq("content-entity-thrift"),
-    resolvers += Resolver.sonatypeRepo("public"),
     libraryDependencies ++= Seq(
       "com.gu" % "content-entity-thrift" % contentEntityVersion,
       "com.gu" %% "content-entity-model" % contentEntityVersion,
@@ -70,6 +70,19 @@ lazy val scalaClasses = Project(id = "content-atom-model", base = file("scala"))
     ),
     // Include the Thrift file in the published jar
     Compile / scroogePublishThrift := true
+  )
+
+lazy val json = Project(id = "content-atom-model-json", base = file("json"))
+  .settings(artifactProductionSettings)
+  .dependsOn(scalaClasses)
+  .disablePlugins(ScroogeSBT)
+  .settings(
+    description := "Circe json encoders and decoders for content atom model",
+    libraryDependencies ++= Seq(
+      "com.gu" %% "content-entity-model-json" % "4.1.0-PREVIEW.ancirce-encoder-decoders.2026-06-29T1027.e9a20d9a",
+      "com.gu" %% "fezziwig" % "2.0.1",
+      "io.circe" %% "circe-parser" % "0.14.15",
+    )
   )
 
 lazy val npmPreviewReleaseTagMaybe = if (sys.env.get("RELEASE_TYPE").contains("PREVIEW_FEATURE_BRANCH")) {
