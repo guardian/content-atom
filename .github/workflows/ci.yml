@@ -16,8 +16,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - uses: sbt/setup-sbt@v1.1.0
-      - name: Build # and "Test" to apply after having some tests
-        run: sbt compile
+      - name: Build and test
+        run: sbt compile test
       - name: Test Summary
         uses: test-summary/action@v2
         with:
