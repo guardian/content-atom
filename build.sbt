@@ -66,7 +66,8 @@ lazy val scalaClasses = Project(id = "content-atom-model", base = file("scala"))
       "com.gu" % "content-entity-thrift" % contentEntityVersion,
       "com.gu" %% "content-entity-model" % contentEntityVersion,
       "org.apache.thrift" % "libthrift" % thriftVersion,
-      "com.twitter" %% "scrooge-core" % scroogeVersion
+      "com.twitter" %% "scrooge-core" % scroogeVersion,
+      "org.scalatest" %% "scalatest" %  "3.2.20" % Test,
     ),
     // Include the Thrift file in the published jar
     Compile / scroogePublishThrift := true
