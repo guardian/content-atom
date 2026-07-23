@@ -14,10 +14,6 @@ import com.gu.contentatom.thrift.AtomData
 
 class ThriftRoundTripSpec extends AnyFlatSpec with Matchers {
   it should "round-trip a CTA atom" in {
-    compactToBinary(
-      Path.of("atom-cta-2bcdfd12-5e96-493c-8b18-a8d4c53df938-unwrapped.binary.thrift"),
-      Atom
-    )
     checkRoundTrip(
       Path.of("atom-cta-2bcdfd12-5e96-493c-8b18-a8d4c53df938-unwrapped.binary.thrift"),
       Atom,
@@ -28,10 +24,6 @@ class ThriftRoundTripSpec extends AnyFlatSpec with Matchers {
   }
 
   it should "round-trip a quiz atom" in {
-    compactToBinary(
-      Path.of("atom-quiz-ed563bff-19cf-49f6-a5c3-a458559f432d-unwrapped.binary.thrift"),
-      Atom
-    )
     checkRoundTrip(
       Path.of("atom-quiz-ed563bff-19cf-49f6-a5c3-a458559f432d-unwrapped.binary.thrift"),
       Atom,
@@ -43,10 +35,6 @@ class ThriftRoundTripSpec extends AnyFlatSpec with Matchers {
   }
 
   it should "round-trip a guide atom" in {
-    compactToBinary(
-      Path.of("atom-guide-9c862998-6f26-42f1-9243-fcc5766486cf-unwrapped.binary.thrift"),
-      Atom
-    )
     checkRoundTrip(
       Path.of("atom-guide-9c862998-6f26-42f1-9243-fcc5766486cf-unwrapped.binary.thrift"),
       Atom,
@@ -58,10 +46,6 @@ class ThriftRoundTripSpec extends AnyFlatSpec with Matchers {
   }
 
   it should "round-trip an explainer atom" in {
-    compactToBinary(
-      Path.of("atom-explainer-4d42b98e-1b9d-4f95-b256-e12acfd39f21-unwrapped.binary.thrift"),
-      Atom
-    )
     checkRoundTrip(
       Path.of("atom-explainer-4d42b98e-1b9d-4f95-b256-e12acfd39f21-unwrapped.binary.thrift"),
       Atom,
@@ -73,10 +57,6 @@ class ThriftRoundTripSpec extends AnyFlatSpec with Matchers {
   }
 
   it should "round-trip a timeline atom" in {
-    compactToBinary(
-      Path.of("atom-timeline-32b0d5c4-61cc-4306-847e-7f3b33f31e77-unwrapped.binary.thrift"),
-      Atom
-    )
     checkRoundTrip(
       Path.of("atom-timeline-32b0d5c4-61cc-4306-847e-7f3b33f31e77-unwrapped.binary.thrift"),
       Atom,
@@ -133,6 +113,13 @@ class ThriftRoundTripSpec extends AnyFlatSpec with Matchers {
     }
   }
 
+  /**
+   * Helper for producing the TBinaryProtocol encoding from the TCompactProtocol
+   * one.
+   *
+   * This is useful if producing specs from concierge, because concierge only
+   * uses TCompactProtocol.
+   */
   def compactToBinary[T <: ThriftStruct](
     resourcePath: Path,
     codec: ThriftStructCodec[T],
