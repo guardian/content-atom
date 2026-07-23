@@ -18,6 +18,11 @@ jobs:
       - uses: sbt/setup-sbt@v1.1.0
       - name: Build and test
         run: sbt compile test
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          registry-url: https://registry.npmjs.org
+      - run: npm ci
       - name: Test Summary
         uses: test-summary/action@v2
         with:
