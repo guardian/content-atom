@@ -5,7 +5,7 @@ import sbtversionpolicy.withsbtrelease.ReleaseVersion
 
 import java.net.URI
 
-val contentEntityVersion = "4.0.0"
+val contentEntityVersion = "5.0.0"
 val scroogeVersion = "22.1.0"   // remember to also update plugins.sbt if the scrooge version changes
 val thriftVersion = "0.24.0"    // remember to also update package.json if the thrift version changes
 
