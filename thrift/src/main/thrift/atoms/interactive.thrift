@@ -6,7 +6,8 @@ namespace java com.gu.contentatom.thrift.atom.interactive
 struct CustomField {
   1: required string fieldName
   2: required string fieldType
-  3: required string defaultValue
+  3: required string fieldDescription
+  4: required string defaultValue
 }
 
 struct InteractiveAtom {
