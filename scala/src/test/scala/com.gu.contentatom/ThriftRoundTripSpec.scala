@@ -11,6 +11,7 @@ import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should.Matchers
 import com.gu.contentatom.thrift.Atom
 import com.gu.contentatom.thrift.AtomData
+import com.gu.contentatom.thrift.atom.multimediaslideshow.SlideContent
 
 class ThriftRoundTripSpec extends AnyFlatSpec with Matchers {
   it should "round-trip a CTA atom" in {
@@ -64,6 +65,20 @@ class ThriftRoundTripSpec extends AnyFlatSpec with Matchers {
         case AtomData.Timeline(timeline) => timeline.events(0).body
         case _ => None
       }) shouldBe Some("<p>Gina Rinehart and Pauline Hanson are seen dining together in Thailand, alongside the former Liberal vice-president Teena McQueen</p>")
+    )
+  }
+
+  it should "round-trip a multimedia slideshow atom" in {
+    checkRoundTrip(
+      Path.of("atom-multimediaslideshow-3eb7e09a-585a-46d2-bd07-341532deea25-unwrapped.binary.thrift"),
+      Atom,
+      (atom: Atom) => (atom.data match {
+        case AtomData.MultimediaSlideshow(slideshow) =>
+          slideshow.slides.map(_.content).collectFirst {
+            case SlideContent.MediaAtom(ref) => ref.mediaAtomId
+          }
+        case _ => None
+      }) shouldBe Some("media-atom-123")
     )
   }
 
