@@ -52,4 +52,7 @@ struct MultimediaSlideshowAtom {
 
   /** Optional title for the slideshow. */
   2: optional string title
+
+  /** The aspect ratio the slideshow is displayed at, e.g. "16:9", "5:4". */
+  3: optional string aspectRatio
 }
