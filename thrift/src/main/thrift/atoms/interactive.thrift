@@ -4,10 +4,11 @@ namespace java com.gu.contentatom.thrift.atom.interactive
 #@namespace typescript _at_guardian.content_atom_model.interactive
 
 struct CustomDataDefinition {
-  1: required string fieldName
-  2: required string fieldType
-  3: required string fieldDescription
-  4: required string defaultValue
+  1: required string fieldId
+  2: required string fieldName
+  3: required string fieldType
+  4: required string fieldDescription
+  5: required string defaultValue
 }
 
 struct InteractiveAtom {
