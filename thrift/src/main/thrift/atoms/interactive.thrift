@@ -31,4 +31,5 @@ struct InteractiveAtom {
    */
   7: optional string placeholderUrl
   8: optional list<CustomDataDefinition> customDataDefinitions = []
+  9: optional string repoUrl
 }
