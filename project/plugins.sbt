@@ -7,3 +7,4 @@ addSbtPlugin("ch.epfl.scala" % "sbt-version-policy" % "3.2.1")
 
 // Patch the build tool graph without changing published library dependencies.
 dependencyOverrides += "org.codehaus.plexus" % "plexus-utils" % "3.6.1"
+dependencyOverrides += "org.msgpack" % "msgpack-core" % "0.9.11"
