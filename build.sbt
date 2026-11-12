@@ -66,6 +66,8 @@ lazy val scalaClasses = Project(id = "content-atom-model", base = file("scala"))
       "com.gu" % "content-entity-thrift" % contentEntityVersion,
       "com.gu" %% "content-entity-model" % contentEntityVersion,
       "org.apache.thrift" % "libthrift" % thriftVersion,
+      // Preserve Thrift HTTP transport; this client selects patched core5/core5-h2 5.4.3.
+      "org.apache.httpcomponents.client5" % "httpclient5" % "5.6.3",
       "com.twitter" %% "scrooge-core" % scroogeVersion,
       "org.scalatest" %% "scalatest" %  "3.2.20" % Test,
     ),
