@@ -9,8 +9,8 @@ enum FieldType {
 
 struct CustomDataDefinition {
   1: required string id
-  2: optional string name
-  3: required FieldType type
+  2: required FieldType type
+  3: optional string name
   4: optional string description
   5: optional string defaultValue
 }
