@@ -3,16 +3,19 @@ namespace java com.gu.contentatom.thrift.atom.interactive
 #@namespace scala com.gu.contentatom.thrift.atom.interactive
 #@namespace typescript _at_guardian.content_atom_model.interactive
 
-enum FieldType {
-  TEXT = 0
+struct TextField {
+  1: optional string defaultValue
+}
+
+union FieldDefinition {
+  1: TextField text
 }
 
 struct CustomDataDefinition {
   1: required string id
-  2: required FieldType type
+  2: required FieldDefinition definition
   3: optional string name
   4: optional string description
-  5: optional string defaultValue
 }
 
 struct InteractiveAtom {
