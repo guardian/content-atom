@@ -13,7 +13,7 @@ union FieldDefinition {
 
 struct CustomDataDefinition {
   1: required string id
-  2: required FieldDefinition definition
+  2: required FieldDefinition fieldDefinition
   3: optional string name
   4: optional string description
 }
