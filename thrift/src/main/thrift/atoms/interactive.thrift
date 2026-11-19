@@ -3,6 +3,11 @@ namespace java com.gu.contentatom.thrift.atom.interactive
 #@namespace scala com.gu.contentatom.thrift.atom.interactive
 #@namespace typescript _at_guardian.content_atom_model.interactive
 
+enum Audience {
+  EDITORIAL = 0
+  ATOM_DEVELOPER = 1
+}
+
 struct TextDataType {
   1: optional string defaultValue
 }
@@ -16,7 +21,7 @@ struct CustomDataDefinition {
   2: required DataType dataType
   3: optional string name
   4: optional string description
-  5: optional bool isDev
+  5: required Audience audience = Audience.EDITORIAL
 }
 
 struct InteractiveAtom {
