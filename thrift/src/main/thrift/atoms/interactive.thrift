@@ -16,6 +16,7 @@ struct CustomDataDefinition {
   2: required DataType dataType
   3: optional string name
   4: optional string description
+  5: optional bool isDev
 }
 
 struct InteractiveAtom {
