@@ -3,6 +3,27 @@ namespace java com.gu.contentatom.thrift.atom.interactive
 #@namespace scala com.gu.contentatom.thrift.atom.interactive
 #@namespace typescript _at_guardian.content_atom_model.interactive
 
+enum Audience {
+  EDITORIAL = 0
+  ATOM_DEVELOPER = 1
+}
+
+struct TextDataType {
+  1: optional string defaultValue
+}
+
+union DataType {
+  1: TextDataType text
+}
+
+struct CustomDataDefinition {
+  1: required string id
+  2: required DataType dataType
+  3: optional string name
+  4: optional string description
+  5: required Audience audience = Audience.EDITORIAL
+}
+
 struct InteractiveAtom {
   /* the unique ID will be stored in the `atom` data*/
   1: required string type
@@ -18,4 +39,6 @@ struct InteractiveAtom {
   See here: https://amp.dev/documentation/components/amp-iframe/ for more information.
    */
   7: optional string placeholderUrl
+  8: optional list<CustomDataDefinition> customDataDefinitions = []
+  9: optional string repoUrl
 }
